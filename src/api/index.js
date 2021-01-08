@@ -251,7 +251,7 @@ export function extractUserData(result) {
 }
 
 export function handleSignIn() {
-  var provider = new firebase.auth.FacebookAuthProvider();
+  var provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope('email');
   firebase.auth().signInWithRedirect(provider);
 }

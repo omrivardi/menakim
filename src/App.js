@@ -8,7 +8,6 @@ import { useTracking } from './hooks/useTracking';
 import { RenderRoutes as Routes } from './routes/RenderRoutes';
 import { Header } from './components';
 
-
 function App() {
   const store = useStore();
   const { t } = useTranslation();
@@ -18,7 +17,7 @@ function App() {
   return (
     <AppWrapper>
       <Helmet
-        titleTemplate="%s - קילומטר אחד"
+        titleTemplate={`%s - ${t('title')}`}
         defaultTitle={t('title')}
         onChangeClientState={(newState) => store.setCurrentPageTitle(newState.title)}
       ></Helmet>
