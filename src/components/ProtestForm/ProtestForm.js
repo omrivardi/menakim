@@ -18,6 +18,9 @@ const protestMarker = new L.Icon({
   iconAnchor: [25, 48],
 });
 
+const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
+const placeTypes = ['river', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
+
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
   return (
@@ -130,12 +133,18 @@ function ProtestForm({
       return;
     }
 
+    if (!params.userApproved) {
+      alert('אנא אשר.י את התקנון');
+      return;
+    }
+
     try {
       params.coords = mapCenter;
       params.dateTimeList = dateTimeList;
       if (defaultValues.protestRef) {
         params.protestRef = defaultValues.protestRef;
       }
+      delete params.userApproved;
 
       let protest = await submitCallback(params);
 
@@ -193,6 +202,28 @@ function ProtestForm({
                   autoFocus
                 ></ProtestFormInput>
                 <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
+              </ProtestFormLabel>
+              <ProtestFormLabel>
+                {t('area.title')}
+                <ProtestFormSelect name="area" ref={register}>
+                  {areas.map((area) => (
+                    <option value={area} key={area}>
+                      {t(`area.values.${area}`)}
+                    </option>
+                  ))}
+                </ProtestFormSelect>
+                <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
+              </ProtestFormLabel>
+              <ProtestFormLabel>
+                {t('placeType.title')}
+                <ProtestFormSelect name="placeType" ref={register}>
+                  {placeTypes.map((placeType) => (
+                    <option value={placeType} key={placeType}>
+                      {t(`placeType.values.${placeType}`)}
+                    </option>
+                  ))}
+                </ProtestFormSelect>
+                <ProtestFormInputDetails>{t('placeType.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
 
               {/* <ProtestFormLabel>
@@ -287,7 +318,7 @@ function ProtestForm({
                 {t('legal.five')}
               </ProtestFormInputDetails>
               <ProtestFormCheckboxWrapper>
-                <ProtestFormCheckbox type="checkbox" id="contact-approve" name="approveContact" ref={register} />
+                <ProtestFormCheckbox type="checkbox" id="contact-approve" name="userApproved" ref={register} />
                 <label htmlFor="contact-approve">{t('legal.agree')}</label>
               </ProtestFormCheckboxWrapper>
 
@@ -357,6 +388,8 @@ const ProtestFormInputDetails = styled.span.attrs((props) => ({
 `;
 
 const ProtestFormCheckbox = styled.input``;
+
+const ProtestFormSelect = styled.select``;
 
 const MapWrapper = styled(Map)`
   width: 100%;

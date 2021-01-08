@@ -43,6 +43,7 @@ export async function createProtest(params, fromPending = false) {
 
   // Add protest to `pending_protests` collection
   const request = await pendingCollection.add(protestParams);
+  console.log(protestParams);
   return request;
 }
 

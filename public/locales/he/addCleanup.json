@@ -19,6 +19,34 @@
     "details": "שם המקום כפי שתושבי האיזור מכירים אותו",
     "placeholder": ""
   },
+  "area": {
+    "title": "מרחב",
+    "details": "מרחב בארץ שבו נמצא מוקד הניקיון שלך",
+    "placeholder": "צפון",
+    "values": {
+      "north": "צפון",
+      "south": "דרום",
+      "center": "מרכז",
+      "golan": "גולן",
+      "arava": "ערבה",
+      "yehuda": "יהודה ושומרון",
+      "other": "אחר"
+    }
+  },
+  "placeType": {
+    "title": "סוג מיקום",
+    "details": "סוג מיקום מוקד הניקיון",
+    "placeholder": "נחל",
+    "values": {
+      "river": "נחל",
+      "viewpoint": "תצפית",
+      "parking": "חניון",
+      "settlement": "בתוך יישוב",
+      "underwater": "מתחת למים",
+      "beach": "חוף",
+      "other": "אחר"
+    }
+  },
   "contact": "פרטי יצירת קשר",
   "whatsapp": {
     "title": "קבוצת וואטסאפ",
