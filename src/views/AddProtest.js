@@ -11,7 +11,7 @@ function AddProtest() {
     <ProtestForm
       initialCoords={store.userCoordinates}
       submitCallback={async (params) => {
-        const result = await createProtest({ ...params, user: store.useStore.user });
+        const result = await createProtest({ ...params, user: store.userStore.user });
         return result;
       }}
     />

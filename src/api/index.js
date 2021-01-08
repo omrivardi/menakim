@@ -171,7 +171,7 @@ export async function saveUserInFirestore(userData) {
       initialFirst,
       initialLast,
       displayName,
-      pictureUrl,
+      ...(pictureUrl && { pictureUrl }),
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     };
     return userRef.set(updatedUserObject).then(() => updatedUserObject);
@@ -228,11 +228,11 @@ export async function sendProtestLeaderRequest(userData, phoneNumber, protestId)
 export function extractUserData(result) {
   const { uid, displayName } = result.user;
   let first_name, last_name, pictureUrl;
-  const isEmulator = result.additionalUserInfo.profile.picture.data ? false : true;
+  const isEmulator = result?.additionalUserInfo?.profile?.picture ? false : true;
 
   // In development mode we are using the authentication emulator; note that the additionalUserInfo.info.profile properties are different while using it.
   if (isEmulator) {
-    [first_name, last_name] = result.additionalUserInfo.profile.name.split(' ');
+    [first_name, last_name] = displayName.split(' ');
     pictureUrl = result.additionalUserInfo.profile.picture;
   } else {
     first_name = result.additionalUserInfo.profile.first_name;
@@ -244,7 +244,7 @@ export function extractUserData(result) {
     first_name,
     last_name,
     displayName,
-    pictureUrl,
+    ...(pictureUrl && { pictureUrl }),
   };
 
   return userData;
