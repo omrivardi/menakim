@@ -69,7 +69,7 @@ export default function MapSearchAutocomplete({ inputRef }) {
           onChange={handleInput}
           disabled={!ready}
           ref={inputRef}
-          placeholder="מה הכתובת?"
+          placeholder="לקבלת מוקדי ניקיון קרובים"
         />
       </div>
       <ComboboxPopover>
