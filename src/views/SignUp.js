@@ -7,29 +7,21 @@ import { extractUserData, getUserFromRedirect, handleSignIn, saveUserInFirestore
 import styled from 'styled-components/macro';
 import queryString from 'query-string';
 import Helmet from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
 function SignUpBeforeRedirect({ returnUrl }) {
+  const { t } = useTranslation('signup');
   return (
     <PageContentWrapper>
       <Helmet>
-        <title>הרשמה</title>
+        <title>{t('title')}</title>
       </Helmet>
-      {returnUrl === '/add-protest' ? (
-        <>
-          <p style={{ marginBottom: 10 }}>על מנת ליצור הפגנה יש להזדהות דרך פייסבוק. </p>
-          <p style={{ marginTop: 0 }}>ניתן ליצור הפגנה ללא הזדהות, אך היא תתווסף למפה לאחר אישור הנהלת האתר. </p>
-        </>
-      ) : (
-        <div>
-          <p>היי! כדי לקחת חלק בפעילות האתר יש להתחבר באמצעות פייסבוק.</p>
-          <p>תוכלו לשמור על אנונימיות לאחר ההרשמה.</p>
-        </div>
-      )}
+      <p>{t('content')} </p>
 
       <Button onClick={() => handleSignIn()} style={{ marginBottom: 10 }}>
-        התחברות דרך פייסבוק
+        {t('signup')}
       </Button>
       {returnUrl === '/add-protest' && (
         <Link to="/add-protest">

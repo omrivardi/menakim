@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import heIL from 'antd/lib/locale/he_IL';
 import './index.css';
+import './i18n';
 import { StoreProvider } from './stores';
 import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreProvider>
-      <ConfigProvider locale={heIL} direction="rtl">
-        <Router>
-          <App />
-        </Router>
-      </ConfigProvider>
-    </StoreProvider>
+    <Suspense fallback={null}>
+      <StoreProvider>
+        <ConfigProvider locale={heIL} direction="rtl">
+          <Router>
+            <App />
+          </Router>
+        </ConfigProvider>
+      </StoreProvider>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );
