@@ -103,7 +103,7 @@ function AppMap({ hoveredProtest }) {
             <Marker position={coordinates} icon={positionPoint}></Marker>
             <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
             {MKs.map((mk) => (
-              <Marker position={mk.position} key={mk.position[0]}>
+              <Marker position={mk.position} icon={new L.icon(mk.icon)} key={mk.position[0]}>
                 <Popup>{mk.name}</Popup>
               </Marker>
             ))}
