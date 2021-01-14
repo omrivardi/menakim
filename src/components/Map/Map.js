@@ -107,7 +107,7 @@ function AppMap({ hoveredProtest }) {
                 <Popup>{mk.name}</Popup>
               </Marker>
             ))}
-            <Circle radius={1000} center={coordinates} />
+            {/* <Circle radius={1000} center={coordinates} /> */}
           </>
         )}
       </MapElement>
