@@ -297,9 +297,9 @@ function ProtestForm({
           </ProtestFormLabel>
           {!editMode ? (
             <>
-              <ProtestFormInputDetails margin="10px 0">
+              {/*<ProtestFormInputDetails margin="10px 0">
                 האימייל לא יפורסם באתר ולא יועבר לשום גורם חיצוני. ניצור קשר במידה ונצטרך לוודא את פרטי ההפגנה.
-              </ProtestFormInputDetails>
+              </ProtestFormInputDetails>*/}
 
               <ProtestFormLabel>
                 כתובת מייל
