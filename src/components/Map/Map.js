@@ -4,7 +4,6 @@ import { useStore } from '../../stores';
 import { pointWithinRadius } from '../../utils';
 import { Map, Circle, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
-import MKs from './MKs.json';
 import L from 'leaflet';
 import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
@@ -102,11 +101,6 @@ function AppMap({ hoveredProtest }) {
           <>
             <Marker position={coordinates} icon={positionPoint}></Marker>
             <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
-            {MKs.map((mk) => (
-              <Marker position={mk.position} key={mk.position[0]}>
-                <Popup>{mk.name}</Popup>
-              </Marker>
-            ))}
             <Circle radius={1000} center={coordinates} />
           </>
         )}
