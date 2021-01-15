@@ -39,7 +39,6 @@ function Header() {
           <a href="https://www.menakimethabait.com/" target="_blank" rel="noreferrer noopener">
             {t('about')}
           </a>
-          <hr />
           <a href="https://www.facebook.com/menakimethabait" target="_blank" rel="noreferrer noopener">
             {t('facebook')}
           </a>
