@@ -32,18 +32,21 @@ function Header() {
           <Link to="/map" onClick={() => setMenuState(false)} className="bm-item">
             {t('map')}
           </Link>
-          <hr />
-          <Link to="/about" onClick={() => setMenuState(false)}>
-            {t('about')}
+          <Link to="/add-protest" onClick={() => setMenuState(false)} className="bm-item">
+            {t('open-position')}
           </Link>
           <hr />
-          <a href="https://www.facebook.com/1km.co.il" target="_blank" rel="noreferrer noopener">
+          <a href="https://www.menakimethabait.com/" target="_blank" rel="noreferrer noopener">
+            {t('about')}
+          </a>
+          <hr />
+          <a href="https://www.facebook.com/menakimethabait" target="_blank" rel="noreferrer noopener">
             {t('facebook')}
           </a>
-          <a href="https://www.instagram.com/1km.co.il/" target="_blank" rel="noreferrer noopener">
+          <a href="https://www.instagram.com/menakim_et_habait/" target="_blank" rel="noreferrer noopener">
             {t('instagram')}
           </a>
-          <a href="https://github.com/guytepper/1km.co.il" target="_blank" rel="noreferrer noopener">
+          <a href="https://github.com/omrivardi/menakim" target="_blank" rel="noreferrer noopener">
             {t('open-source')}
           </a>
           <a
