@@ -302,10 +302,6 @@ function ProtestForm({
           {!editMode ? (
             <>
               <ProtestFormInputDetails margin="10px 0">
-                האימייל לא יפורסם באתר ולא יועבר לשום גורם חיצוני. ניצור קשר במידה ונצטרך לוודא את פרטי ההפגנה.
-              </ProtestFormInputDetails>
-
-              <ProtestFormInputDetails margin="10px 0">
                 {t('legal.one')}
                 <br />
                 {t('legal.two')}

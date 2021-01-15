@@ -4,7 +4,6 @@ import { useStore } from '../../stores';
 import { pointWithinRadius } from '../../utils';
 import { Map, Circle, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
-import MKs from './MKs.json';
 import L from 'leaflet';
 import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
@@ -27,13 +26,13 @@ const positionPoint = new L.Icon({
 });
 
 const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
-  const iconUrl = hovered ? '/icons/protesting.svg' : '/icons/marker-purple.svg';
+  const iconUrl = '/icons/markers/cleaning-marker.png';
 
   // Use a speical marker from the protest object / the default fist.
   let markerInfo = marker || {
     iconUrl,
     iconRetinaUrl: iconUrl,
-    iconSize: [50, 48],
+    iconSize: [70, 70],
     iconAnchor: [12, 43],
   };
 
@@ -102,11 +101,6 @@ function AppMap({ hoveredProtest }) {
           <>
             <Marker position={coordinates} icon={positionPoint}></Marker>
             <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
-            {MKs.map((mk) => (
-              <Marker position={mk.position} icon={new L.icon(mk.icon)} key={mk.position[0]}>
-                <Popup>{mk.name}</Popup>
-              </Marker>
-            ))}
             <Circle radius={1000} center={coordinates} />
           </>
         )}
