@@ -46,6 +46,16 @@ function Header() {
           <a href="https://github.com/guytepper/1km.co.il" target="_blank" rel="noreferrer noopener">
             {t('open-source')}
           </a>
+          <a
+            href="https://add.eventable.com/events/5fbd2022dc4d5900169aa8bf/5fbd202345b8360065cb430d"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            {t('calendar')}
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=&text=www.menakimethabait.com" target="_blank" rel="noreferrer noopener">
+            {t('share')}
+          </a>
           {isAdmin(store.userStore.user) && (
             <Link to="/admin" onClick={() => setMenuState(false)}>
               ניהול
