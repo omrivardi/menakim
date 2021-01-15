@@ -118,8 +118,12 @@ function ProtestForm({
     //   alert('אנא הזינו את כתובת ההפגנה');
     //   return;
     // } else {
+    if (!params.displayName) {
+      alert(t('validations.name'));
+      return;
+    }
     if (!mapCenter) {
-      alert('אנא הזינו כתובת תקינה');
+      alert(t('validations.map'));
       return;
     }
 
@@ -129,12 +133,12 @@ function ProtestForm({
     // }
 
     if (params.whatsAppLink && !isValidUrl(params.whatsAppLink)) {
-      alert('לינק לקבוצת הוואטסאפ אינו תקין');
+      alert(t('validations.link'));
       return;
     }
 
     if (!params.userApproved) {
-      alert('אנא אשר.י את התקנון');
+      alert(t('validations.approved'));
       return;
     }
 
@@ -150,14 +154,14 @@ function ProtestForm({
 
       if (editMode) {
         setSubmitSuccess(true);
-        setSubmitMessage('ההפגנה נשלחה בהצלחה ותתווסף למפה בזמן הקרוב :)');
+        setSubmitMessage(t('messages.ok'));
         afterSubmitCallback();
         return;
       }
 
       if (protest._document) {
         setSubmitSuccess(true);
-        setSubmitMessage('ההפגנה נשלחה בהצלחה ותתווסף למפה בזמן הקרוב :)');
+        setSubmitMessage(t('messages.ok'));
         afterSubmitCallback();
       } else {
         throw new Error('protest._document was null.');
@@ -165,7 +169,7 @@ function ProtestForm({
     } catch (err) {
       console.error(err);
       setSubmitSuccess(true);
-      setSubmitMessage('תקלה התרחשה בתהליך השליחה. אנא פנו אלינו וננסה להבין את הבעיה: support@1km.zendesk.com');
+      setSubmitMessage(t('messages.error'));
     }
     // }
   };
@@ -184,7 +188,7 @@ function ProtestForm({
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
           <Link to="/">
-            <Button>לעמוד הראשי</Button>
+            <Button>{t('mainPage')}</Button>
           </Link>
         </>
       ) : (
