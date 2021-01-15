@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Menu from 'react-burger-menu/lib/menus/slide';
 import styled, { keyframes } from 'styled-components/macro';
 import { useStore } from '../../stores';
@@ -10,6 +11,7 @@ function Header() {
   const store = useStore();
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
+  const { t } = useTranslation('header');
 
   return (
     <HeaderWrapper path={pathname}>
@@ -28,37 +30,21 @@ function Header() {
           disableAutoFocus
         >
           <Link to="/map" onClick={() => setMenuState(false)} className="bm-item">
-            מפת הפגנות
-          </Link>
-          <Link to="/live" onClick={() => setMenuState(false)} className="bm-item">
-            פיד מחאה
-          </Link>
-          <Link
-            to={store.userStore.user ? '/upload-image?returnUrl=/live' : `/sign-up?returnUrl=/upload-image?returnUrl=/live`}
-            onClick={() => setMenuState(false)}
-            className="bm-item"
-          >
-            העלאת תמונה
+            {t('map')}
           </Link>
           <hr />
           <Link to="/about" onClick={() => setMenuState(false)}>
-            על הפרוייקט
-          </Link>
-          <Link to="/donate" onClick={() => setMenuState(false)}>
-            תרומה
+            {t('about')}
           </Link>
           <hr />
           <a href="https://www.facebook.com/1km.co.il" target="_blank" rel="noreferrer noopener">
-            פייסבוק
-          </a>
-          <a href="https://twitter.com/1kmcoil" target="_blank" rel="noreferrer noopener">
-            טוויטר
+            {t('facebook')}
           </a>
           <a href="https://www.instagram.com/1km.co.il/" target="_blank" rel="noreferrer noopener">
-            אינסטגרם
+            {t('instagram')}
           </a>
           <a href="https://github.com/guytepper/1km.co.il" target="_blank" rel="noreferrer noopener">
-            קוד פתוח
+            {t('open-source')}
           </a>
           {isAdmin(store.userStore.user) && (
             <Link to="/admin" onClick={() => setMenuState(false)}>
