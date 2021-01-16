@@ -151,7 +151,9 @@ function ProtestPageContent({ protest, user, userCoordinates }) {
           <Details>
             <Title>{displayName}</Title>
             <h3>מנהל המוקד: {protestAdminName}</h3>
-
+            <a href={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
+              נווט למוקד בעזרת Waze
+            </a>
             <ProtestCardInfo>
               {streetAddress && (
                 <ProtestCardDetail>
