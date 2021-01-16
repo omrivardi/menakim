@@ -1,5 +1,6 @@
 export { default as Header } from './Header';
 export { default as Button } from './elements/Button';
+export { default as WazeButton } from './elements/Button/WazeButton';
 export { default as Map } from './Map';
 export { default as Modal } from './Modal';
 export { default as IntroModal } from './IntroModal';
