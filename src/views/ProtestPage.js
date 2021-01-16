@@ -10,6 +10,7 @@ import {
   sendProtestLeaderRequest,
   updateProtest,
   getLatestProtestPictures,
+  getFullUserData,
 } from '../api';
 import { Map, Marker, Polyline, TileLayer } from 'react-leaflet';
 import { ProtectedRoute, ProtestForm, PictureGallery } from '../components';
@@ -43,7 +44,9 @@ function getEditButtonLink(user, protest) {
 }
 
 async function _fetchProtest(id, setProtest) {
-  const protest = await fetchProtest(id);
+  const _protest = await fetchProtest(id);
+  const protestAdminName = await getFullUserData(_protest?.roles?.leader[0]);
+  const protest = { ..._protest, protestAdminName: protestAdminName?.displayName };
 
   if (protest) {
     setProtest(protest);
@@ -91,7 +94,7 @@ function ProtestPageContent({ protest, user, userCoordinates }) {
   const mapElement = useRef(null);
   const polylineElement = useRef(null);
   const [polyPositions, setPolyPositions] = useState([]);
-  const { coordinates, displayName, streetAddress, notes, dateTimeList } = protest;
+  const { coordinates, displayName, streetAddress, notes, dateTimeList, protestAdminName } = protest;
   const [latestPictures, setLatestPictures] = useState([]);
   const galleryMatch = useRouteMatch('/protest/:id/gallery');
   const galleryDateMatch = useRouteMatch('/protest/:id/gallery/:date');
@@ -147,6 +150,8 @@ function ProtestPageContent({ protest, user, userCoordinates }) {
           {/* <ProfilePic src="/protest-profile-pic.png" alt="Protester with flag getting sprayed" /> */}
           <Details>
             <Title>{displayName}</Title>
+            <h3>מנהל המוקד: {protestAdminName}</h3>
+
             <ProtestCardInfo>
               {streetAddress && (
                 <ProtestCardDetail>
