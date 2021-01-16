@@ -13,7 +13,7 @@ import {
   getFullUserData,
 } from '../api';
 import { Map, Marker, Polyline, TileLayer } from 'react-leaflet';
-import { ProtectedRoute, ProtestForm, PictureGallery } from '../components';
+import { ProtectedRoute, ProtestForm, PictureGallery, WazeButton } from '../components';
 import {
   ProtestCardDetail,
   ProtestCardGroupButton,
@@ -151,9 +151,6 @@ function ProtestPageContent({ protest, user, userCoordinates }) {
           <Details>
             <Title>{displayName}</Title>
             <h3>מנהל המוקד: {protestAdminName}</h3>
-            <a href={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
-              נווט למוקד בעזרת Waze
-            </a>
             <ProtestCardInfo>
               {streetAddress && (
                 <ProtestCardDetail>
@@ -167,6 +164,11 @@ function ProtestPageContent({ protest, user, userCoordinates }) {
                   {formatDistance(calculateDistance(userCoordinates, [coordinates.latitude, coordinates.longitude]))}
                 </ProtestCardDetail>
               )}
+              <WazeButton
+                link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}
+              >
+                נווט בעזרת Waze
+              </WazeButton>
               {notes && <ProtestCardDetail style={{ textAlign: 'center' }}>{notes}</ProtestCardDetail>}
             </ProtestCardInfo>
           </Details>
