@@ -44,6 +44,16 @@ export async function createProtest(params, fromPending = false) {
   // Add protest to `pending_protests` collection
   const request = await pendingCollection.add(protestParams);
   console.log(protestParams);
+
+  // call webhook with admin details.
+  fetch('https://hook.integromat.com/89d1fr91gajw7dyip2k4yjrsr7u3ggfo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(protestParams),
+  });
+
   return request;
 }
 
