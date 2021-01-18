@@ -3,6 +3,7 @@ import getDistance from 'geolib/es/getDistance';
 
 export function getCurrentPosition() {
   return new Promise((resolve, reject) => {
+    alert('על מנת להציג את מוקדי הניקיון על המפה יש לאשר לדפדפן את הגישה למיקום');
     navigator.geolocation.getCurrentPosition(
       (event) => {
         resolve([event.coords.latitude, event.coords.longitude]);

@@ -33,9 +33,9 @@ function ProtestList({ loading, closeProtests, farProtests }) {
         <>
           {closeProtests.length === 0 ? (
             <ProtestListHeader style={{ marginTop: 15 }}>
-              לא נמצאו הפגנות ברדיוס של קילומטר ממך.
+              לא נמצאו מוקדי נקיון בסביבתך.
               <br />
-              <Link to="/add-protest/">הוסיפו את ההפגנה הראשונה!</Link>
+              <Link to="/add-protest/">הוסיפו את מוקד הנקיון הראשון!</Link>
             </ProtestListHeader>
           ) : (
             <ProtestListItems protests={closeProtests} listTitle={'עד קילומטר אחד ממך'} />
