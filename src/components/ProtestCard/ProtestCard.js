@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
 import { useHistory } from 'react-router-dom';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
+import { WazeButton } from '../';
 
 function getFormattedDate(date) {
   if (!date) {
@@ -16,7 +17,16 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   const store = useStore();
   const history = useHistory();
 
-  const { displayName, streetAddress, distance, meeting_time: meetingTime, dateTimeList, id } = protestInfo;
+  const {
+    displayName,
+    streetAddress,
+    distance,
+    meeting_time: meetingTime,
+    dateTimeList,
+    id,
+    adminName,
+    coordinates,
+  } = protestInfo;
 
   const upcomingDate = getUpcomingDate(dateTimeList);
   const formattedDate = getFormattedDate(upcomingDate);
@@ -34,6 +44,15 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     >
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
+        {adminName && (
+          <ProtestCardDetail data-testid="protestCard__adminName">
+            <span style={{ fontWeight: 'bold', marginLeft: '5px' }}>מנהל המוקד:</span> {adminName}
+          </ProtestCardDetail>
+        )}
+
+        <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
+          נווט בעזרת Waze
+        </WazeButton>
         {streetAddress && (
           <ProtestCardDetail data-testid="protestCard__streetAddress">
             <ProtestCardIcon src="/icons/location.svg" alt="" aria-hidden="true" title="מיקום ההפגנה" />
