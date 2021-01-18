@@ -8,30 +8,30 @@ import One from './ProjectUpdates/one';
 export const posts = [
   {
     slug: '404',
-    title: 'הדף לא נמצא - קילומטר  אחד',
+    title: 'הדף לא נמצא - מנקים את הבית',
     text: <FourOhFour />,
   },
   {
     slug: 'legal-notice',
-    title: 'הבהרה משפטית - קילומטר אחד',
+    title: 'הבהרה משפטית - מנקים את הבית',
     permalink: '/legal-notice',
     text: <LegalNotice />,
   },
   {
     slug: 'about',
-    title: 'על הפרוייקט - קילומטר אחד',
+    title: 'על הפרוייקט - מנקים את הבית',
     permalink: '/about',
     text: <ProjectSupport />,
   },
   {
     slug: 'donate',
-    title: 'תרומה לפרוייקט - קילומטר אחד',
+    title: 'תרומה לפרוייקט - מנקים את הבית',
     permalink: '/donate',
     text: <DonatePage />,
   },
   {
     slug: '1',
-    title: 'עדכון #1 - קילומטר אחד',
+    title: 'עדכון #1 - מנקים את הבית',
     text: <One />,
   },
 ];

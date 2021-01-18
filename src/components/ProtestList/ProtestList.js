@@ -38,7 +38,7 @@ function ProtestList({ loading, closeProtests, farProtests }) {
               <Link to="/add-protest/">הוסיפו את מוקד הנקיון הראשון!</Link>
             </ProtestListHeader>
           ) : (
-            <ProtestListItems protests={closeProtests} listTitle={'עד קילומטר אחד ממך'} />
+            <ProtestListItems protests={closeProtests} listTitle={'מוקדי נקיון בסביבתך'} />
           )}
           <ProtestListItems protests={farProtests} listTitle={'קצת יותר רחוק'} />
         </>
