@@ -52,10 +52,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           </ProtestCardDetail>
         )}
 
-        <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
-          נווט בעזרת Waze
-        </WazeButton>
-
         <SocialButton type="whatsapp" link={whatsAppLink}>
           לקבוצת ה whatsapp
         </SocialButton>
@@ -79,6 +75,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             {meetingTime}
           </ProtestCardDetail>
         )}
+        <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
+          נווט בעזרת Waze
+        </WazeButton>
         {distance && (
           <ProtestCardDetail>
             <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title="מרחק" />
