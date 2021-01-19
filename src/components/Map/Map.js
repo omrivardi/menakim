@@ -26,11 +26,6 @@ const positionPoint = new L.Icon({
   iconSize: [35, 40],
 });
 
-async function fetchProtestAdmin(uid) {
-  const protestAdmin = await getFullUserData(uid);
-  return protestAdmin?.displayName || '';
-}
-
 const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
   const [adminName, setAdminName] = useState('');
 
@@ -46,8 +41,8 @@ const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
 
   useEffect(() => {
     (async () => {
-      const adminName = await fetchProtestAdmin(props?.roles?.leader[0]);
-      setAdminName(adminName);
+      const protestAdmin = await getFullUserData(props?.roles?.leader[0]);
+      setAdminName(protestAdmin?.displayName);
     })();
   }, []);
 
