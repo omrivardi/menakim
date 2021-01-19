@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import PlacesAutocomplete from '../PlacesAutocomplete';
+// import PlacesAutocomplete from '../PlacesAutocomplete';
 import { useForm } from 'react-hook-form';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,7 @@ import Button from '../elements/Button';
 import { validateLatLng, isValidUrl } from '../../utils';
 import { fetchNearbyProtests } from '../../api';
 import L from 'leaflet';
-import DateTimeList from '../DateTimeList';
+// import DateTimeList from '../DateTimeList';
 
 const protestMarker = new L.Icon({
   iconUrl: '/icons/marker-purple.svg',
@@ -60,11 +60,12 @@ function ProtestForm({
     return initialState;
   }, [initialCoords]);
 
+  // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, setValue, reset } = useForm({
     defaultValues,
   });
 
-  const [streetAddressDefaultValue, setStreetAddressDefaultValue] = useState(defaultValues.streetAddress);
+  // const [streetAddressDefaultValue, setStreetAddressDefaultValue] = useState(defaultValues.streetAddress);
 
   // These two are separate so that onMoveEnd isn't called on every map move
   const [mapCenter, setMapCenter] = useState(coordinatesUpdater);
@@ -78,13 +79,13 @@ function ProtestForm({
   const [zoomLevel, setZoomLevel] = useState(14);
   // const { recaptcha } = useRef(null);
 
-  const setStreetAddress = React.useCallback((value) => setValue('streetAddress', value), [setValue]);
+  // const setStreetAddress = React.useCallback((value) => setValue('streetAddress', value), [setValue]);
 
-  useEffect(() => {
-    reset({});
-    setStreetAddressDefaultValue('');
-    setStreetAddress('');
-  }, [editMode, reset, setStreetAddress]);
+  // useEffect(() => {
+  //   reset({});
+  //   setStreetAddressDefaultValue('');
+  //   setStreetAddress('');
+  // }, [editMode, reset, setStreetAddress]);
 
   // The two useEffects below this are in order to deal with the defaultValues & Places Autocomplete
   useEffect(() => {
@@ -92,8 +93,9 @@ function ProtestForm({
       reset(defaultValues);
       setSubmitMessage('');
       setSubmitSuccess(false);
-      setStreetAddressDefaultValue(defaultValues.streetAddress);
-      setStreetAddress(defaultValues.streetAddress);
+      // setStreetAddressDefaultValue(defaultValues.streetAddress);
+      // setStreetAddress(defaultValues.streetAddress);
+      // setStreetAddress(defaultValues.streetAddress);
       setDateTimeList(defaultValues.dateTimeList || [{ id: 0, date: '2020-10-24', time: '17:30' }]);
 
       if (validateLatLng(defaultValues.latlng)) {
@@ -101,7 +103,7 @@ function ProtestForm({
         setMarkerPosition(defaultValues.latlng);
       }
     }
-  }, [defaultValues, reset, setStreetAddress, setDateTimeList]);
+  }, [defaultValues, reset, /* setStreetAddress,*/ setDateTimeList]);
 
   // Load nearby protests on mount
   useEffect(() => {
