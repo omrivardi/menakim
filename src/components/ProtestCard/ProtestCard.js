@@ -4,6 +4,7 @@ import { useStore } from '../../stores';
 import { useHistory } from 'react-router-dom';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import { WazeButton } from '../';
+import SocialButton from '../elements/Button/SocialButton';
 
 function getFormattedDate(date) {
   if (!date) {
@@ -26,6 +27,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     id,
     adminName,
     coordinates,
+    whatsAppLink,
   } = protestInfo;
 
   const upcomingDate = getUpcomingDate(dateTimeList);
@@ -53,6 +55,11 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
         <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
           נווט בעזרת Waze
         </WazeButton>
+
+        <SocialButton type="whatsapp" link={whatsAppLink}>
+          לקבוצת ה whatsapp
+        </SocialButton>
+
         {streetAddress && (
           <ProtestCardDetail data-testid="protestCard__streetAddress">
             <ProtestCardIcon src="/icons/location.svg" alt="" aria-hidden="true" title="מיקום ההפגנה" />
