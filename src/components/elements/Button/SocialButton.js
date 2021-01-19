@@ -18,7 +18,7 @@ export const Button = styled.a`
   height: 32px;
   display: flex;
   align-items: center;
-
+  margin-bottom: 10px;
   background: ${(props) => {
     switch (props.$type) {
       case 'twitter':
