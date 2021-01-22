@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
 import { pointWithinRadius } from '../../utils';
@@ -7,6 +7,7 @@ import styled from 'styled-components/macro';
 import L from 'leaflet';
 import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
+import { getFullUserData } from '../../api';
 
 const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
   new L.Icon({
@@ -25,7 +26,9 @@ const positionPoint = new L.Icon({
   iconSize: [35, 40],
 });
 
-const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
+const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
+  const [adminName, setAdminName] = useState('');
+
   const iconUrl = '/icons/markers/cleaning-marker.png';
 
   // Use a speical marker from the protest object / the default fist.
@@ -36,10 +39,17 @@ const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
     iconAnchor: [12, 43],
   };
 
+  useEffect(() => {
+    (async () => {
+      const protestAdmin = await getFullUserData(roles?.leader[0]);
+      setAdminName(protestAdmin?.displayName);
+    })();
+  }, [roles]);
+
   return (
     <Marker position={[coordinates.latitude, coordinates.longitude]} icon={protestPoint(markerInfo)}>
       <Popup closeButton={false}>
-        <ProtestCard protestInfo={props} style={{ margin: 0 }} />
+        <ProtestCard protestInfo={{ ...props, adminName }} style={{ margin: 0 }} />
       </Popup>
     </Marker>
   );

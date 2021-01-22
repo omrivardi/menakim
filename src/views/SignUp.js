@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useStore } from '../stores';
 import { Button, PageWrapper, PageContentWrapper, LoadingSpinner } from '../components';
 import { Modal, Button as AntButton, Form, Input, Typography } from 'antd';
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
-const reg = /^[0-9\-]+$/;
+const reg = /^[0-9-]+$/;
 
 // A basic validation for now, can extend later
 const validateFields = (firstName, lastName, phone) =>
