@@ -2,21 +2,24 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import { WazeButton } from '../';
 import SocialButton from '../elements/Button/SocialButton';
 
-function getFormattedDate(date) {
+function FormattedDate({ date }) {
+  const { t } = useTranslation('card');
   if (!date) {
     return null;
   }
 
-  return `יום ${dateToDayOfWeek(date.date)} ${formatDate(date.date)} בשעה ${date.time}`;
+  return `${t('day')} ${dateToDayOfWeek(date.date)} ${formatDate(date.date)} ${t('atHour')} ${date.time}`;
 }
 
 function ProtestCard({ protestInfo, showAction = false, style }) {
   const store = useStore();
   const history = useHistory();
+  const { t } = useTranslation('card');
 
   const {
     displayName,
@@ -31,7 +34,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   } = protestInfo;
 
   const upcomingDate = getUpcomingDate(dateTimeList);
-  const formattedDate = getFormattedDate(upcomingDate);
 
   return (
     <ProtestCardWrapper
@@ -48,39 +50,39 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       <ProtestCardInfo>
         {adminName && (
           <ProtestCardDetail data-testid="protestCard__adminName">
-            <span style={{ fontWeight: 'bold', marginLeft: '5px' }}>מנהל המוקד:</span> {adminName}
+            <span style={{ fontWeight: 'bold', marginLeft: '5px' }}>{t('admin')}:</span> {adminName}
           </ProtestCardDetail>
         )}
 
         <SocialButton type="whatsapp" link={whatsAppLink}>
-          לקבוצת ה whatsapp
+          {t('whatsappLink')}
         </SocialButton>
 
         {streetAddress && (
           <ProtestCardDetail data-testid="protestCard__streetAddress">
-            <ProtestCardIcon src="/icons/location.svg" alt="" aria-hidden="true" title="מיקום ההפגנה" />
+            <ProtestCardIcon src="/icons/location.svg" alt="" aria-hidden="true" title={t('location')} />
             {streetAddress}
           </ProtestCardDetail>
         )}
 
         {upcomingDate && (
           <ProtestCardDetail key={upcomingDate.id}>
-            <ProtestCardIcon src="/icons/time.svg" alt="meeting time" aria-hidden="true" title="שעת מפגש" />
-            {formattedDate}
+            <ProtestCardIcon src="/icons/time.svg" alt="meeting time" aria-hidden="true" title={t('time')} />
+            <FormattedDate date={upcomingDate} />
           </ProtestCardDetail>
         )}
         {!upcomingDate && meetingTime && (
           <ProtestCardDetail>
-            <ProtestCardIcon src="/icons/time.svg" alt="meeting time" aria-hidden="true" title="שעת מפגש" />
+            <ProtestCardIcon src="/icons/time.svg" alt="meeting time" aria-hidden="true" title={t('time')} />
             {meetingTime}
           </ProtestCardDetail>
         )}
         <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
-          נווט בעזרת Waze
+          {t('navigate')}
         </WazeButton>
         {distance && (
           <ProtestCardDetail>
-            <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title="מרחק" />
+            <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
             {formatDistance(distance)}
           </ProtestCardDetail>
         )}

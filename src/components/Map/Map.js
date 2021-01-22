@@ -26,7 +26,7 @@ const positionPoint = new L.Icon({
   iconSize: [35, 40],
 });
 
-const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
+const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   const [adminName, setAdminName] = useState('');
 
   const iconUrl = '/icons/markers/cleaning-marker.png';
@@ -41,10 +41,10 @@ const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
 
   useEffect(() => {
     (async () => {
-      const protestAdmin = await getFullUserData(props?.roles?.leader[0]);
+      const protestAdmin = await getFullUserData(roles?.leader[0]);
       setAdminName(protestAdmin?.displayName);
     })();
-  }, []);
+  }, [roles]);
 
   return (
     <Marker position={[coordinates.latitude, coordinates.longitude]} icon={protestPoint(markerInfo)}>

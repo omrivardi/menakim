@@ -12,7 +12,7 @@ function ProtestListItem({ protestInfo }) {
       const protestAdmin = await getFullUserData(protestInfo?.roles?.leader[0]);
       setAdminName(protestAdmin?.displayName);
     })();
-  }, []);
+  }, [protestInfo]);
 
   return <ProtestCard protestInfo={{ ...protestInfo, adminName }} />;
 }

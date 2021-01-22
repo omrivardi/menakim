@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from '../stores';
 import { createProtest } from '../api';
 import { ProtestForm } from '../components';
-import { Button, PageWrapper, PageContentWrapper, LoadingSpinner } from '../components';
+import { Button, PageWrapper, PageContentWrapper } from '../components';
 
 function AddProtest() {
   const store = useStore();
