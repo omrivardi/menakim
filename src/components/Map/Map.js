@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
 import { pointWithinRadius } from '../../utils';
-import { Map, Circle, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
 import L from 'leaflet';
 import AddressBar from './AddressBar';
@@ -111,7 +111,6 @@ function AppMap({ hoveredProtest }) {
           <>
             <Marker position={coordinates} icon={positionPoint}></Marker>
             <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
-            <Circle radius={1000} center={coordinates} />
           </>
         )}
       </MapElement>
