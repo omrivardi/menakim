@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useStore } from '../stores';
 import { Button, PageWrapper, PageContentWrapper, LoadingSpinner } from '../components';
 import { Modal, Button as AntButton, Form, Input, Typography } from 'antd';
-import { extractUserData, getUserFromRedirect, handleSignIn, saveUserInFirestore, updateUserName } from '../api';
+import { extractUserData, getUserFromRedirect, handleSignIn, saveUserInFirestore, updateUserData } from '../api';
 import styled from 'styled-components/macro';
 import queryString from 'query-string';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
+
+const reg = /^[0-9-]+$/;
+
+// A basic validation for now, can extend later
+const validateFields = (firstName, lastName, phone) =>
+  firstName.length > 2 && firstName.length < 10 && lastName.length > 2 && lastName.length && reg.test(phone);
 
 function SignUpBeforeRedirect({ returnUrl }) {
   const { t } = useTranslation('signup');
@@ -23,7 +29,8 @@ function SignUpBeforeRedirect({ returnUrl }) {
       <Button onClick={() => handleSignIn()} style={{ marginBottom: 10 }}>
         {t('signup')}
       </Button>
-      {returnUrl === '/add-protest' && (
+      {/* keeping it here in case we want to redirect in the furture */}
+      {/* {returnUrl === '/add-protest' && (
         <Link to="/add-protest">
           <>
             <Button
@@ -36,7 +43,7 @@ function SignUpBeforeRedirect({ returnUrl }) {
             </Button>
           </>
         </Link>
-      )}
+      )} */}
     </PageContentWrapper>
   );
 }
@@ -55,9 +62,11 @@ let userId = '';
 let pictureUrl = '';
 
 export default function SignUp(props) {
+  const { t } = useTranslation('signup');
   const [stage, setStage] = useState(stages.UNKNOWN);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
   const history = useHistory();
   const store = useStore();
 
@@ -73,11 +82,12 @@ export default function SignUp(props) {
   const onSignUpSubmit = async () => {
     store.userStore.setUserName(firstName, lastName);
     store.userStore.setUserPicture(pictureUrl);
-    await updateUserName({ userId, firstName, lastName });
+    store.userStore.setUserPhone(phone);
+    await updateUserData({ userId, firstName, lastName, phone });
 
     Modal.success({
-      title: 'נרשמת בהצלחה!',
-      okText: 'המשך',
+      title: t('success'),
+      okText: t('next'),
       onOk: () => {
         redirectToReturnURL();
       },
@@ -115,7 +125,7 @@ export default function SignUp(props) {
   if (stage === stages.UNKNOWN) {
     return (
       <PageWrapper>
-        <p style={{ marginTop: 25 }}>רק כמה שניות...</p>
+        <p style={{ marginTop: 25 }}>{t('waiting')}</p>
         <LoadingSpinner />
       </PageWrapper>
     );
@@ -133,28 +143,31 @@ export default function SignUp(props) {
     return (
       <PageWrapper>
         <Helmet>
-          <title>סיום הרשמה</title>
+          <title>{t('form.title')}</title>
         </Helmet>
 
         <PageContentWrapper>
-          <Title level={3}>התחברת בהצלחה!</Title>
-          <p style={{ fontSize: 16 }}>יש להזין את שמכם על מנת לסיים את ההרשמה.</p>
-          <SignUpFormItem label="שם פרטי / כינוי" required style={{ flexDirection: 'column', marginBottom: 10 }}>
+          <Title level={3}>{t('form.subtitle')}</Title>
+          <p style={{ fontSize: 16 }}>{t('form.content')}</p>
+          <SignUpFormItem label={t('form.firstName')} required style={{ flexDirection: 'column', marginBottom: 10 }}>
             <Input autoFocus value={firstName} onChange={(e) => setFirstName(e.target.value)} />
           </SignUpFormItem>
-          <SignUpFormItem label="שם משפחה " style={{ flexDirection: 'column' }}>
+          <SignUpFormItem label={t('form.lastName')} style={{ flexDirection: 'column' }}>
             <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          </SignUpFormItem>
+          <SignUpFormItem label={t('form.phone')} style={{ flexDirection: 'column' }}>
+            <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
           </SignUpFormItem>
           <SignUpFormItem>
             <AntButton
-              disabled={firstName.length < 2}
+              disabled={!validateFields(firstName, lastName, phone)}
               className="bg-success"
               type="primary"
               size="large"
               style={{ width: 300 }}
               onClick={() => onSignUpSubmit()}
             >
-              סיום הרשמה
+              {t('form.submit')}
             </AntButton>
           </SignUpFormItem>
         </PageContentWrapper>

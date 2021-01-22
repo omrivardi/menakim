@@ -44,6 +44,16 @@ export async function createProtest(params, fromPending = false) {
   // Add protest to `pending_protests` collection
   const request = await pendingCollection.add(protestParams);
   console.log(protestParams);
+
+  // call webhook with admin details.
+  fetch('https://hook.integromat.com/89d1fr91gajw7dyip2k4yjrsr7u3ggfo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(protestParams),
+  });
+
   return request;
 }
 
@@ -295,10 +305,10 @@ export async function assignRoleOnProtest({ userId, protestId, requestId, status
   await firestore.collection('leader_requests').doc(requestId).update({ status, approved_by: adminId });
 }
 
-export async function updateUserName({ userId, firstName, lastName = '' }) {
+export async function updateUserData({ userId, firstName, lastName = '', phone = '' }) {
   const userRef = firestore.collection('users').doc(userId);
 
-  const updatedUser = await userRef.update({ firstName, lastName });
+  const updatedUser = await userRef.update({ firstName, lastName, phone });
   return updatedUser;
 }
 

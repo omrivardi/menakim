@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import PlacesAutocomplete from '../PlacesAutocomplete';
+// import PlacesAutocomplete from '../PlacesAutocomplete';
 import { useForm } from 'react-hook-form';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,7 @@ import Button from '../elements/Button';
 import { validateLatLng, isValidUrl } from '../../utils';
 import { fetchNearbyProtests } from '../../api';
 import L from 'leaflet';
-import DateTimeList from '../DateTimeList';
+// import DateTimeList from '../DateTimeList';
 
 const protestMarker = new L.Icon({
   iconUrl: '/icons/marker-purple.svg',
@@ -60,11 +60,12 @@ function ProtestForm({
     return initialState;
   }, [initialCoords]);
 
+  // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, setValue, reset } = useForm({
     defaultValues,
   });
 
-  const [streetAddressDefaultValue, setStreetAddressDefaultValue] = useState(defaultValues.streetAddress);
+  // const [streetAddressDefaultValue, setStreetAddressDefaultValue] = useState(defaultValues.streetAddress);
 
   // These two are separate so that onMoveEnd isn't called on every map move
   const [mapCenter, setMapCenter] = useState(coordinatesUpdater);
@@ -78,13 +79,13 @@ function ProtestForm({
   const [zoomLevel, setZoomLevel] = useState(14);
   // const { recaptcha } = useRef(null);
 
-  const setStreetAddress = React.useCallback((value) => setValue('streetAddress', value), [setValue]);
+  // const setStreetAddress = React.useCallback((value) => setValue('streetAddress', value), [setValue]);
 
-  useEffect(() => {
-    reset({});
-    setStreetAddressDefaultValue('');
-    setStreetAddress('');
-  }, [editMode, reset, setStreetAddress]);
+  // useEffect(() => {
+  //   reset({});
+  //   setStreetAddressDefaultValue('');
+  //   setStreetAddress('');
+  // }, [editMode, reset, setStreetAddress]);
 
   // The two useEffects below this are in order to deal with the defaultValues & Places Autocomplete
   useEffect(() => {
@@ -92,8 +93,9 @@ function ProtestForm({
       reset(defaultValues);
       setSubmitMessage('');
       setSubmitSuccess(false);
-      setStreetAddressDefaultValue(defaultValues.streetAddress);
-      setStreetAddress(defaultValues.streetAddress);
+      // setStreetAddressDefaultValue(defaultValues.streetAddress);
+      // setStreetAddress(defaultValues.streetAddress);
+      // setStreetAddress(defaultValues.streetAddress);
       setDateTimeList(defaultValues.dateTimeList || [{ id: 0, date: '2020-10-24', time: '17:30' }]);
 
       if (validateLatLng(defaultValues.latlng)) {
@@ -101,7 +103,7 @@ function ProtestForm({
         setMarkerPosition(defaultValues.latlng);
       }
     }
-  }, [defaultValues, reset, setStreetAddress, setDateTimeList]);
+  }, [defaultValues, reset, /* setStreetAddress,*/ setDateTimeList]);
 
   // Load nearby protests on mount
   useEffect(() => {
@@ -118,8 +120,12 @@ function ProtestForm({
     //   alert('אנא הזינו את כתובת ההפגנה');
     //   return;
     // } else {
+    if (!params.displayName) {
+      alert(t('validations.name'));
+      return;
+    }
     if (!mapCenter) {
-      alert('אנא הזינו כתובת תקינה');
+      alert(t('validations.map'));
       return;
     }
 
@@ -129,12 +135,12 @@ function ProtestForm({
     // }
 
     if (params.whatsAppLink && !isValidUrl(params.whatsAppLink)) {
-      alert('לינק לקבוצת הוואטסאפ אינו תקין');
+      alert(t('validations.link'));
       return;
     }
 
     if (!params.userApproved) {
-      alert('אנא אשר.י את התקנון');
+      alert(t('validations.approved'));
       return;
     }
 
@@ -150,14 +156,14 @@ function ProtestForm({
 
       if (editMode) {
         setSubmitSuccess(true);
-        setSubmitMessage('ההפגנה נשלחה בהצלחה ותתווסף למפה בזמן הקרוב :)');
+        setSubmitMessage(t('messages.ok'));
         afterSubmitCallback();
         return;
       }
 
       if (protest._document) {
         setSubmitSuccess(true);
-        setSubmitMessage('ההפגנה נשלחה בהצלחה ותתווסף למפה בזמן הקרוב :)');
+        setSubmitMessage(t('messages.ok'));
         afterSubmitCallback();
       } else {
         throw new Error('protest._document was null.');
@@ -165,7 +171,7 @@ function ProtestForm({
     } catch (err) {
       console.error(err);
       setSubmitSuccess(true);
-      setSubmitMessage('תקלה התרחשה בתהליך השליחה. אנא פנו אלינו וננסה להבין את הבעיה: support@1km.zendesk.com');
+      setSubmitMessage(t('messages.error'));
     }
     // }
   };
@@ -184,7 +190,7 @@ function ProtestForm({
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
           <Link to="/">
-            <Button>לעמוד הראשי</Button>
+            <Button>{t('mainPage')}</Button>
           </Link>
         </>
       ) : (
@@ -297,15 +303,6 @@ function ProtestForm({
           </ProtestFormLabel>
           {!editMode ? (
             <>
-              <ProtestFormInputDetails margin="10px 0">
-                האימייל לא יפורסם באתר ולא יועבר לשום גורם חיצוני. ניצור קשר במידה ונצטרך לוודא את פרטי ההפגנה.
-              </ProtestFormInputDetails>
-
-              <ProtestFormLabel>
-                כתובת מייל
-                <ProtestFormInput type="email" placeholder="האימייל שלך" name="email" ref={register}></ProtestFormInput>
-              </ProtestFormLabel>
-
               <ProtestFormInputDetails margin="10px 0">
                 {t('legal.one')}
                 <br />
