@@ -295,10 +295,10 @@ export async function assignRoleOnProtest({ userId, protestId, requestId, status
   await firestore.collection('leader_requests').doc(requestId).update({ status, approved_by: adminId });
 }
 
-export async function updateUserName({ userId, firstName, lastName = '' }) {
+export async function updateUserData({ userId, firstName, lastName = '', phone = '' }) {
   const userRef = firestore.collection('users').doc(userId);
 
-  const updatedUser = await userRef.update({ firstName, lastName });
+  const updatedUser = await userRef.update({ firstName, lastName, phone });
   return updatedUser;
 }
 
