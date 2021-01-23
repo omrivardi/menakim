@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import { WazeButton } from '../';
@@ -18,7 +18,7 @@ function FormattedDate({ date }) {
 
 function ProtestCard({ protestInfo, showAction = false, style }) {
   const store = useStore();
-  const history = useHistory();
+  // const history = useHistory();
   const { t } = useTranslation('card');
 
   const {
