@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import { WazeButton } from '../';
@@ -18,7 +18,7 @@ function FormattedDate({ date }) {
 
 function ProtestCard({ protestInfo, showAction = false, style }) {
   const store = useStore();
-  const history = useHistory();
+  // const history = useHistory();
   const { t } = useTranslation('card');
 
   const {
@@ -52,9 +52,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       style={style}
       onMouseOver={() => store.mapStore.setHoveredProtestId(protestInfo.id)}
       onMouseOut={() => store.mapStore.setHoveredProtestId(null)}
-      onClick={() => {
-        history.push(`/protest/${id}`);
-      }}
+      // onClick={() => {
+      //   history.push(`/protest/${id}`);
+      // }}
       data-testid="protestCard"
     >
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
@@ -109,7 +109,7 @@ const ProtestCardWrapper = styled.div`
   margin: 0 10px;
   background-color: #fff;
   box-shadow: 0 1px 4px 0px #00000026;
-  cursor: pointer;
+  // cursor: pointer;
   border-radius: 4px;
   transition: box-shadow 175ms ease-out;
 

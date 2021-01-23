@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import ProtestCard from '../ProtestCard';
+import { Button } from '../elements';
+import { useHistory } from 'react-router-dom';
 import { getFullUserData } from '../../api';
 
 function ProtestListItem({ protestInfo }) {
@@ -34,6 +35,7 @@ function ProtestListItems({ protests, listTitle }) {
 
 function ProtestList({ loading, closeProtests, farProtests }) {
   const wrapper = useRef(null);
+  const history = useHistory();
 
   useEffect(() => {
     wrapper.current.scrollTop = 0;
@@ -47,9 +49,16 @@ function ProtestList({ loading, closeProtests, farProtests }) {
         <>
           {closeProtests.length === 0 ? (
             <ProtestListHeader style={{ marginTop: 15 }}>
-              לא נמצאו הפגנות ברדיוס של קילומטר ממך.
+              על מנת להציג את מוקדי הניקיון על המפה יש לאשר לדפדפן את הגישה למיקום או לחילופין להכניס את הכתובת שלכם
               <br />
-              <Link to="/add-protest/">הוסיפו את ההפגנה הראשונה!</Link>
+              <Button
+                style={{ marginTop: '1rem' }}
+                onClick={async () => {
+                  history.push('/add-protest/');
+                }}
+              >
+                פתחו מוקד ניקיון חדש!
+              </Button>
             </ProtestListHeader>
           ) : (
             <ProtestListItems protests={closeProtests} listTitle={'עד קילומטר אחד ממך'} />
