@@ -100,7 +100,7 @@ function AppMap({ hoveredProtest }) {
         onMoveEnd={({ target }) => {
           updateMap([target.getCenter().lat, target.getCenter().lng]);
         }}
-        zoom={14}
+        zoom={11.5}
         zoomControl={false}
       >
         <TileLayer
