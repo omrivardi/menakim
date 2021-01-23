@@ -120,7 +120,6 @@ function AppMap({ hoveredProtest }) {
 
 const MapWrapper = styled.div`
   width: 100%;
-  height: 350px;
   margin-bottom: 10px;
   grid-row: 1;
   grid-column: 2 / -1;
