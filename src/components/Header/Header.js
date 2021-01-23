@@ -19,7 +19,7 @@ function Header() {
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
       <Link to="/">
-        <img src="/logo.svg" alt=" קילומטר אחד" />
+        <img src="/logo.svg" alt="קילומטר אחד" />
       </Link>
       <NavProfileWrapper>
         <Menu
