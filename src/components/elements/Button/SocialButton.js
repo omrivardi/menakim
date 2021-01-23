@@ -14,7 +14,7 @@ export default function SocialButton({ type, link, children, className }) {
 }
 
 export const Button = styled.a`
-  width: 284px;
+  width: 100%;
   height: 32px;
   display: flex;
   align-items: center;
