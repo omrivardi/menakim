@@ -42,7 +42,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   useEffect(() => {
     (async () => {
       const protestAdmin = await getFullUserData(roles?.leader[0]);
-      setAdminName(`${protestAdmin?.firstName} ${protestAdmin?.lastName}`);
+      setAdminName(`${protestAdmin?.firstName || ''} ${protestAdmin?.lastName || ''}`);
     })();
   }, [roles]);
 
@@ -100,7 +100,7 @@ function AppMap({ hoveredProtest }) {
         onMoveEnd={({ target }) => {
           updateMap([target.getCenter().lat, target.getCenter().lng]);
         }}
-        zoom={14}
+        zoom={11.5}
         zoomControl={false}
       >
         <TileLayer
@@ -110,9 +110,9 @@ function AppMap({ hoveredProtest }) {
         {coordinates.length > 0 && (
           <>
             <Marker position={coordinates} icon={positionPoint}></Marker>
-            <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
           </>
         )}
+        <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
       </MapElement>
     </MapWrapper>
   );
