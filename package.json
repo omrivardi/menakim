@@ -48,11 +48,13 @@
     "cy:run": "cypress run",
     "eject": "react-scripts eject",
     "format": "prettier --write .",
-    "deploy": "npm run build && firebase deploy --only hosting"
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "lint": "eslint src"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint"
     }
   },
   "lint-staged": {
