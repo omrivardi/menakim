@@ -17,7 +17,7 @@ const getUserPosition = async ({ setCoordinates }) => {
 };
 
 export default function MapSearchAutocomplete({ inputRef }) {
-  const { t, i18n } = useTranslation('translations');
+  const { t } = useTranslation('translations');
   const {
     ready,
     value,

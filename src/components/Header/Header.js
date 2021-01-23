@@ -11,7 +11,7 @@ function Header() {
   const store = useStore();
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
-  const { t, i18n } = useTranslation('header');
+  const { t } = useTranslation('header');
   return (
     <HeaderWrapper path={pathname}>
       <NavItemLive to="/live">

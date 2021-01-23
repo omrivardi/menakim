@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import ProtestCard from '../ProtestCard';
 import { Button } from '../elements';
-import { useHistory, matchPath } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { getFullUserData } from '../../api';
-import { useTranslation } from 'react-i18next';
 
 function ProtestListItem({ protestInfo }) {
   const [adminName, setAdminName] = useState('');
@@ -38,7 +36,6 @@ function ProtestListItems({ protests, listTitle }) {
 function ProtestList({ loading, closeProtests, farProtests }) {
   const wrapper = useRef(null);
   const history = useHistory();
-  const { t, i18n } = useTranslation('translations');
 
   useEffect(() => {
     wrapper.current.scrollTop = 0;
