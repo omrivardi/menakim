@@ -239,16 +239,21 @@ export async function sendProtestLeaderRequest(userData, phoneNumber, protestId)
 export function extractUserData(result) {
   const { uid, displayName } = result.user;
   let first_name, last_name, pictureUrl;
-  const isEmulator = result?.additionalUserInfo?.profile?.picture ? false : true;
+  const profile = result?.additionalUserInfo?.profile;
+  if (!profile) {
+    throw new Error('no profile was loaded');
+  }
+
+  const isEmulator = profile.picture ? false : true;
 
   // In development mode we are using the authentication emulator; note that the additionalUserInfo.info.profile properties are different while using it.
   if (isEmulator) {
     [first_name, last_name] = displayName.split(' ');
-    pictureUrl = result.additionalUserInfo.profile.picture;
+    pictureUrl = profile.picture;
   } else {
-    first_name = result.additionalUserInfo.profile.first_name;
-    last_name = result.additionalUserInfo.profile.last_name;
-    pictureUrl = result.additionalUserInfo.profile.picture.data.url;
+    first_name = profile.first_name || profile.given_name;
+    last_name = profile.last_name || profile.family_name;
+    pictureUrl = profile.picture;
   }
   const userData = {
     uid,
