@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
-import { WazeButton } from '../';
+// import { WazeButton } from '../';
 import SocialButton from '../elements/Button/SocialButton';
 
 function FormattedDate({ date }) {
@@ -18,7 +18,7 @@ function FormattedDate({ date }) {
 
 function ProtestCard({ protestInfo, showAction = false, style }) {
   const store = useStore();
-  const history = useHistory();
+  // const history = useHistory();
   const { t } = useTranslation('card');
 
   const {
@@ -52,9 +52,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       style={style}
       onMouseOver={() => store.mapStore.setHoveredProtestId(protestInfo.id)}
       onMouseOut={() => store.mapStore.setHoveredProtestId(null)}
-      onClick={() => {
-        history.push(`/protest/${id}`);
-      }}
+      // onClick={() => {
+      //   history.push(`/protest/${id}`);
+      // }}
       data-testid="protestCard"
     >
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
@@ -90,9 +90,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             {meetingTime}
           </ProtestCardDetail>
         )}
-        <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
+        {/* <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
           {t('navigate')}
-        </WazeButton>
+        </WazeButton> */}
         {distance && (
           <ProtestCardDetail>
             <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
@@ -109,7 +109,7 @@ const ProtestCardWrapper = styled.div`
   margin: 0 10px;
   background-color: #fff;
   box-shadow: 0 1px 4px 0px #00000026;
-  cursor: pointer;
+  // cursor: pointer;
   border-radius: 4px;
   transition: box-shadow 175ms ease-out;
 
