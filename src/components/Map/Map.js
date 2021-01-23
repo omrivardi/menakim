@@ -28,7 +28,7 @@ const positionPoint = new L.Icon({
 
 const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   const [adminName, setAdminName] = useState('');
-
+  const a = 1;
   const iconUrl = '/icons/markers/cleaning-marker.png';
 
   // Use a speical marker from the protest object / the default fist.
