@@ -8,6 +8,7 @@ import L from 'leaflet';
 import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
 import { getFullUserData } from '../../api';
+import location from '../../assets/icons/location.png';
 
 const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
   new L.Icon({
@@ -19,8 +20,8 @@ const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
   });
 
 const positionPoint = new L.Icon({
-  iconUrl: '/icons/marker.svg',
-  iconRetinaUrl: '/icons/marker.svg',
+  iconUrl: location,
+  iconRetinaUrl: location,
   iconAnchor: [17.5, 40],
   popupAnchor: [0, -35],
   iconSize: [35, 40],
