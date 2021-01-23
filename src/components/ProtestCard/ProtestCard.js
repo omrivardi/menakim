@@ -52,9 +52,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       style={style}
       onMouseOver={() => store.mapStore.setHoveredProtestId(protestInfo.id)}
       onMouseOut={() => store.mapStore.setHoveredProtestId(null)}
-      onClick={() => {
-        history.push(`/protest/${id}`);
-      }}
+      // onClick={() => {
+      //   history.push(`/protest/${id}`);
+      // }}
       data-testid="protestCard"
     >
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
@@ -109,7 +109,7 @@ const ProtestCardWrapper = styled.div`
   margin: 0 10px;
   background-color: #fff;
   box-shadow: 0 1px 4px 0px #00000026;
-  cursor: pointer;
+  // cursor: pointer;
   border-radius: 4px;
   transition: box-shadow 175ms ease-out;
 
