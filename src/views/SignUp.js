@@ -15,7 +15,12 @@ const reg = /^[0-9-]+$/;
 
 // A basic validation for now, can extend later
 const validateFields = (firstName, lastName, phone) =>
-  firstName.length >= 2 && firstName.length < 20 && lastName.length >= 2 && lastName.length < 20 && reg.test(phone);
+  firstName.length >= 2 &&
+  firstName.length < 20 &&
+  lastName.length >= 2 &&
+  lastName.length < 20 &&
+  phone.length >= 10 &&
+  reg.test(phone);
 
 function SignUpBeforeRedirect({ returnUrl }) {
   const { t } = useTranslation('signup');
