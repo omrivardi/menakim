@@ -11,15 +11,14 @@ function Header() {
   const store = useStore();
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
-  const { t } = useTranslation('header');
-
+  const { t, i18n } = useTranslation('header');
   return (
     <HeaderWrapper path={pathname}>
       <NavItemLive to="/live">
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
-      <Link to="/">
-        <img src="/logo.svg" alt=" קילומטר אחד" />
+      <Link to="/" style={{ fontFamily: 'almoni', fontSize: '2rem' }}>
+        {t('cleaning')}
       </Link>
       <NavProfileWrapper>
         <Menu

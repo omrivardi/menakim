@@ -34,6 +34,12 @@
   src: local('Caravan DL 2.0 AAA'), url('./assets/fonts/caravan-90-aaa.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'almoni';
+  font-weight: 400;
+  src: local('Almoni DL Regular'), url('./assets/fonts/almoni-dl-aaa-400.woff') format('woff');
+}
+
 html {
   box-sizing: border-box;
 }
@@ -60,6 +66,13 @@ a {
   color: #2980b9;
   text-decoration: none;
   transition: color 0.15s;
+}
+
+h2 {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 
 input {
