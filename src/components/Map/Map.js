@@ -110,9 +110,9 @@ function AppMap({ hoveredProtest }) {
         {coordinates.length > 0 && (
           <>
             <Marker position={coordinates} icon={positionPoint}></Marker>
-            <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
           </>
         )}
+        <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
       </MapElement>
     </MapWrapper>
   );
