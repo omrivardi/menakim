@@ -42,7 +42,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   useEffect(() => {
     (async () => {
       const protestAdmin = await getFullUserData(roles?.leader[0]);
-      setAdminName(protestAdmin?.displayName);
+      setAdminName(`${protestAdmin?.firstName} ${protestAdmin?.lastName}`);
     })();
   }, [roles]);
 
