@@ -4,7 +4,7 @@ import { useStore } from '../../stores';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
-import { WazeButton } from '../';
+// import { WazeButton } from '../';
 import SocialButton from '../elements/Button/SocialButton';
 
 function FormattedDate({ date }) {
@@ -90,9 +90,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             {meetingTime}
           </ProtestCardDetail>
         )}
-        <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
+        {/* <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
           {t('navigate')}
-        </WazeButton>
+        </WazeButton> */}
         {distance && (
           <ProtestCardDetail>
             <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
