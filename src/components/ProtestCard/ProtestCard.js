@@ -35,6 +35,17 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
 
   const upcomingDate = getUpcomingDate(dateTimeList);
 
+  function handleWhatsappClick() {
+    // call webhook with event details.
+    fetch('https://hook.integromat.com/leu403u1xmcwoamaojg69m6usbhcnm49', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ displayName, id, coordinates }),
+    });
+  }
+
   return (
     <ProtestCardWrapper
       tabIndex="0"
@@ -54,9 +65,11 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           </ProtestCardDetail>
         )}
 
-        <SocialButton type="whatsapp" link={whatsAppLink}>
-          {t('whatsappLink')}
-        </SocialButton>
+        <div onClick={handleWhatsappClick}>
+          <SocialButton type="whatsapp" link={whatsAppLink}>
+            {t('whatsappLink')}
+          </SocialButton>
+        </div>
 
         {streetAddress && (
           <ProtestCardDetail data-testid="protestCard__streetAddress">
