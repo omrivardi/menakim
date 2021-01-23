@@ -1,9 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import ProtestCard from '../ProtestCard';
 import { Button } from '../elements';
 import { useHistory, matchPath } from 'react-router-dom';
+import { getFullUserData } from '../../api';
+import { useTranslation } from 'react-i18next';
+
+function ProtestListItem({ protestInfo }) {
+  const [adminName, setAdminName] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      const protestAdmin = await getFullUserData(protestInfo?.roles?.leader[0]);
+      setAdminName(protestAdmin?.displayName);
+    })();
+  }, [protestInfo]);
+
+  return <ProtestCard protestInfo={{ ...protestInfo, adminName }} />;
+}
 
 function ProtestListItems({ protests, listTitle }) {
   if (protests.length > 0) {
@@ -11,7 +26,7 @@ function ProtestListItems({ protests, listTitle }) {
       <>
         <ProtestListHeader>{listTitle}</ProtestListHeader>
         {protests.slice(0, 10).map((protest) => (
-          <ProtestCard key={protest.id} protestInfo={protest} />
+          <ProtestListItem key={protest.id} protestInfo={protest} />
         ))}
       </>
     );
@@ -23,6 +38,7 @@ function ProtestListItems({ protests, listTitle }) {
 function ProtestList({ loading, closeProtests, farProtests }) {
   const wrapper = useRef(null);
   const history = useHistory();
+  const { t, i18n } = useTranslation('translations');
 
   useEffect(() => {
     wrapper.current.scrollTop = 0;

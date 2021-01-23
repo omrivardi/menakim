@@ -5,6 +5,7 @@ import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption 
 import { getCurrentPosition } from '../../../utils';
 import { useStore } from '../../../stores';
 import '@reach/combobox/styles.css';
+import { useTranslation } from 'react-i18next';
 
 const getUserPosition = async ({ setCoordinates }) => {
   try {
@@ -16,6 +17,7 @@ const getUserPosition = async ({ setCoordinates }) => {
 };
 
 export default function MapSearchAutocomplete({ inputRef }) {
+  const { t, i18n } = useTranslation('translations');
   const {
     ready,
     value,
@@ -69,7 +71,7 @@ export default function MapSearchAutocomplete({ inputRef }) {
           onChange={handleInput}
           disabled={!ready}
           ref={inputRef}
-          placeholder="לקבלת מוקדי ניקיון קרובים"
+          placeholder={t('cleaning-positions')}
         />
       </div>
       <ComboboxPopover>

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import PlacesAutocomplete from '../PlacesAutocomplete';
+// import PlacesAutocomplete from '../PlacesAutocomplete';
 import { useForm } from 'react-hook-form';
 import { Map, TileLayer, Marker } from 'react-leaflet';
+import { useTranslation } from 'react-i18next';
 import Button from '../elements/Button';
 import { validateLatLng, isValidUrl } from '../../utils';
 import { fetchNearbyProtests } from '../../api';
 import L from 'leaflet';
-import DateTimeList from '../DateTimeList';
+// import DateTimeList from '../DateTimeList';
 
 const protestMarker = new L.Icon({
   iconUrl: '/icons/marker-purple.svg',
@@ -16,6 +17,32 @@ const protestMarker = new L.Icon({
   iconSize: [50, 48],
   iconAnchor: [25, 48],
 });
+
+const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
+const placeTypes = ['river', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
+
+const OpeningText = () => {
+  const { t } = useTranslation('addCleanup');
+  return (
+    <div>
+      <p>{t('opening.one')}</p>
+      <p>{t('opening.two')}</p>
+      <p>
+        {t('opening.three')}{' '}
+        <a href="https://drive.google.com/file/d/1b4pSIEgJ021VDZyuPZwa2ANZAv19KIJh/view?usp=sharing">{t('opening.link')}</a>
+      </p>
+      <p>{t('opening.four')}</p>
+      <p>{t('opening.five')}</p>
+      <ul>
+        <li>{t('opening.bullets.one')}</li>
+        <li>{t('opening.bullets.two')}</li>
+        <li>{t('opening.bullets.three')}</li>
+        <li>{t('opening.bullets.four')}</li>
+      </ul>
+      <p>{t('opening.six')}</p>
+    </div>
+  );
+};
 
 function ProtestForm({
   initialCoords,
@@ -25,17 +52,20 @@ function ProtestForm({
   editMode = null,
   isAdmin,
 }) {
+  const { t } = useTranslation('addCleanup');
+
   const coordinatesUpdater = useCallback(() => {
     let initialState = [31.7749837, 35.219797];
     if (validateLatLng(initialCoords)) initialState = initialCoords;
     return initialState;
   }, [initialCoords]);
 
+  // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, setValue, reset } = useForm({
     defaultValues,
   });
 
-  const [streetAddressDefaultValue, setStreetAddressDefaultValue] = useState(defaultValues.streetAddress);
+  // const [streetAddressDefaultValue, setStreetAddressDefaultValue] = useState(defaultValues.streetAddress);
 
   // These two are separate so that onMoveEnd isn't called on every map move
   const [mapCenter, setMapCenter] = useState(coordinatesUpdater);
@@ -49,13 +79,13 @@ function ProtestForm({
   const [zoomLevel, setZoomLevel] = useState(14);
   // const { recaptcha } = useRef(null);
 
-  const setStreetAddress = React.useCallback((value) => setValue('streetAddress', value), [setValue]);
+  // const setStreetAddress = React.useCallback((value) => setValue('streetAddress', value), [setValue]);
 
-  useEffect(() => {
-    reset({});
-    setStreetAddressDefaultValue('');
-    setStreetAddress('');
-  }, [editMode, reset, setStreetAddress]);
+  // useEffect(() => {
+  //   reset({});
+  //   setStreetAddressDefaultValue('');
+  //   setStreetAddress('');
+  // }, [editMode, reset, setStreetAddress]);
 
   // The two useEffects below this are in order to deal with the defaultValues & Places Autocomplete
   useEffect(() => {
@@ -63,8 +93,9 @@ function ProtestForm({
       reset(defaultValues);
       setSubmitMessage('');
       setSubmitSuccess(false);
-      setStreetAddressDefaultValue(defaultValues.streetAddress);
-      setStreetAddress(defaultValues.streetAddress);
+      // setStreetAddressDefaultValue(defaultValues.streetAddress);
+      // setStreetAddress(defaultValues.streetAddress);
+      // setStreetAddress(defaultValues.streetAddress);
       setDateTimeList(defaultValues.dateTimeList || [{ id: 0, date: '2020-10-24', time: '17:30' }]);
 
       if (validateLatLng(defaultValues.latlng)) {
@@ -72,7 +103,7 @@ function ProtestForm({
         setMarkerPosition(defaultValues.latlng);
       }
     }
-  }, [defaultValues, reset, setStreetAddress, setDateTimeList]);
+  }, [defaultValues, reset, /* setStreetAddress,*/ setDateTimeList]);
 
   // Load nearby protests on mount
   useEffect(() => {
@@ -85,54 +116,64 @@ function ProtestForm({
   }, [coordinatesUpdater]);
 
   const onSubmit = async (params) => {
-    if (!editMode && !params.streetAddress) {
-      alert('אנא הזינו את כתובת ההפגנה');
+    // if (!editMode && !params.streetAddress) {
+    //   alert('אנא הזינו את כתובת ההפגנה');
+    //   return;
+    // } else {
+    if (!params.displayName) {
+      alert(t('validations.name'));
       return;
-    } else {
-      if (!mapCenter) {
-        alert('אנא הזינו כתובת תקינה');
-        return;
-      }
-
-      if (params.telegramLink && !isValidUrl(params.telegramLink)) {
-        alert('לינק לקבוצת הטלגרם אינו תקין');
-        return;
-      }
-
-      if (params.whatsAppLink && !isValidUrl(params.whatsAppLink)) {
-        alert('לינק לקבוצת הוואטסאפ אינו תקין');
-        return;
-      }
-
-      try {
-        params.coords = mapCenter;
-        params.dateTimeList = dateTimeList;
-        if (defaultValues.protestRef) {
-          params.protestRef = defaultValues.protestRef;
-        }
-
-        let protest = await submitCallback(params);
-
-        if (editMode) {
-          setSubmitSuccess(true);
-          setSubmitMessage('ההפגנה נשלחה בהצלחה ותתווסף למפה בזמן הקרוב :)');
-          afterSubmitCallback();
-          return;
-        }
-
-        if (protest._document) {
-          setSubmitSuccess(true);
-          setSubmitMessage('ההפגנה נשלחה בהצלחה ותתווסף למפה בזמן הקרוב :)');
-          afterSubmitCallback();
-        } else {
-          throw new Error('protest._document was null.');
-        }
-      } catch (err) {
-        console.error(err);
-        setSubmitSuccess(true);
-        setSubmitMessage('תקלה התרחשה בתהליך השליחה. אנא פנו אלינו וננסה להבין את הבעיה: support@1km.zendesk.com');
-      }
     }
+    if (!mapCenter) {
+      alert(t('validations.map'));
+      return;
+    }
+
+    // if (params.telegramLink && !isValidUrl(params.telegramLink)) {
+    //   alert('לינק לקבוצת הטלגרם אינו תקין');
+    //   return;
+    // }
+
+    if (params.whatsAppLink && !isValidUrl(params.whatsAppLink)) {
+      alert(t('validations.link'));
+      return;
+    }
+
+    if (!params.userApproved) {
+      alert(t('validations.approved'));
+      return;
+    }
+
+    try {
+      params.coords = mapCenter;
+      params.dateTimeList = dateTimeList;
+      if (defaultValues.protestRef) {
+        params.protestRef = defaultValues.protestRef;
+      }
+      delete params.userApproved;
+
+      let protest = await submitCallback(params);
+
+      if (editMode) {
+        setSubmitSuccess(true);
+        setSubmitMessage(t('messages.ok'));
+        afterSubmitCallback();
+        return;
+      }
+
+      if (protest._document) {
+        setSubmitSuccess(true);
+        setSubmitMessage(t('messages.ok'));
+        afterSubmitCallback();
+      } else {
+        throw new Error('protest._document was null.');
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitSuccess(true);
+      setSubmitMessage(t('messages.error'));
+    }
+    // }
   };
 
   // useEffect(() => {
@@ -149,26 +190,49 @@ function ProtestForm({
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
           <Link to="/">
-            <Button>לעמוד הראשי</Button>
+            <Button>{t('mainPage')}</Button>
           </Link>
         </>
       ) : (
         <>
           {(!editMode || isAdmin) && (
             <>
+              <OpeningText />
               <ProtestFormLabel>
-                שם המקום
+                {t('place.title')}
                 <ProtestFormInput
                   type="text"
                   name="displayName"
                   ref={register}
-                  placeholder="איפה ההפגנה?"
+                  placeholder={t('place.placeholder')}
                   autoFocus
                 ></ProtestFormInput>
-                <ProtestFormInputDetails>שם המקום כפי שתושבי האיזור מכירים אותו</ProtestFormInputDetails>
+                <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
+              </ProtestFormLabel>
+              <ProtestFormLabel>
+                {t('area.title')}
+                <ProtestFormSelect name="area" ref={register}>
+                  {areas.map((area) => (
+                    <option value={area} key={area}>
+                      {t(`area.values.${area}`)}
+                    </option>
+                  ))}
+                </ProtestFormSelect>
+                <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
+              </ProtestFormLabel>
+              <ProtestFormLabel>
+                {t('placeType.title')}
+                <ProtestFormSelect name="placeType" ref={register}>
+                  {placeTypes.map((placeType) => (
+                    <option value={placeType} key={placeType}>
+                      {t(`placeType.values.${placeType}`)}
+                    </option>
+                  ))}
+                </ProtestFormSelect>
+                <ProtestFormInputDetails>{t('placeType.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
 
-              <ProtestFormLabel>
+              {/* <ProtestFormLabel>
                 כתובת
                 <PlacesAutocomplete
                   setManualAddress={setMapCenter}
@@ -177,7 +241,7 @@ function ProtestForm({
                   defaultValue={streetAddressDefaultValue}
                 />
                 <ProtestFormInputDetails>לאחר בחירת הכתובת, הזיזו את הסמן למיקום המדויק:</ProtestFormInputDetails>
-              </ProtestFormLabel>
+              </ProtestFormLabel> */}
               <MapWrapper
                 center={mapCenter}
                 zoom={zoomLevel}
@@ -219,42 +283,44 @@ function ProtestForm({
               <hr />
             </>
           )}
-          <ProtestFormSectionTitle>תאריך ושעה</ProtestFormSectionTitle>
-          <DateTimeList dateTimeList={dateTimeList} setDateTimeList={setDateTimeList} />
+          {/* <ProtestFormSectionTitle>תאריך ושעה</ProtestFormSectionTitle>
+          <DateTimeList dateTimeList={dateTimeList} setDateTimeList={setDateTimeList} /> */}
 
           <hr />
-          <ProtestFormSectionTitle>פרטי יצירת קשר</ProtestFormSectionTitle>
+          <ProtestFormSectionTitle>{t('contact')}</ProtestFormSectionTitle>
           <ProtestFormLabel>
-            קבוצת וואטסאפ
-            <ProtestFormInput placeholder="לינק לקבוצה" name="whatsAppLink" ref={register}></ProtestFormInput>
+            {t('whatsapp.title')}
+            <ProtestFormInput placeholder={t('whatsapp.placeholder')} name="whatsAppLink" ref={register}></ProtestFormInput>
           </ProtestFormLabel>
-          <ProtestFormLabel>
+          {/* <ProtestFormLabel>
             קבוצת טלגרם
             <ProtestFormInput placeholder="לינק לקבוצה" name="telegramLink" ref={register}></ProtestFormInput>
-          </ProtestFormLabel>
+          </ProtestFormLabel> */}
           <ProtestFormLabel>
-            הערות
-            <ProtestFormInput placeholder="הערות להפגנה" name="notes" ref={register}></ProtestFormInput>
-            <ProtestFormInputDetails>כל דבר שחשוב שיופיע בפרטי ההפגנה.</ProtestFormInputDetails>
+            {t('remarks.title')}
+            <ProtestFormInput placeholder={t('remarks.title')} name="notes" ref={register}></ProtestFormInput>
+            <ProtestFormInputDetails>{t('remarks.details')}</ProtestFormInputDetails>
           </ProtestFormLabel>
           {!editMode ? (
             <>
               <ProtestFormInputDetails margin="10px 0">
-                האימייל לא יפורסם באתר ולא יועבר לשום גורם חיצוני. ניצור קשר במידה ונצטרך לוודא את פרטי ההפגנה.
+                {t('legal.one')}
+                <br />
+                {t('legal.two')}
+                <br />
+                {t('legal.three')}
+                <br />
+                {t('legal.four')}
+                <br />
+                {t('legal.five')}
               </ProtestFormInputDetails>
-
-              <ProtestFormLabel>
-                כתובת מייל
-                <ProtestFormInput type="email" placeholder="האימייל שלך" name="email" ref={register}></ProtestFormInput>
-              </ProtestFormLabel>
-
               <ProtestFormCheckboxWrapper>
-                <ProtestFormCheckbox type="checkbox" id="contact-approve" name="approveContact" ref={register} />
-                <label htmlFor="contact-approve">אני מעוניין/מעוניינת לקבל עדכונים מיוצר האתר</label>
+                <ProtestFormCheckbox type="checkbox" id="contact-approve" name="userApproved" ref={register} />
+                <label htmlFor="contact-approve">{t('legal.agree')}</label>
               </ProtestFormCheckboxWrapper>
 
               <Button type="submit" color="#1ED96E">
-                הוספת הפגנה
+                {t('add')}
               </Button>
             </>
           ) : (
@@ -286,6 +352,7 @@ const ProtestFormWrapper = styled.form`
 
   @media (min-width: 768px) {
     grid-column: 1 / -1;
+    width: 500px;
   }
 `;
 
@@ -318,6 +385,8 @@ const ProtestFormInputDetails = styled.span.attrs((props) => ({
 `;
 
 const ProtestFormCheckbox = styled.input``;
+
+const ProtestFormSelect = styled.select``;
 
 const MapWrapper = styled(Map)`
   width: 100%;
