@@ -15,7 +15,7 @@ const reg = /^[0-9-]+$/;
 
 // A basic validation for now, can extend later
 const validateFields = (firstName, lastName, phone) =>
-  firstName.length > 2 && firstName.length < 10 && lastName.length > 2 && lastName.length && reg.test(phone);
+  firstName.length >= 2 && firstName.length < 20 && lastName.length >= 2 && lastName.length < 20 && reg.test(phone);
 
 function SignUpBeforeRedirect({ returnUrl }) {
   const { t } = useTranslation('signup');
@@ -152,10 +152,10 @@ export default function SignUp(props) {
           <SignUpFormItem label={t('form.firstName')} required style={{ flexDirection: 'column', marginBottom: 10 }}>
             <Input autoFocus value={firstName} onChange={(e) => setFirstName(e.target.value)} />
           </SignUpFormItem>
-          <SignUpFormItem label={t('form.lastName')} style={{ flexDirection: 'column' }}>
+          <SignUpFormItem label={t('form.lastName')} required style={{ flexDirection: 'column' }}>
             <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
           </SignUpFormItem>
-          <SignUpFormItem label={t('form.phone')} style={{ flexDirection: 'column' }}>
+          <SignUpFormItem label={t('form.phone')} required style={{ flexDirection: 'column' }}>
             <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
           </SignUpFormItem>
           <SignUpFormItem>
