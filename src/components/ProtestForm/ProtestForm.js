@@ -29,9 +29,6 @@ const OpeningText = () => {
       <p>{t('opening.two')}</p>
       <p>
         {t('opening.three')}{' '}
-        <div role="button" tabindex="0">
-          Some clickable text
-        </div>
         <a
           href="#0"
           role="button"
