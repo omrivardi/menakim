@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { getCurrentPosition } from '../../utils';
+import { useTranslation } from 'react-i18next';
 import { useStore } from '../../stores';
 import {
   Map,
@@ -10,6 +11,7 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components/macro';
 
 function ProtestMap() {
+  const { t } = useTranslation('utils');
   const store = useStore();
   const { mapStore, protestStore, userCoordinates } = store;
   const hoveredProtest = useMemo(() => {
@@ -34,13 +36,14 @@ function ProtestMap() {
   // Ask for user location on map initial load
   useEffect(() => {
     const setCoordinates = async () => {
+      alert(t('popup'));
       try {
         if (userCoordinates.length === 0) {
           const coordinates = await getCurrentPosition();
           store.setCoordinates(coordinates);
         }
       } catch (err) {
-        alert('לא הצלחנו לאתר את המיקום.\nניתן להזין את המיקום ידנית :)');
+        alert(t('popup'));
       }
     };
 
