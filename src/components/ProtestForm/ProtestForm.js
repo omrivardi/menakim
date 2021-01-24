@@ -134,6 +134,7 @@ function ProtestForm({
     //   return;
     // }
 
+
     if (!params.whatsAppLink || !isValidUrl(params.whatsAppLink)) {
       alert(t('validations.link'));
       return;
