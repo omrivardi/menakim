@@ -37,7 +37,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
     iconUrl,
     iconRetinaUrl: iconUrl,
     iconSize: [20, 20],
-    iconAnchor: [12, 43],
+    iconAnchor: [10, 20],
   };
 
   useEffect(() => {
