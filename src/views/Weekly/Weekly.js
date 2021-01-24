@@ -384,7 +384,7 @@ function Weekly() {
       </WeeklySection>
       <footer className="weekly-footer">
         <div style={{ fontSize: 17, marginBottom: 20 }}>
-          <p>קילומטר אחד הוא פרוייקט ללא מטרות רווח.</p>
+          <p>מנקים את הבית הוא פרוייקט ללא מטרות רווח.</p>
           <p>
             במידה ואתם מעוניינים לתרום לנו, <Link to="/donate">לחצו כאן.</Link>
           </p>

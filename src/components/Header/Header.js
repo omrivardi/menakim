@@ -31,7 +31,7 @@ function Header() {
           <Link to="/map" onClick={() => setMenuState(false)} className="bm-item">
             {t('map')}
           </Link>
-          <Link to="/add-protest" onClick={() => setMenuState(false)} className="bm-item">
+          <Link to="/add-position" onClick={() => setMenuState(false)} className="bm-item">
             {t('open-position')}
           </Link>
           <hr />
@@ -43,9 +43,6 @@ function Header() {
           </a>
           <a href="https://www.instagram.com/menakim_et_habait/" target="_blank" rel="noreferrer noopener">
             {t('instagram')}
-          </a>
-          <a href="https://github.com/omrivardi/menakim" target="_blank" rel="noreferrer noopener">
-            {t('open-source')}
           </a>
           <a
             href="https://add.eventable.com/events/5fbd2022dc4d5900169aa8bf/5fbd202345b8360065cb430d"

@@ -52,7 +52,7 @@ function ProtestMap() {
   return (
     <>
       <Helmet>
-        <title>מפת הפגנות</title>
+        <title>מנקים את הבית</title>
       </Helmet>
       <HomepageWrapper>
         {/* <ProtestListWrapper>
