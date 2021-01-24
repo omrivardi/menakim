@@ -3,34 +3,28 @@ import React from 'react';
 // eslint-disable-next-line
 import Helmet from 'react-helmet';
 import { mdx } from 'mdx.macro';
-import { useTranslation } from 'react-i18next';
-const { t } = useTranslation('donate');
 
 const Content = mdx`
 <Helmet>
-  <title>${t('title')}</title>
+  <title>תרומה לפרוייקט</title>
 </Helmet>
 
-## ${t('title')}
+## תרומה לפרוייקט 
 
 <div style={{ textAlign: 'center' }}>
-${t('text1')}  
-${t('text2')}    
+"קילומטר אחד" הינו פרוייקט ללא מטרות רווח.  
+כל צוות הפרוייקט עובד בהתנדבות מתוך אמונה במטרה.     
 
 
-${t('text3')}  
+נהיה אסירי תודה לכל תרומה שתעזור לנו לכסות את עלויות תחזוקת האתר.
 
 
-<p>${t('text4')}<a href="https://paypal.me/guytepper" target="_blank" rel="noreferrer noopener">${t('text5')}</a>${t(
-  'text6'
-)}<a href="https://docs.google.com/forms/d/e/1FAIpQLSfVKiEvHZQlrHbmXt2jfVdAbetCtwAU7gN6mSDcw9Z5eEidug/viewform"  target="_blank" rel="noreferrer noopener">${t(
-  'text7'
-)}</a>.</p>
-${t('text8')}
-${t('text9')}
+<p>ניתן להעביר <a href="https://paypal.me/guytepper" target="_blank" rel="noreferrer noopener">תשלום בפייפאל</a> לחשבון של גיא טפר (מוביל הפרוייקט) או דרך הביט באמצעות <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVKiEvHZQlrHbmXt2jfVdAbetCtwAU7gN6mSDcw9Z5eEidug/viewform"  target="_blank" rel="noreferrer noopener">מילוי הטופס הבא</a>.</p>
+  סכום התרומות שנאסף ועלויות הפעלת האתר יהיו שקופים ויפורסמו בהמשך.
+במידה וכסף יישאר, נפנה לתורמים ונשאל לאן ירצו שכספם יגיע. 
 
-${t('text10')}
-${t('text11')}
+תודה רבה!  
+צוות קילומטר אחד
 </div>
 
 `;
