@@ -2,7 +2,6 @@ import React from 'react';
 import FourOhFour from './four-oh-four.js';
 import LegalNotice from './legal-notice.js';
 import ProjectSupport from './project-support';
-import DonatePage from './donate-page';
 import One from './ProjectUpdates/one';
 
 export const posts = [
