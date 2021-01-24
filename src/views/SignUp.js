@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useStore } from '../stores';
 import { Button, PageWrapper, PageContentWrapper, LoadingSpinner } from '../components';
 import { Modal, Button as AntButton, Form, Input, Typography } from 'antd';
-import { extractUserData, getUserFromRedirect, handleSignIn, saveUserInFirestore, updateUserData } from '../api';
+import { extractUserData, getUserFromRedirect, handleSignIn, emailSignIn, saveUserInFirestore, updateUserData } from '../api';
 import styled from 'styled-components/macro';
 import queryString from 'query-string';
 import Helmet from 'react-helmet';
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 const { Title } = Typography;
 
 const reg = /^[0-9-]+$/;
+const emailReg = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
 // A basic validation for now, can extend later
 const validateFields = (firstName, lastName, phone) =>
@@ -22,8 +23,57 @@ const validateFields = (firstName, lastName, phone) =>
   phone.length >= 10 &&
   reg.test(phone);
 
-function SignUpBeforeRedirect({ returnUrl }) {
+const validateEmailLogin = (email, pass) => emailReg.test(email) && pass >= 6;
+
+function EmailSignIn({ cancel, updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [validatePassword, setValidatePassword] = useState('');
+
+  return (
+    <>
+      <SignUpFormItem label={t('form.email')} required style={{ flexDirection: 'column' }}>
+        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+      </SignUpFormItem>
+      <SignUpFormItem label={t('form.password')} required style={{ flexDirection: 'column' }}>
+        <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
+      </SignUpFormItem>
+      <SignUpFormItem label={t('form.validatePassword')} required style={{ flexDirection: 'column' }}>
+        <Input.Password value={validatePassword} onChange={(e) => setValidatePassword(e.target.value)} />
+      </SignUpFormItem>
+      <Buttons>
+        <AntButton
+          disabled={!validateEmailLogin(email, password) || password !== validatePassword}
+          className="bg-success"
+          type="primary"
+          size="large"
+          style={{ width: 150, marginLeft: 10 }}
+          onClick={() =>
+            emailSignIn(email, password).then((userCredential) => {
+              updateUserAndRedirect(userCredential);
+            })
+          }
+        >
+          {t('noUser.action')}
+        </AntButton>
+        <AntButton type="default" size="large" style={{ width: 150 }} onClick={cancel}>
+          {t('form.cancel')}
+        </AntButton>
+      </Buttons>
+    </>
+  );
+}
+
+const stages = {
+  UNKNOWN: 'unkonwn',
+  BEFORE_FACEBOOK_AUTH: 'beforeFacebookAuth',
+  AFTER_FACEBOOK_AUTH: 'afterFacebookAuth',
+};
+
+function SignUpBeforeRedirect({ updateUserAndRedirect }) {
+  const { t } = useTranslation('signup');
+  const [emailSignIn, setEmailSignIn] = useState(false);
   return (
     <PageContentWrapper>
       <Helmet>
@@ -32,36 +82,18 @@ function SignUpBeforeRedirect({ returnUrl }) {
       <p>{t('content')} </p>
 
       <Button onClick={() => handleSignIn()} style={{ marginBottom: 10 }}>
-        {t('signup')}
+        {t('googleSignup')}
       </Button>
-      {/* keeping it here in case we want to redirect in the furture */}
-      {/* {returnUrl === '/add-protest' && (
-        <Link to="/add-protest">
-          <>
-            <Button
-              style={{
-                background:
-                  'radial-gradient(100.6% 793.82% at 9.54% -0.6%, rgb(166, 145, 145) 0%, rgb(119, 95, 95) 100%) repeat scroll 0% 0%',
-              }}
-            >
-              יצירת הפגנה אנונימית
-            </Button>
-          </>
-        </Link>
-      )} */}
+      {emailSignIn ? (
+        <EmailSignIn cancel={() => setEmailSignIn(false)} updateUserAndRedirect={updateUserAndRedirect} />
+      ) : (
+        <Button onClick={() => setEmailSignIn(true)} style={{ marginBottom: 10 }}>
+          {t('emailSignup')}
+        </Button>
+      )}
     </PageContentWrapper>
   );
 }
-
-function getReturnUrl(path) {
-  return queryString.parse(path).returnUrl;
-}
-
-const stages = {
-  UNKNOWN: 'unkonwn',
-  BEFORE_FACEBOOK_AUTH: 'beforeFacebookAuth',
-  AFTER_FACEBOOK_AUTH: 'afterFacebookAuth',
-};
 
 let userId = '';
 let pictureUrl = '';
@@ -80,7 +112,7 @@ export default function SignUp(props) {
     if (returnUrl) {
       history.push(returnUrl);
     } else {
-      history.push('/');
+      history.push('/add-position');
     }
   };
 
@@ -99,26 +131,30 @@ export default function SignUp(props) {
     });
   };
 
+  const updateUserAndRedirect = (userCredential) => {
+    if (!userCredential) {
+      setStage(stages.BEFORE_FACEBOOK_AUTH);
+      return;
+    }
+
+    if (!userCredential.additionalUserInfo.isNewUser) {
+      redirectToReturnURL();
+      return;
+    }
+
+    const userData = extractUserData(userCredential);
+
+    saveUserInFirestore(userData).then((userDoc) => {
+      setStage(stages.AFTER_FACEBOOK_AUTH);
+      userId = userDoc.uid;
+      pictureUrl = userDoc.pictureUrl;
+    });
+  };
+
   useEffect(() => {
     getUserFromRedirect()
       .then((result) => {
-        if (!result) {
-          setStage(stages.BEFORE_FACEBOOK_AUTH);
-          return;
-        }
-
-        if (!result.additionalUserInfo.isNewUser) {
-          redirectToReturnURL();
-          return;
-        }
-
-        const userData = extractUserData(result);
-
-        saveUserInFirestore(userData).then((userDoc) => {
-          setStage(stages.AFTER_FACEBOOK_AUTH);
-          userId = userDoc.uid;
-          pictureUrl = userDoc.pictureUrl;
-        });
+        updateUserAndRedirect(result);
       })
       .catch((error) => {
         console.log(error);
@@ -139,7 +175,7 @@ export default function SignUp(props) {
   if (stage === stages.BEFORE_FACEBOOK_AUTH) {
     return (
       <PageWrapper>
-        <SignUpBeforeRedirect returnUrl={getReturnUrl(window.location.search)} />
+        <SignUpBeforeRedirect updateUserAndRedirect={updateUserAndRedirect} />
       </PageWrapper>
     );
   }
@@ -184,4 +220,9 @@ export default function SignUp(props) {
 const SignUpFormItem = styled(Form.Item)`
   min-width: 100%;
   max-width: 290px;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  align-content: space-between;
 `;

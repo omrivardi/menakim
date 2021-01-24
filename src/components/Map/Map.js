@@ -37,7 +37,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
     iconUrl,
     iconRetinaUrl: iconUrl,
     iconSize: [20, 20],
-    iconAnchor: [12, 43],
+    iconAnchor: [10, 20],
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   return (
     <Marker position={[coordinates.latitude, coordinates.longitude]} icon={protestPoint(markerInfo)}>
       <Popup closeButton={false}>
-        <ProtestCard protestInfo={{ ...props, adminName }} style={{ margin: 0 }} />
+        <ProtestCard protestInfo={{ ...props, coordinates, adminName, adminId: roles?.leader[0] }} style={{ margin: 0 }} />
       </Popup>
     </Marker>
   );

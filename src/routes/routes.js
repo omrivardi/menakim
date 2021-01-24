@@ -24,7 +24,7 @@ const routes = [
     key: 'PROTEST_PAGE',
   },
   {
-    path: '/add-protest',
+    path: '/add-position',
     component: AddProtest,
     key: 'ADD_PROTEST',
   },

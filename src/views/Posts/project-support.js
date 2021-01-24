@@ -34,7 +34,7 @@ const Content = mdx`
 
 <div style={{ textAlign: 'center' }}>
 <p>נפגש ברחובות! <br/>
-צוות קילומטר אחד</p>
+צוות מנקים את הבית</p>
 </div>
 `;
 
