@@ -4,34 +4,36 @@ import LegalNotice from './legal-notice.js';
 import ProjectSupport from './project-support';
 import DonatePage from './donate-page';
 import One from './ProjectUpdates/one';
+import { useTranslation } from 'react-i18next';
+const { t } = useTranslation('translations');
 
 export const posts = [
   {
     slug: '404',
-    title: 'הדף לא נמצא - מנקים את הבית',
+    title: t('404'),
     text: <FourOhFour />,
   },
   {
     slug: 'legal-notice',
-    title: 'הבהרה משפטית - מנקים את הבית',
+    title: t('legal-notice'),
     permalink: '/legal-notice',
     text: <LegalNotice />,
   },
   {
     slug: 'about',
-    title: 'על הפרוייקט - מנקים את הבית',
+    title: t('about'),
     permalink: '/about',
     text: <ProjectSupport />,
   },
   {
     slug: 'donate',
-    title: 'תרומה לפרוייקט - מנקים את הבית',
+    title: t('donate'),
     permalink: '/donate',
     text: <DonatePage />,
   },
   {
     slug: '1',
-    title: 'עדכון #1 - מנקים את הבית',
+    title: t('1'),
     text: <One />,
   },
 ];

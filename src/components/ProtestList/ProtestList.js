@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import ProtestCard from '../ProtestCard';
+import { useTranslation } from 'react-i18next';
 
 function ProtestListItems({ protests, listTitle }) {
   if (protests.length > 0) {
@@ -19,6 +20,7 @@ function ProtestListItems({ protests, listTitle }) {
 }
 
 function ProtestList({ loading, closeProtests, farProtests }) {
+  const { t } = useTranslation('protestList');
   const wrapper = useRef(null);
 
   useEffect(() => {
@@ -28,19 +30,19 @@ function ProtestList({ loading, closeProtests, farProtests }) {
   return (
     <ProtestListWrapper ref={wrapper}>
       {loading ? (
-        <p>טוען...</p>
+        <p>{t('loading')}</p>
       ) : (
         <>
           {closeProtests.length === 0 ? (
             <ProtestListHeader style={{ marginTop: 15 }}>
-              לא נמצאו מוקדי נקיון בסביבתך.
+              {t('notfound')}
               <br />
-              <Link to="/add-protest/">הוסיפו את מוקד הנקיון הראשון!</Link>
+              <Link to="/add-protest/">{t('add')}</Link>
             </ProtestListHeader>
           ) : (
-            <ProtestListItems protests={closeProtests} listTitle={'מוקדי נקיון בסביבתך'} />
+            <ProtestListItems protests={closeProtests} listTitle={t('aroundyou')} />
           )}
-          <ProtestListItems protests={farProtests} listTitle={'קצת יותר רחוק'} />
+          <ProtestListItems protests={farProtests} listTitle={t('abitfurther')} />
         </>
       )}
     </ProtestListWrapper>
