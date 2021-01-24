@@ -6,12 +6,14 @@ import Menu from 'react-burger-menu/lib/menus/slide';
 import styled, { keyframes } from 'styled-components/macro';
 import { useStore } from '../../stores';
 import { isAdmin } from '../../utils';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
   const store = useStore();
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation('header');
+
   return (
     <HeaderWrapper path={pathname}>
       <NavItemLive to="/live">
