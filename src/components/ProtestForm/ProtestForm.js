@@ -29,10 +29,7 @@ const OpeningText = () => {
       <p>{t('opening.two')}</p>
       <p>
         {t('opening.three')}{' '}
-        <a
-          href=""
-          onClick={() => window.open('https://drive.google.com/file/d/1b4pSIEgJ021VDZyuPZwa2ANZAv19KIJh/view?usp=sharing')}
-        >
+        <a onClick={() => window.open('https://drive.google.com/file/d/1b4pSIEgJ021VDZyuPZwa2ANZAv19KIJh/view?usp=sharing')}>
           {t('opening.link')}
         </a>
       </p>
