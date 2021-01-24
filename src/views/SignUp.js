@@ -80,7 +80,7 @@ export default function SignUp(props) {
     if (returnUrl) {
       history.push(returnUrl);
     } else {
-      history.push('/');
+      history.push('/add-protest');
     }
   };
 
