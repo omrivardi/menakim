@@ -199,7 +199,6 @@ function ProtestForm({
                   name="displayName"
                   ref={register}
                   placeholder={t('place.placeholder')}
-                  autoFocus
                 ></ProtestFormInput>
                 <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
