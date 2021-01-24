@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Menu from 'react-burger-menu/lib/menus/slide';
 import styled, { keyframes } from 'styled-components/macro';
 import { useStore } from '../../stores';
@@ -18,8 +19,8 @@ function Header() {
       <NavItemLive to="/live">
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
-      <Link to="/">
-        <img src="/logo.svg" alt={t('cleaning')} />
+      <Link to="/" style={{ fontFamily: 'almoni', fontSize: '2rem' }}>
+        {t('cleaning')}
       </Link>
       <NavProfileWrapper>
         <Menu
@@ -30,37 +31,30 @@ function Header() {
           disableAutoFocus
         >
           <Link to="/map" onClick={() => setMenuState(false)} className="bm-item">
-            מפת הפגנות
+            {t('map')}
           </Link>
-          <Link to="/live" onClick={() => setMenuState(false)} className="bm-item">
-            פיד מחאה
+          <Link to="/add-protest" onClick={() => setMenuState(false)} className="bm-item">
+            {t('open-position')}
           </Link>
-          <Link
-            to={store.userStore.user ? '/upload-image?returnUrl=/live' : `/sign-up?returnUrl=/upload-image?returnUrl=/live`}
-            onClick={() => setMenuState(false)}
-            className="bm-item"
+          <hr />
+          <a href="https://www.menakimethabait.com/" target="_blank" rel="noreferrer noopener">
+            {t('about')}
+          </a>
+          <a href="https://www.facebook.com/menakimethabait" target="_blank" rel="noreferrer noopener">
+            {t('facebook')}
+          </a>
+          <a href="https://www.instagram.com/menakim_et_habait/" target="_blank" rel="noreferrer noopener">
+            {t('instagram')}
+          </a>
+          <a
+            href="https://add.eventable.com/events/5fbd2022dc4d5900169aa8bf/5fbd202345b8360065cb430d"
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            העלאת תמונה
-          </Link>
-          <hr />
-          <Link to="/about" onClick={() => setMenuState(false)}>
-            על הפרוייקט
-          </Link>
-          <Link to="/donate" onClick={() => setMenuState(false)}>
-            תרומה
-          </Link>
-          <hr />
-          <a href="https://www.facebook.com/1km.co.il" target="_blank" rel="noreferrer noopener">
-            פייסבוק
+            {t('calendar')}
           </a>
-          <a href="https://twitter.com/1kmcoil" target="_blank" rel="noreferrer noopener">
-            טוויטר
-          </a>
-          <a href="https://www.instagram.com/1km.co.il/" target="_blank" rel="noreferrer noopener">
-            אינסטגרם
-          </a>
-          <a href="https://github.com/guytepper/1km.co.il" target="_blank" rel="noreferrer noopener">
-            קוד פתוח
+          <a href="https://api.whatsapp.com/send?phone=&text=www.menakimethabait.com" target="_blank" rel="noreferrer noopener">
+            {t('share')}
           </a>
           {isAdmin(store.userStore.user) && (
             <Link to="/admin" onClick={() => setMenuState(false)}>

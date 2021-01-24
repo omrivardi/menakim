@@ -5,7 +5,7 @@ export default function SocialButton({ type, link, children, className }) {
   return (
     <Button href={link} target="_blank" rel="noreferrer noopener" $type={type} className={className}>
       <ImageContainer>
-        <img src={`/icons/${type}-button.svg`} alt={type} />
+        <Icon src={`/icons/waze32x32.svg`} alt={type} />
       </ImageContainer>
       <Divider />
       <Text>{children}</Text>
@@ -14,25 +14,11 @@ export default function SocialButton({ type, link, children, className }) {
 }
 
 export const Button = styled.a`
-  width: 100%;
+  width: 284px;
   height: 32px;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  background: ${(props) => {
-    switch (props.$type) {
-      case 'twitter':
-        return '#55ACEE';
-      case 'facebook':
-        return '#1877F2';
-      case 'telegram':
-        return 'linear-gradient(180deg, #38AFE3 0%, #1E97C9 100%)';
-      case 'whatsapp':
-        return '#25D366';
-      default:
-        return 'black';
-    }
-  }};
 `;
 
 const Divider = styled.div`
@@ -46,13 +32,17 @@ const Divider = styled.div`
 const Text = styled.span`
   font-size: 16px;
   line-height: 19px;
-
-  color: #ffffff;
 `;
 
 const ImageContainer = styled.div`
   width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Icon = styled.img`
+  max-width: 100%;
+  max-height: 100%;
 `;

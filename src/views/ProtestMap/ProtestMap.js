@@ -2,7 +2,10 @@ import React, { useEffect, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { getCurrentPosition } from '../../utils';
 import { useStore } from '../../stores';
-import { Map, ProtestList } from '../../components';
+import {
+  Map,
+  // ProtestList
+} from '../../components';
 import Helmet from 'react-helmet';
 import styled from 'styled-components/macro';
 
@@ -49,16 +52,16 @@ function ProtestMap() {
   return (
     <>
       <Helmet>
-        <title>מפת הפגנות</title>
+        <title>מנקים את הבית</title>
       </Helmet>
       <HomepageWrapper>
-        <ProtestListWrapper>
+        {/* <ProtestListWrapper>
           <ProtestList
             closeProtests={protestStore.closeProtests}
             farProtests={protestStore.farProtests}
             loading={protestStore.protests?.length === 0 && protestStore.state === 'pending'}
           />
-        </ProtestListWrapper>
+        </ProtestListWrapper> */}
 
         <Map hoveredProtest={hoveredProtest} />
       </HomepageWrapper>
@@ -74,34 +77,34 @@ const HomepageWrapper = styled.div`
   grid-row: 2;
   z-index: 0;
 
-  @media (min-width: 768px) {
-    grid-template-columns: 280px 1fr;
-    grid-template-rows: 1fr;
-  }
+  // @media (min-width: 768px) {
+  //   grid-template-columns: 280px 1fr;
+  //   grid-template-rows: 1fr;
+  // }
 
-  @media (min-width: 1024px) {
-    grid-template-columns: 300px 1fr;
-  }
+  // @media (min-width: 1024px) {
+  //   grid-template-columns: 300px 1fr;
+  // }
 
-  @media (min-width: 1280px) {
-    grid-template-columns: 330px 1fr;
-  }
+  // @media (min-width: 1280px) {
+  //   grid-template-columns: 330px 1fr;
+  // }
 
-  @media (min-width: 1700px) {
-    grid-template-columns: 375px 1fr;
-  }
+  // @media (min-width: 1700px) {
+  //   grid-template-columns: 375px 1fr;
+  // }
 `;
 
-const ProtestListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  grid-column: 1 / 2;
-  grid-row: 2;
+// const ProtestListWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   grid-column: 1 / 2;
+//   grid-row: 2;
 
-  @media (min-width: 768px) {
-    grid-row: 1;
-    padding: 10px 15px 0;
-    max-height: calc(100vh - 60px);
-  }
-`;
+//   @media (min-width: 768px) {
+//     grid-row: 1;
+//     padding: 10px 15px 0;
+//     max-height: calc(100vh - 60px);
+//   }
+// `;
