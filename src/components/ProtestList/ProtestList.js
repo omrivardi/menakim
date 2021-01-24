@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components/macro';
 import ProtestCard from '../ProtestCard';
+import { useTranslation } from 'react-i18next';
+
 import { Button } from '../elements';
 import { useHistory } from 'react-router-dom';
 import { getFullUserData } from '../../api';
@@ -34,6 +36,7 @@ function ProtestListItems({ protests, listTitle }) {
 }
 
 function ProtestList({ loading, closeProtests, farProtests }) {
+  const { t } = useTranslation('protestList');
   const wrapper = useRef(null);
   const history = useHistory();
 
@@ -44,11 +47,14 @@ function ProtestList({ loading, closeProtests, farProtests }) {
   return (
     <ProtestListWrapper ref={wrapper}>
       {loading ? (
-        <p>טוען...</p>
+        <p>{t('loading')}</p>
       ) : (
         <>
           {closeProtests.length === 0 ? (
             <ProtestListHeader style={{ marginTop: 15 }}>
+
+              {t('notfound')}
+              <br />
               על מנת להציג את מוקדי הניקיון על המפה יש לאשר לדפדפן את הגישה למיקום או לחילופין להכניס את הכתובת שלכם
               <br />
               <Button
@@ -61,9 +67,9 @@ function ProtestList({ loading, closeProtests, farProtests }) {
               </Button>
             </ProtestListHeader>
           ) : (
-            <ProtestListItems protests={closeProtests} listTitle={'עד קילומטר אחד ממך'} />
+            <ProtestListItems protests={closeProtests} listTitle={t('aroundyou')} />
           )}
-          <ProtestListItems protests={farProtests} listTitle={'קצת יותר רחוק'} />
+          <ProtestListItems protests={farProtests} listTitle={t('abitfurther')} />
         </>
       )}
     </ProtestListWrapper>
