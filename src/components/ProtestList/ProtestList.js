@@ -52,7 +52,6 @@ function ProtestList({ loading, closeProtests, farProtests }) {
         <>
           {closeProtests.length === 0 ? (
             <ProtestListHeader style={{ marginTop: 15 }}>
-
               {t('notfound')}
               <br />
               על מנת להציג את מוקדי הניקיון על המפה יש לאשר לדפדפן את הגישה למיקום או לחילופין להכניס את הכתובת שלכם
@@ -60,7 +59,7 @@ function ProtestList({ loading, closeProtests, farProtests }) {
               <Button
                 style={{ marginTop: '1rem' }}
                 onClick={async () => {
-                  history.push('/add-protest/');
+                  history.push('/add-position/');
                 }}
               >
                 פתחו מוקד ניקיון חדש!

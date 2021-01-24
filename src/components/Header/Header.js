@@ -32,7 +32,7 @@ function Header() {
           <Link to="/map" onClick={() => setMenuState(false)} className="bm-item">
             {t('map')}
           </Link>
-          <Link to="/add-protest" onClick={() => setMenuState(false)} className="bm-item">
+          <Link to="/add-position" onClick={() => setMenuState(false)} className="bm-item">
             {t('open-position')}
           </Link>
           <hr />

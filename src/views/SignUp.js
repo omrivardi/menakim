@@ -112,7 +112,7 @@ export default function SignUp(props) {
     if (returnUrl) {
       history.push(returnUrl);
     } else {
-      history.push('/add-protest');
+      history.push('/add-position');
     }
   };
 
