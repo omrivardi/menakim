@@ -1,8 +1,11 @@
 import isPointWithinRadius from 'geolib/es/isPointWithinRadius';
 import getDistance from 'geolib/es/getDistance';
+import { useTranslation } from 'react-i18next';
 
 export function getCurrentPosition() {
   return new Promise((resolve, reject) => {
+    const { t } = useTranslation('utils');
+    alert(t('popup'));
     navigator.geolocation.getCurrentPosition(
       (event) => {
         resolve([event.coords.latitude, event.coords.longitude]);

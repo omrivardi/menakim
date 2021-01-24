@@ -176,9 +176,10 @@ export async function saveUserInFirestore(userData) {
   if (userDoc.exists) {
     return { ...userDoc, exists: true };
   } else {
-    const { uid, first_name: initialFirst, last_name: initialLast, displayName, pictureUrl } = userData;
+    const { uid, email, first_name: initialFirst, last_name: initialLast, displayName, pictureUrl } = userData;
     const updatedUserObject = {
       uid,
+      email,
       initialFirst,
       initialLast,
       displayName,
@@ -237,26 +238,34 @@ export async function sendProtestLeaderRequest(userData, phoneNumber, protestId)
 }
 
 export function extractUserData(result) {
-  const { uid, displayName } = result.user;
+  const { uid, displayName, email } = result.user;
   let first_name, last_name, pictureUrl;
   const profile = result?.additionalUserInfo?.profile;
-  if (!profile) {
-    throw new Error('no profile was loaded');
-  }
 
-  const isEmulator = profile.picture ? false : true;
-
-  // In development mode we are using the authentication emulator; note that the additionalUserInfo.info.profile properties are different while using it.
-  if (isEmulator) {
-    [first_name, last_name] = displayName.split(' ');
-    pictureUrl = profile.picture;
+  if (result?.additionalUserInfo?.providerId === 'password') {
+    first_name = 'new';
+    last_name = 'user';
   } else {
-    first_name = profile.first_name || profile.given_name;
-    last_name = profile.last_name || profile.family_name;
-    pictureUrl = profile.picture;
+    if (!profile) {
+      throw new Error('no profile was loaded');
+    }
+
+    const isEmulator = profile.picture ? false : true;
+
+    // In development mode we are using the authentication emulator; note that the additionalUserInfo.info.profile properties are different while using it.
+    if (isEmulator) {
+      [first_name, last_name] = displayName.split(' ');
+      pictureUrl = profile.picture;
+    } else {
+      first_name = profile.first_name || profile.given_name;
+      last_name = profile.last_name || profile.family_name;
+      pictureUrl = profile.picture;
+    }
   }
+
   const userData = {
     uid,
+    email,
     first_name,
     last_name,
     displayName,
@@ -270,6 +279,19 @@ export function handleSignIn() {
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope('email');
   firebase.auth().signInWithRedirect(provider);
+}
+
+export function emailSignIn(email, password) {
+  return firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .catch((err) => {
+      if (err.code === 'auth/user-not-found') {
+        return firebase.auth().createUserWithEmailAndPassword(email, password);
+      } else {
+        throw err;
+      }
+    });
 }
 
 /**

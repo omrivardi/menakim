@@ -8,6 +8,7 @@ import L from 'leaflet';
 import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
 import { getFullUserData } from '../../api';
+import location from '../../assets/icons/location.png';
 
 const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
   new L.Icon({
@@ -19,8 +20,8 @@ const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
   });
 
 const positionPoint = new L.Icon({
-  iconUrl: '/icons/marker.svg',
-  iconRetinaUrl: '/icons/marker.svg',
+  iconUrl: location,
+  iconRetinaUrl: location,
   iconAnchor: [17.5, 40],
   popupAnchor: [0, -35],
   iconSize: [35, 40],
@@ -35,8 +36,8 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   let markerInfo = marker || {
     iconUrl,
     iconRetinaUrl: iconUrl,
-    iconSize: [70, 70],
-    iconAnchor: [12, 43],
+    iconSize: [20, 20],
+    iconAnchor: [10, 20],
   };
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   return (
     <Marker position={[coordinates.latitude, coordinates.longitude]} icon={protestPoint(markerInfo)}>
       <Popup closeButton={false}>
-        <ProtestCard protestInfo={{ ...props, adminName }} style={{ margin: 0 }} />
+        <ProtestCard protestInfo={{ ...props, coordinates, adminName, adminId: roles?.leader[0] }} style={{ margin: 0 }} />
       </Popup>
     </Marker>
   );
