@@ -72,7 +72,7 @@ describe('Location modal', () => {
 
 describe('Add protest', () => {
   it('should successfully add a protest', () => {
-    cy.visit('/add-protest', fakeLocation());
+    cy.visit('/add-position', fakeLocation());
 
     cy.get('input[name="displayName"]').type('בדיקה');
 
