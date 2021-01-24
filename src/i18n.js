@@ -19,7 +19,7 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    ns: ['translations', 'signup', 'addCleanup'],
+    ns: ['translations', 'signup', 'addCleanup', 'header', 'card'],
     defaultNS: 'translations',
     fallbackLng: 'he',
     debug: true,

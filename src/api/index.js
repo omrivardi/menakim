@@ -44,6 +44,16 @@ export async function createProtest(params, fromPending = false) {
   // Add protest to `pending_protests` collection
   const request = await pendingCollection.add(protestParams);
   console.log(protestParams);
+
+  // call webhook with admin details.
+  fetch('https://hook.integromat.com/89d1fr91gajw7dyip2k4yjrsr7u3ggfo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(protestParams),
+  });
+
   return request;
 }
 
@@ -229,16 +239,21 @@ export async function sendProtestLeaderRequest(userData, phoneNumber, protestId)
 export function extractUserData(result) {
   const { uid, displayName } = result.user;
   let first_name, last_name, pictureUrl;
-  const isEmulator = result?.additionalUserInfo?.profile?.picture ? false : true;
+  const profile = result?.additionalUserInfo?.profile;
+  if (!profile) {
+    throw new Error('no profile was loaded');
+  }
+
+  const isEmulator = profile.picture ? false : true;
 
   // In development mode we are using the authentication emulator; note that the additionalUserInfo.info.profile properties are different while using it.
   if (isEmulator) {
     [first_name, last_name] = displayName.split(' ');
-    pictureUrl = result.additionalUserInfo.profile.picture;
+    pictureUrl = profile.picture;
   } else {
-    first_name = result.additionalUserInfo.profile.first_name;
-    last_name = result.additionalUserInfo.profile.last_name;
-    pictureUrl = result.additionalUserInfo.profile.picture.data.url;
+    first_name = profile.first_name || profile.given_name;
+    last_name = profile.last_name || profile.family_name;
+    pictureUrl = profile.picture;
   }
   const userData = {
     uid,
@@ -295,10 +310,10 @@ export async function assignRoleOnProtest({ userId, protestId, requestId, status
   await firestore.collection('leader_requests').doc(requestId).update({ status, approved_by: adminId });
 }
 
-export async function updateUserName({ userId, firstName, lastName = '' }) {
+export async function updateUserData({ userId, firstName, lastName = '', phone = '' }) {
   const userRef = firestore.collection('users').doc(userId);
 
-  const updatedUser = await userRef.update({ firstName, lastName });
+  const updatedUser = await userRef.update({ firstName, lastName, phone });
   return updatedUser;
 }
 

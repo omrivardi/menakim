@@ -64,6 +64,10 @@ class UserStore {
     this.user.lastName = lastName;
   };
 
+  setUserPhone = (phone = '') => {
+    this.user.phone = phone;
+  };
+
   setUserPicture = (pictureUrl = '') => {
     this.user.pictureUrl = pictureUrl;
   };

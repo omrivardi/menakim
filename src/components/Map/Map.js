@@ -1,13 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
 import { pointWithinRadius } from '../../utils';
-import { Map, Circle, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
-import MKs from './MKs.json';
 import L from 'leaflet';
 import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
+import { getFullUserData } from '../../api';
+import location from '../../assets/icons/location.png';
 
 const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
   new L.Icon({
@@ -19,28 +20,37 @@ const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
   });
 
 const positionPoint = new L.Icon({
-  iconUrl: '/icons/marker.svg',
-  iconRetinaUrl: '/icons/marker.svg',
+  iconUrl: location,
+  iconRetinaUrl: location,
   iconAnchor: [17.5, 40],
   popupAnchor: [0, -35],
   iconSize: [35, 40],
 });
 
-const PopupMarker = ({ coordinates, marker, hovered, ...props }) => {
-  const iconUrl = hovered ? '/icons/protesting.svg' : '/icons/marker-purple.svg';
+const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
+  const [adminName, setAdminName] = useState('');
+
+  const iconUrl = '/icons/markers/cleaning-marker.png';
 
   // Use a speical marker from the protest object / the default fist.
   let markerInfo = marker || {
     iconUrl,
     iconRetinaUrl: iconUrl,
-    iconSize: [50, 48],
-    iconAnchor: [12, 43],
+    iconSize: [20, 20],
+    iconAnchor: [10, 20],
   };
+
+  useEffect(() => {
+    (async () => {
+      const protestAdmin = await getFullUserData(roles?.leader[0]);
+      setAdminName(`${protestAdmin?.firstName || ''} ${protestAdmin?.lastName || ''}`);
+    })();
+  }, [roles]);
 
   return (
     <Marker position={[coordinates.latitude, coordinates.longitude]} icon={protestPoint(markerInfo)}>
       <Popup closeButton={false}>
-        <ProtestCard protestInfo={props} style={{ margin: 0 }} />
+        <ProtestCard protestInfo={{ ...props, adminName }} style={{ margin: 0 }} />
       </Popup>
     </Marker>
   );
@@ -91,7 +101,7 @@ function AppMap({ hoveredProtest }) {
         onMoveEnd={({ target }) => {
           updateMap([target.getCenter().lat, target.getCenter().lng]);
         }}
-        zoom={14}
+        zoom={11.5}
         zoomControl={false}
       >
         <TileLayer
@@ -101,15 +111,9 @@ function AppMap({ hoveredProtest }) {
         {coordinates.length > 0 && (
           <>
             <Marker position={coordinates} icon={positionPoint}></Marker>
-            <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
-            {MKs.map((mk) => (
-              <Marker position={mk.position} icon={new L.icon(mk.icon)} key={mk.position[0]}>
-                <Popup>{mk.name}</Popup>
-              </Marker>
-            ))}
-            <Circle radius={1000} center={coordinates} />
           </>
         )}
+        <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
       </MapElement>
     </MapWrapper>
   );
@@ -117,7 +121,6 @@ function AppMap({ hoveredProtest }) {
 
 const MapWrapper = styled.div`
   width: 100%;
-  height: 350px;
   margin-bottom: 10px;
   grid-row: 1;
   grid-column: 2 / -1;

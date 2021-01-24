@@ -1,8 +1,24 @@
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components/macro';
 import ProtestCard from '../ProtestCard';
 import { useTranslation } from 'react-i18next';
+
+import { Button } from '../elements';
+import { useHistory } from 'react-router-dom';
+import { getFullUserData } from '../../api';
+
+function ProtestListItem({ protestInfo }) {
+  const [adminName, setAdminName] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      const protestAdmin = await getFullUserData(protestInfo?.roles?.leader[0]);
+      setAdminName(protestAdmin?.displayName);
+    })();
+  }, [protestInfo]);
+
+  return <ProtestCard protestInfo={{ ...protestInfo, adminName }} />;
+}
 
 function ProtestListItems({ protests, listTitle }) {
   if (protests.length > 0) {
@@ -10,7 +26,7 @@ function ProtestListItems({ protests, listTitle }) {
       <>
         <ProtestListHeader>{listTitle}</ProtestListHeader>
         {protests.slice(0, 10).map((protest) => (
-          <ProtestCard key={protest.id} protestInfo={protest} />
+          <ProtestListItem key={protest.id} protestInfo={protest} />
         ))}
       </>
     );
@@ -22,6 +38,7 @@ function ProtestListItems({ protests, listTitle }) {
 function ProtestList({ loading, closeProtests, farProtests }) {
   const { t } = useTranslation('protestList');
   const wrapper = useRef(null);
+  const history = useHistory();
 
   useEffect(() => {
     wrapper.current.scrollTop = 0;
@@ -35,9 +52,20 @@ function ProtestList({ loading, closeProtests, farProtests }) {
         <>
           {closeProtests.length === 0 ? (
             <ProtestListHeader style={{ marginTop: 15 }}>
+
               {t('notfound')}
               <br />
-              <Link to="/add-protest/">{t('add')}</Link>
+
+              על מנת להציג את מוקדי הניקיון על המפה יש לאשר לדפדפן את הגישה למיקום או לחילופין להכניס את הכתובת שלכם
+              <br />
+              <Button
+                style={{ marginTop: '1rem' }}
+                onClick={async () => {
+                  history.push('/add-protest/');
+                }}
+              >
+                פתחו מוקד ניקיון חדש!
+              </Button>
             </ProtestListHeader>
           ) : (
             <ProtestListItems protests={closeProtests} listTitle={t('aroundyou')} />
