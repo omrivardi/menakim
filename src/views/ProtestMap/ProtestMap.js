@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { getCurrentPosition } from '../../utils';
-import { useTranslation } from 'react-i18next';
 import { useStore } from '../../stores';
 import {
   Map,
@@ -11,7 +10,6 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components/macro';
 
 function ProtestMap() {
-  const { t } = useTranslation('utils');
   const store = useStore();
   const { mapStore, protestStore, userCoordinates } = store;
   const hoveredProtest = useMemo(() => {
