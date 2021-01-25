@@ -36,15 +36,12 @@ function ProtestMap() {
   // Ask for user location on map initial load
   useEffect(() => {
     const setCoordinates = async () => {
-      alert(t('popup'));
       try {
         if (userCoordinates.length === 0) {
           const coordinates = await getCurrentPosition();
           store.setCoordinates(coordinates);
         }
-      } catch (err) {
-        alert(t('popup'));
-      }
+      } catch (err) {}
     };
 
     setCoordinates();

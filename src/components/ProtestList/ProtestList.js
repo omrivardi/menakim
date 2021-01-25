@@ -54,8 +54,6 @@ function ProtestList({ loading, closeProtests, farProtests }) {
             <ProtestListHeader style={{ marginTop: 15 }}>
               {t('notfound')}
               <br />
-              על מנת להציג את מוקדי הניקיון על המפה יש לאשר לדפדפן את הגישה למיקום או לחילופין להכניס את הכתובת שלכם
-              <br />
               <Button
                 style={{ marginTop: '1rem' }}
                 onClick={async () => {
