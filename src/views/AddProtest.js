@@ -10,7 +10,9 @@ import { ProtestForm } from '../components';
 
 function AddProtest() {
   const store = useStore();
-  if (!store.userStore.user) {
+
+  // user is not loaded or registeration is partial - show signup page
+  if (!store.userStore.user || !store.userStore.user.phone) {
     return <SignUp />;
   }
   return (
