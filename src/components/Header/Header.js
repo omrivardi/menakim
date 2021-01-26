@@ -54,6 +54,9 @@ function Header() {
           <a href="https://api.whatsapp.com/send?phone=&text=www.menakimethabait.com" target="_blank" rel="noreferrer noopener">
             {t('share')}
           </a>
+          <a href="mailto:info@menakimethabait.com" target="_blank" rel="noreferrer noopener">
+            {t('contact')}
+          </a>
           {isAdmin(store.userStore.user) && (
             <Link to="/admin" onClick={() => setMenuState(false)}>
               ניהול
