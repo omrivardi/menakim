@@ -8,6 +8,7 @@ import styled from 'styled-components/macro';
 import queryString from 'query-string';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
+import GoogleButton from 'react-google-button';
 
 const { Title } = Typography;
 
@@ -81,9 +82,7 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       </Helmet>
       <p>{t('content')} </p>
 
-      <Button onClick={() => handleSignIn()} style={{ marginBottom: 10 }}>
-        {t('googleSignup')}
-      </Button>
+      <GoogleButton onClick={() => handleSignIn()} style={{ marginBottom: 10, width: 300 }} />
       {emailSignIn ? (
         <EmailSignIn cancel={() => setEmailSignIn(false)} updateUserAndRedirect={updateUserAndRedirect} />
       ) : (
