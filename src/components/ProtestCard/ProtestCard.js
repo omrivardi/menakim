@@ -31,6 +31,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     coordinates,
     whatsAppLink,
     adminId,
+    id,
   } = protestInfo;
 
   const upcomingDate = getUpcomingDate(dateTimeList);
@@ -42,7 +43,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ displayName, id: adminId, coordinates }),
+      body: JSON.stringify({ displayName, adminId, protestId: id, coordinates }),
     });
   }
 

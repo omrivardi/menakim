@@ -39,9 +39,7 @@ function ProtestMap() {
           const coordinates = await getCurrentPosition();
           store.setCoordinates(coordinates);
         }
-      } catch (err) {
-        alert('לא הצלחנו לאתר את המיקום.\nניתן להזין את המיקום ידנית :)');
-      }
+      } catch (err) {}
     };
 
     setCoordinates();
