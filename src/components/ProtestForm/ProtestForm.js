@@ -197,7 +197,7 @@ function ProtestForm({
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
           <Link to="/">
-            <Button>{t('mainPage')}</Button>
+            <Button style={{margin: "auto"}}>{t('mainPage')}</Button>
           </Link>
         </>
       ) : (
