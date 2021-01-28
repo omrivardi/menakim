@@ -33,6 +33,9 @@ export async function createProtest(params, fromPending = false) {
     protestParams.roles = { leader: [user.uid] };
   }
 
+  // Set whatsapp group link visibility (default: true).
+  protestParams.whatsappVisible = true;
+
   if (user?.uid || fromPending === true) {
     const protestDoc = await protestsCollection.add(protestParams);
     protestParams.protestRef = protestDoc.id;
