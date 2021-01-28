@@ -5,6 +5,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "ahooks": "^2.9.4",
     "antd": "^4.7.3",
     "firebase": "^8.1.1",
     "geofirestore": "^4.3.0",
