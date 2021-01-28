@@ -49,9 +49,9 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
 
   return (
     <Marker position={[coordinates.latitude, coordinates.longitude]} icon={protestPoint(markerInfo)}>
-      <Popup closeButton={false}>
+      <StylePopup closeButton={false}>
         <ProtestCard protestInfo={{ ...props, coordinates, adminName, adminId: roles?.leader[0] }} style={{ margin: 0 }} />
-      </Popup>
+      </StylePopup>
     </Marker>
   );
 };
@@ -141,6 +141,12 @@ const MapElement = styled(Map)`
 
   grid-column: 1 / -1;
   grid-row: 1 / -1;
+`;
+
+const StylePopup = styled(Popup)`
+  .leaflet-popup-content {
+    min-width: 260px;
+  }
 `;
 
 export default observer(AppMap);
