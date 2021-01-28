@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRequest } from 'ahooks';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
+import { updateProtest } from '../../api';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 // import { WazeButton } from '../';
 import SocialButton from '../elements/Button/SocialButton';
+import { Form, Switch } from 'antd';
 
 function FormattedDate({ date }) {
   const { t } = useTranslation('card');
@@ -17,10 +20,6 @@ function FormattedDate({ date }) {
 }
 
 function ProtestCard({ protestInfo, showAction = false, style }) {
-  const store = useStore();
-  // const history = useHistory();
-  const { t } = useTranslation('card');
-
   const {
     displayName,
     streetAddress,
@@ -30,9 +29,23 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     adminName,
     coordinates,
     whatsAppLink,
+    whatsappVisible,
     adminId,
     id,
   } = protestInfo;
+
+  const store = useStore();
+  const [whatsappToggleValue, setWhatsappToggleValue] = useState(whatsappVisible);
+
+  // const history = useHistory();
+  const { t } = useTranslation('card');
+
+  const { loading: isWhatsappToggleLoading, run } = useRequest(updateProtest, {
+    manual: true,
+    onSuccess: () => {
+      setWhatsappToggleValue((prev) => !prev);
+    },
+  });
 
   const upcomingDate = getUpcomingDate(dateTimeList);
 
@@ -44,6 +57,13 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ displayName, adminId, protestId: id, coordinates }),
+    });
+  }
+
+  function toggleWhatsappChange() {
+    run({
+      protestId: id,
+      params: { coords: protestInfo?.latlng, whatsappVisible: !whatsappToggleValue },
     });
   }
 
@@ -66,11 +86,19 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           </ProtestCardDetail>
         )}
 
-        <div onClick={handleWhatsappClick}>
-          <SocialButton type="whatsapp" link={whatsAppLink}>
-            {t('whatsappLink')}
-          </SocialButton>
-        </div>
+        {store?.userStore?.user?.uid === adminId ? (
+          <Form.Item label={t('showWhatsappButton')}>
+            <Switch loading={isWhatsappToggleLoading} checked={whatsappToggleValue} onChange={toggleWhatsappChange} />
+          </Form.Item>
+        ) : null}
+
+        {whatsappToggleValue && (
+          <div onClick={handleWhatsappClick}>
+            <SocialButton type="whatsapp" link={whatsAppLink}>
+              {t('whatsappLink')}
+            </SocialButton>
+          </div>
+        )}
 
         {streetAddress && (
           <ProtestCardDetail data-testid="protestCard__streetAddress">
