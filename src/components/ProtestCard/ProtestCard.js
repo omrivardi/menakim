@@ -35,7 +35,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   } = protestInfo;
 
   const store = useStore();
-  const [whatsappToggleValue, setWhatsappToggleValue] = useState(whatsappVisible);
+  const [whatsappToggleValue, setWhatsappToggleValue] = useState(whatsappVisible === undefined || whatsappVisible);
 
   // const history = useHistory();
   const { t } = useTranslation('card');
