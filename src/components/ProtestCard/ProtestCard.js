@@ -87,17 +87,19 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
         )}
 
         {store?.userStore?.user?.uid === adminId ? (
-          <Form.Item label={t('showWhatsappButton')}>
+          <FormItem label={t('showWhatsappButton')}>
             <Switch loading={isWhatsappToggleLoading} checked={whatsappToggleValue} onChange={toggleWhatsappChange} />
-          </Form.Item>
+          </FormItem>
         ) : null}
 
-        {whatsappToggleValue && (
+        {whatsappToggleValue ? (
           <div onClick={handleWhatsappClick}>
             <SocialButton type="whatsapp" link={whatsAppLink}>
               {t('whatsappLink')}
             </SocialButton>
           </div>
+        ) : (
+          <ProtestCardDetail>{t('whatsappNotAvailable')}</ProtestCardDetail>
         )}
 
         {streetAddress && (
@@ -179,6 +181,10 @@ const ProtestCardIcon = styled.img`
   width: 17.5px;
   margin-inline-end: 5px;
   user-select: none;
+`;
+
+const FormItem = styled(Form.Item)`
+  margin-bottom: 10px;
 `;
 
 export default ProtestCard;
