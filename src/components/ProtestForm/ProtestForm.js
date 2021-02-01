@@ -25,13 +25,7 @@ const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
   return (
     <div>
-      <p>
-        {t('opening.one')} ({t('opening.one-postfix')}
-        <a href="#0" role="button" tabIndex="0" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
-          {t('one-postfix-link')}
-        </a>
-        )
-      </p>
+      <p>{t('opening.one')}</p>
       <p>{t('opening.two')}</p>
       <p>
         {t('opening.three')}{' '}
