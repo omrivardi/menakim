@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
-import { pointWithinRadius } from '../../utils';
+// import { pointWithinRadius } from '../../utils';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
 import L from 'leaflet';
@@ -72,9 +72,10 @@ const balfur = [31.7749837, 35.219797];
 
 function AppMap({ hoveredProtest }) {
   const store = useStore();
-  const { mapStore, protestStore, userCoordinates: coordinates } = store;
+  const { mapStore, userCoordinates: coordinates } = store;
   const addressInputRef = useRef(); // Search Bar ref, used by the combobox
 
+  /*
   const updateMap = (currentMapPosition) => {
     // The following if condition is a 'hack' to check if the userCoordinates have just updated their position
     // If they did, update the protest list with the fetched nearby protests (by setting the onlyMarkers parameter to false)
@@ -93,14 +94,12 @@ function AppMap({ hoveredProtest }) {
     mapStore.setMapPosition(currentMapPosition);
   };
 
+  */
+
   return (
     <MapWrapper>
       <AddressBar inputRef={addressInputRef} />
-      <MapElement
-        center={coordinates.length > 0 ? coordinates : balfur}
-        zoom={11.5}
-        zoomControl={false}
-      >
+      <MapElement center={coordinates.length > 0 ? coordinates : balfur} zoom={11.5} zoomControl={false}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
