@@ -98,9 +98,6 @@ function AppMap({ hoveredProtest }) {
       <AddressBar inputRef={addressInputRef} />
       <MapElement
         center={coordinates.length > 0 ? coordinates : balfur}
-        onMoveEnd={({ target }) => {
-          updateMap([target.getCenter().lat, target.getCenter().lng]);
-        }}
         zoom={11.5}
         zoomControl={false}
       >
