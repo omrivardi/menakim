@@ -119,7 +119,7 @@ export async function fetchNearbyProtests(position) {
 
   const query = geocollection.near({
     center: new firebase.firestore.GeoPoint(position[0], position[1]),
-    radius: 20,
+    radius: 1000,
   });
 
   const snapshot = await query.limit(35).get();
