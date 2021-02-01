@@ -41,7 +41,13 @@ const OpeningText = () => {
       <p>{t('opening.four')}</p>
       <p>{t('opening.five')}</p>
       <ul>
-        <li>{t('opening.bullets.one')}</li>
+        <li>
+          {t('opening.bullets.one')}({t('opening.bullets.one-postfix')}
+          <a href="#0" role="button" tabIndex="0" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
+            {t('opening.bullets.one-postfix-link')}
+          </a>
+          )
+        </li>
         <li>{t('opening.bullets.two')}</li>
         <li>{t('opening.bullets.three')}</li>
         <li>{t('opening.bullets.four')}</li>
@@ -197,7 +203,7 @@ function ProtestForm({
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
           <Link to="/">
-            <Button style={{margin: "auto"}}>{t('mainPage')}</Button>
+            <Button style={{ margin: 'auto' }}>{t('mainPage')}</Button>
           </Link>
         </>
       ) : (
