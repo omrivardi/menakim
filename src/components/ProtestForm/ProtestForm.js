@@ -25,13 +25,7 @@ const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
   return (
     <div>
-      <p>
-        {t('opening.one')} ({t('opening.one-postfix')}
-        <a href="#0" role="button" tabIndex="0" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
-          {t('one-postfix-link')}
-        </a>
-        )
-      </p>
+      <p>{t('opening.one')}</p>
       <p>{t('opening.two')}</p>
       <p>
         {t('opening.three')}{' '}
@@ -47,7 +41,13 @@ const OpeningText = () => {
       <p>{t('opening.four')}</p>
       <p>{t('opening.five')}</p>
       <ul>
-        <li>{t('opening.bullets.one')}</li>
+        <li>
+          {t('opening.bullets.one')}({t('opening.bullets.one-postfix')}
+          <a href="#0" role="button" tabIndex="0" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
+            {t('opening.bullets.one-postfix-link')}
+          </a>
+          )
+        </li>
         <li>{t('opening.bullets.two')}</li>
         <li>{t('opening.bullets.three')}</li>
         <li>{t('opening.bullets.four')}</li>
