@@ -54,6 +54,9 @@ function Header() {
           <a href="https://api.whatsapp.com/send?phone=&text=www.menakimethabait.com" target="_blank" rel="noreferrer noopener">
             {t('share')}
           </a>
+          <Link to="/terms-of-use" onClick={() => setMenuState(false)} className="bm-item">
+            {t('terms')}
+          </Link>
           <a href="mailto:info@menakimethabait.com" target="_blank" rel="noreferrer noopener">
             {t('contact')}
           </a>
