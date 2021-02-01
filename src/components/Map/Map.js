@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
-import { pointWithinRadius } from '../../utils';
+//import { pointWithinRadius } from '../../utils';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
 import L from 'leaflet';
@@ -72,7 +72,7 @@ const balfur = [31.7749837, 35.219797];
 
 function AppMap({ hoveredProtest }) {
   const store = useStore();
-  const { mapStore, protestStore, userCoordinates: coordinates } = store;
+  const { mapStore, userCoordinates: coordinates } = store;
   const addressInputRef = useRef(); // Search Bar ref, used by the combobox
 
   /*
