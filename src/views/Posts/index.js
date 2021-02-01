@@ -1,5 +1,6 @@
 import React from 'react';
 import FourOhFour from './four-oh-four.js';
+import TermsOfUse from './terms-of-use.js';
 import LegalNotice from './legal-notice.js';
 import ProjectSupport from './project-support';
 import One from './ProjectUpdates/one';
@@ -7,30 +8,35 @@ import One from './ProjectUpdates/one';
 export const posts = [
   {
     slug: '404',
-    title: 'הדף לא נמצא - קילומטר  אחד',
+    title: 'הדף לא נמצא - מנקים את הבית',
     text: <FourOhFour />,
   },
   {
     slug: 'legal-notice',
-    title: 'הבהרה משפטית - קילומטר אחד',
+    title: 'הבהרה משפטית - מנקים את הבית',
     permalink: '/legal-notice',
     text: <LegalNotice />,
   },
   {
     slug: 'about',
-    title: 'על הפרוייקט - קילומטר אחד',
+    title: 'על הפרוייקט - מנקים את הבית',
     permalink: '/about',
     text: <ProjectSupport />,
   },
   /*   {
     slug: 'donate',
-    title: 'תרומה לפרוייקט - קילומטר אחד',
+    title: 'תרומה לפרוייקט - מנקים את הבית',
     permalink: '/donate',
     text: <DonatePage />,
   }, */
   {
+    slug: 'terms-of-use',
+    title: 'תנאי השימוש - מנקים את הבית',
+    text: <TermsOfUse />,
+  },
+  {
     slug: '1',
-    title: 'עדכון #1 - קילומטר אחד',
+    title: 'עדכון #1 - מנקים את הבית',
     text: <One />,
   },
 ];

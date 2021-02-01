@@ -9,6 +9,7 @@ import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '..
 // import { WazeButton } from '../';
 import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
+import { Link } from 'react-router-dom';
 
 function FormattedDate({ date }) {
   const { t } = useTranslation('card');
@@ -97,6 +98,12 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             <SocialButton type="whatsapp" link={whatsAppLink}>
               {t('whatsappLink')}
             </SocialButton>
+            <TermsInfo>
+              <p>{t('responsibility')}</p>
+              <Link to="/terms-of-use" className="bm-item" style={{ 'text-decoration': 'underline' }}>
+                {t('terms')}
+              </Link>
+            </TermsInfo>
           </div>
         ) : (
           <ProtestCardDetail>{t('whatsappNotAvailable')}</ProtestCardDetail>
@@ -185,6 +192,11 @@ const ProtestCardIcon = styled.img`
 
 const FormItem = styled(Form.Item)`
   margin-bottom: 10px;
+`;
+
+const TermsInfo = styled(Form.Item)`
+  text-align: center;
+  line-height: 0;
 `;
 
 export default ProtestCard;
