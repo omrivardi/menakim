@@ -318,8 +318,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 #logo{
-  height: 110%;
-  width: 3.8vw;
+  height: 100%;
+  width: 3.5vw;
 }
 
 @media (max-width: 1400px) {
