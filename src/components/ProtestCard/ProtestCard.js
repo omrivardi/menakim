@@ -100,7 +100,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             </SocialButton>
             <TermsInfo>
               <p>{t('responsibility')}</p>
-              <Link to="/terms-of-use" className="bm-item" style={{ 'text-decoration': 'underline' }}>
+              <Link to="/terms-of-use" className="bm-item" style={{ textDecoration: 'underline' }}>
                 {t('terms')}
               </Link>
             </TermsInfo>
