@@ -263,7 +263,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #6e7dff;
+  background: #39B578;
   font-size: 26px;
 }
 
@@ -319,7 +319,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 #logo{
   height: 100%;
-  width: 3.8vw;
+  width: 3.5vw;
 }
 
 @media (max-width: 1400px) {
