@@ -17,8 +17,8 @@ function Header() {
       <NavItemLive to="/live">
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
-      <Link to="/" style={{ fontFamily: 'almoni', fontSize: '2rem' }}>
-        {t('cleaning')}
+      <Link to="/" style={{ fontFamily: 'almoni', fontSize: '2rem', height: '100%' }}>
+        <img src="/icons/logo.jpeg" id="logo" alt="logo" />
       </Link>
       <NavProfileWrapper>
         <Menu
