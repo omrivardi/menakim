@@ -41,6 +41,8 @@
     "placeholder": "נחל",
     "values": {
       "river": "נחל",
+      "forest":"יער / חורשה",
+      "park":"פארק",
       "viewpoint": "תצפית",
       "parking": "חניון",
       "settlement": "בתוך יישוב",

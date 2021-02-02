@@ -19,7 +19,7 @@ const protestMarker = new L.Icon({
 });
 
 const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
-const placeTypes = ['river', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
+const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
 
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
