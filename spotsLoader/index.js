@@ -4,17 +4,21 @@ const fs = require('fs');
 const admin = require('firebase-admin');
 const geofirestore = require('geofirestore');
 
-process.env['FIRESTORE_EMULATOR_HOST'] = 'localhost:6001';
-process.env['FIREBASE_AUTH_EMULATOR_HOST'] = 'localhost:9099';
+let added = 0;
+const isEmulator = !process.env.REMOTE;
+if (isEmulator) {
+  console.log('running in emulator');
+  process.env['FIRESTORE_EMULATOR_HOST'] = 'localhost:6001';
+  process.env['FIREBASE_AUTH_EMULATOR_HOST'] = 'localhost:9099';
+}
 
-process.env.DATABASE_URL = 'https://menakin-dev-default-rtdb.firebaseio.com';
-process.env.PROJECT_ID = 'menakin-dev';
-process.env.FILE_PATH = '/home/omri/Documents/dev/menakim/spotsLoader/spots.csv';
+process.env.FILE_PATH = process.env.FILE_PATH || '/home/omri/Documents/dev/menakim/spotsLoader/spots.csv';
 const filePath = process.env.FILE_PATH;
 
 admin.initializeApp({
-  projectId: process.env.PROJECT_ID,
-  databaseURL: process.env.DATABASE_URL,
+  credential: admin.credential.applicationDefault(),
+  projectId: 'menakin-dev',
+  databaseURL: 'https://menakin-dev-default-rtdb.firebaseio.com',
 });
 
 const geoFirestore = geofirestore.initializeApp(admin.firestore());
@@ -93,7 +97,7 @@ async function processRow(row) {
       };
 
       await geoFirestore.collection(placesCollection).add(place);
-      // await db.collection(placesCollection).doc(uuidv1()).set(place);
+      console.log(`added ${place.displayName}, ${++added} places were added so far`);
     }
   } catch (err) {
     console.log(err, 'skipping row');
@@ -104,5 +108,5 @@ fs.createReadStream(filePath)
   .pipe(csv())
   .on('data', (row) => processRow(row))
   .on('end', () => {
-    console.log('CSV file successfully processed');
+    console.log('Loaded all rows, processing...');
   });
