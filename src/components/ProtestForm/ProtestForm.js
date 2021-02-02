@@ -42,7 +42,7 @@ const OpeningText = () => {
       <p>{t('opening.five')}</p>
       <ul>
         <li>
-          {t('opening.bullets.one')}({t('opening.bullets.one-postfix')}
+          {t('opening.bullets.one')} ({t('opening.bullets.one-postfix')}
           <a href="#0" role="button" tabIndex="0" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
             {t('opening.bullets.one-postfix-link')}
           </a>
