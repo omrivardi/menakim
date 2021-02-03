@@ -61,6 +61,7 @@ async function getOrCreateUser(email, firstName, lastName, phone) {
           firstName,
           lastName,
           phone,
+          uid: newUser.uid,
         });
 
       return newUser.uid;
@@ -93,6 +94,7 @@ async function processRow(row) {
           leader: [userId],
         },
         whatsAppLink: parsed.whatsAppLink,
+        whatsappVisible: true,
         coordinates: new admin.firestore.GeoPoint(Number(parsed.Latitude), Number(parsed.Longitude)),
       };
 
@@ -100,7 +102,7 @@ async function processRow(row) {
       console.log(`added ${place.displayName}, ${++added} places were added so far`);
     }
   } catch (err) {
-    console.log(err, 'skipping row');
+    console.log(err.message, 'skipping row');
   }
 }
 
