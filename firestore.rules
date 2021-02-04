@@ -6,7 +6,8 @@ service cloud.firestore {
     // document. The wildcard expression {userId} makes the userId variable
     // available in rules.
     match /users/{userId} {
-      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow read: if true;
+      allow update, delete: if request.auth != null && request.auth.uid == userId;
       allow create: if request.auth != null;
     }
 
@@ -15,8 +16,9 @@ service cloud.firestore {
     }
 
     match /protests/{id} {
+      allow read: if true;
       allow create: if request.auth != null;
-      allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.roles.leader[0];
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.roles.leader[0];
     }
 
   }
