@@ -21,11 +21,21 @@ class UserStore {
           userData = { uid: user.uid, email: user.email };
         }
         this.user = userData;
+      } else {
+        this.user = null;
       }
     });
 
     this.checkCache();
   }
+
+  logOut = async () => {
+    try {
+      await auth.signOut();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   checkCache() {
     const userProtest = getLocalStorage('1km_current_protest');
