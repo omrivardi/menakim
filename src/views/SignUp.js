@@ -86,7 +86,7 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       {emailSignIn ? (
         <EmailSignIn cancel={() => setEmailSignIn(false)} updateUserAndRedirect={updateUserAndRedirect} />
       ) : (
-        <Button onClick={() => setEmailSignIn(true)} style={{ marginBottom: 10 }}>
+        <Button onClick={() => setEmailSignIn(true)} style={{ marginBottom: 10, background: '#39B578' }}>
           {t('emailSignup')}
         </Button>
       )}
