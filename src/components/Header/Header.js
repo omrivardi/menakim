@@ -12,6 +12,7 @@ function Header() {
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation('header');
+
   return (
     <HeaderWrapper path={pathname}>
       <NavItemLive to="/live">
@@ -34,6 +35,11 @@ function Header() {
           <Link to="/add-position" onClick={() => setMenuState(false)} className="bm-item">
             {t('open-position')}
           </Link>
+          {!store?.userStore?.user && (
+            <Link to="/sign-up?returnUrl=/" onClick={() => setMenuState(false)} className="bm-item">
+              {t('locationAdminLogin')}
+            </Link>
+          )}
           <hr />
           <a href="https://www.menakimethabait.com/" target="_blank" rel="noreferrer noopener">
             {t('about')}
@@ -63,6 +69,12 @@ function Header() {
           {isAdmin(store.userStore.user) && (
             <Link to="/admin" onClick={() => setMenuState(false)}>
               ניהול
+            </Link>
+          )}
+
+          {store.userStore.user && (
+            <Link to="/" onClick={() => store.userStore.logOut()}>
+              התנתקות
             </Link>
           )}
         </Menu>
