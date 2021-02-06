@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 import Button from '../elements/Button';
 import { validateLatLng, isValidUrl } from '../../utils';
 import { fetchNearbyProtests } from '../../api';
+import { useStore } from '../../stores';
+
 import L from 'leaflet';
 // import DateTimeList from '../DateTimeList';
 
@@ -66,7 +68,7 @@ function ProtestForm({
   isAdmin,
 }) {
   const { t } = useTranslation('addCleanup');
-
+  const store = useStore();
   const coordinatesUpdater = useCallback(() => {
     let initialState = [31.7749837, 35.219797];
     if (validateLatLng(initialCoords)) initialState = initialCoords;
@@ -202,7 +204,15 @@ function ProtestForm({
       {submitSuccess && !editMode ? (
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
-          <Link to="/">
+          <Link
+            to="/"
+            onClick={() => {
+              // fetch locations and update coords before redirecting
+              const { protestStore } = store;
+              protestStore.fetchProtests({ onlyMarkers: false });
+              store.setCoordinates(mapCenter);
+            }}
+          >
             <Button style={{ margin: 'auto' }}>{t('mainPage')}</Button>
           </Link>
         </>
