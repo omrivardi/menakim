@@ -17,8 +17,8 @@ const filePath = process.env.FILE_PATH;
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
-  projectId: 'menakin-dev',
-  databaseURL: 'https://menakin-dev-default-rtdb.firebaseio.com',
+  projectId: 'menakim-et-habait',
+  // databaseURL: 'https://menakin-dev-default-rtdb.firebaseio.com',
 });
 
 const geoFirestore = geofirestore.initializeApp(admin.firestore());
@@ -74,7 +74,7 @@ async function getOrCreateUser(email, firstName, lastName, phone) {
 }
 
 async function isPlaceExist(placeName) {
-  const placeRef = await db.collection(placesCollection).where('name', '==', placeName).get();
+  const placeRef = await db.collection(placesCollection).where('displayName', '==', placeName).get();
   return !placeRef.empty;
 }
 
