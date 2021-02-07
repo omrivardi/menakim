@@ -30,9 +30,8 @@ function ProtestMap() {
           const coordinates = await getCurrentPosition();
           store.setCoordinates(coordinates);
         }
-      } catch (err) {
-        protestStore.fetchProtests({ onlyMarkers: false });
-      }
+      } catch (err) {}
+      protestStore.fetchProtests({ onlyMarkers: false });
     };
 
     setCoordinates();
