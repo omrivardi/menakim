@@ -347,12 +347,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 @media (max-width: 450px) {
   #logo {
-    width: 32vw;
+    width: 40vw;
   }
 }
 
 @media (max-width: 350px) {
   #logo {
-    width: 35vw;
+    width: 42vw;
   }
 }
