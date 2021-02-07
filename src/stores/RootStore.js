@@ -6,7 +6,7 @@ import LiveStore from './LiveStore';
 import userStore from './UserStore';
 
 class RootStore {
-  userCoordinates = [32.12545, 34.89584];
+  userCoordinates = [];
   currentPageTitle = 'מנקים את הבית';
 
   constructor() {
