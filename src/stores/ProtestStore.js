@@ -40,19 +40,21 @@ class ProtestStore {
 
   async fetchProtests({ onlyMarkers, position }) {
     this.state = 'pending';
-
     try {
-      const coordinates = position || this.rootStore.userCoordinates;
-      if (coordinates?.length === 2) {
-        const protests = await fetchNearbyProtests(coordinates);
-        if (!onlyMarkers) {
-          runInAction(() => {
-            this.nearbyProtests = protests;
-          });
-        }
+      let coordinates = position || this.rootStore.userCoordinates;
 
-        this.rootStore.mapStore.updateMarkers(protests);
+      if (coordinates?.length !== 2) {
+        coordinates = [31.7749837, 35.219797];
       }
+
+      const protests = await fetchNearbyProtests(coordinates);
+      if (!onlyMarkers) {
+        runInAction(() => {
+          this.nearbyProtests = protests;
+        });
+      }
+
+      this.rootStore.mapStore.updateMarkers(protests);
 
       runInAction(() => {
         this.state = 'done';
