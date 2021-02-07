@@ -319,40 +319,40 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 #logo {
   height: 100%;
-  width: 3.5vw;
+  width: 10vw;
 }
 
 @media (max-width: 1400px) {
-  #logo {
-    width: 6vw;
-  }
-}
-
-@media (max-width: 1000px) {
-  #logo {
-    width: 8vw;
-  }
-}
-
-@media (max-width: 800px) {
-  #logo {
-    width: 10vw;
-  }
-}
-
-@media (max-width: 500px) {
-  #logo {
-    width: 13vw;
-  }
-}
-@media (max-width: 450px) {
   #logo {
     width: 16vw;
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 1000px) {
   #logo {
     width: 22vw;
+  }
+}
+
+@media (max-width: 800px) {
+  #logo {
+    width: 28vw;
+  }
+}
+
+@media (max-width: 500px) {
+  #logo {
+    width: 30vw;
+  }
+}
+@media (max-width: 450px) {
+  #logo {
+    width: 32vw;
+  }
+}
+
+@media (max-width: 350px) {
+  #logo {
+    width: 35vw;
   }
 }
