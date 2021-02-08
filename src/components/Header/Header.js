@@ -63,7 +63,11 @@ function Header() {
           <Link to="/terms-of-use" onClick={() => setMenuState(false)} className="bm-item">
             {t('terms')}
           </Link>
-          <a href="mailto:info@menakimethabait.com" target="_blank" rel="noreferrer noopener">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@menakimethabait.com"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             {t('contact')}
           </a>
           {isAdmin(store.userStore.user) && (
