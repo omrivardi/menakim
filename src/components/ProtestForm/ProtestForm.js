@@ -35,7 +35,7 @@ const OpeningText = () => {
           href="#0"
           role="button"
           tabIndex="0"
-          onClick={() => window.open('https://drive.google.com/file/d/1b4pSIEgJ021VDZyuPZwa2ANZAv19KIJh/view?usp=sharing')}
+          onClick={() => window.open('https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=sharing')}
         >
           {t('opening.link')}
         </a>
