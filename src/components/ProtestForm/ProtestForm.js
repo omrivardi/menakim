@@ -26,7 +26,7 @@ const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settleme
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
   return (
-    <div>
+    <div style={{ fontSize: 18 }}>
       <p>{t('opening.one')}</p>
       <p>{t('opening.two')}</p>
       <p>
@@ -384,6 +384,7 @@ export const ProtestFormLabel = styled.label`
   width: 100%;
   margin-bottom: 10px;
   font-weight: 600;
+  font-size: 18px;
 `;
 
 export const ProtestFormInput = styled.input`
@@ -400,7 +401,7 @@ const ProtestFormInputDetails = styled.span.attrs((props) => ({
   margin: props.margin || '0',
 }))`
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   margin: ${(props) => props.margin};
   text-align: ${(props) => props.textAlign};
@@ -426,7 +427,7 @@ const ProtestFormCheckboxWrapper = styled.div`
   grid-template-columns: 20px 1fr;
   align-items: start;
   margin: 7.5px 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 100;
 `;
 
