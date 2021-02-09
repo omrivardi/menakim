@@ -10,5 +10,10 @@
   "whatsappLink": "לקבוצת ה whatsapp",
   "navigate": "נווט בעזרת Waze",
   "showWhatsappButton": "הצגת קישור לווטסאפ",
-  "whatsappNotAvailable": "ההרשמה למוקד הגיעה למגבלת המשתתפים והמשתתפות ונסגרה על ידי אחראי.ת המוקד"
+  "whatsappNotAvailable": "ההרשמה למוקד הגיעה למגבלת המשתתפים והמשתתפות ונסגרה על ידי אחראי.ת המוקד",
+  "report": "דיווח",
+  "reportMail": {
+    "subject": "דיווח על מוקד ספאם - מספר מוקד: ",
+    "body": "מספר מוקד: "
+  }
 }
