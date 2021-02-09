@@ -10,6 +10,8 @@ import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '..
 import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
 import { Link } from 'react-router-dom';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { isMobile } from 'react-device-detect';
 
 function FormattedDate({ date }) {
   const { t } = useTranslation('card');
@@ -40,6 +42,11 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
 
   // const history = useHistory();
   const { t } = useTranslation('card');
+  const mailSubject = `${t('reportMail.subject')}${id}`;
+  const mailBody = `${t('reportMail.body')}${id}`;
+  const contactLink = isMobile
+    ? `mailto:info@menakimethabait.comsubject=${mailSubject}body=${mailBody}`
+    : `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@menakimethabait.com&su=${mailSubject}&body=${mailBody}`;
 
   const { loading: isWhatsappToggleLoading, run } = useRequest(updateProtest, {
     manual: true,
@@ -131,12 +138,18 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
         {/* <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
           {t('navigate')}
         </WazeButton> */}
-        {distance && (
-          <ProtestCardDetail>
-            <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
-            {formatDistance(distance)}
-          </ProtestCardDetail>
-        )}
+        <ProtestCardDetail>
+          <ProtestCardBottom>
+            <div>
+              <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
+              {distance ? formatDistance(distance) : 0}
+            </div>
+            <ProtestReportWrapper onClick={() => window.open(contactLink)}>
+              <InfoCircleOutlined style={{ marginLeft: '6px', fontSize: '15px' }} />
+              {t('report')}
+            </ProtestReportWrapper>
+          </ProtestCardBottom>
+        </ProtestCardDetail>
       </ProtestCardInfo>
     </ProtestCardWrapper>
   );
@@ -184,10 +197,37 @@ const ProtestCardDetail = styled.h3`
   margin-bottom: 5px;
 `;
 
+const ProtestCardBottom = styled.h3`
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 100;
+  margin-bottom: 5px;
+  width: 100%;
+`;
+
 const ProtestCardIcon = styled.img`
   width: 17.5px;
   margin-inline-end: 5px;
   user-select: none;
+`;
+
+const ProtestReportWrapper = styled.div`
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: red;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+    color: red;
+  }
 `;
 
 const FormItem = styled(Form.Item)`
