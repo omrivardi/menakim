@@ -45,7 +45,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   const mailSubject = `${t('reportMail.subject')}${id}`;
   const mailBody = `${t('reportMail.body')}${id}`;
   const contactLink = isMobile
-    ? `mailto:info@menakimethabait.comsubject=${mailSubject}body=${mailBody}`
+    ? `mailto:info@menakimethabait.com?subject=${mailSubject}&body=${mailBody}`
     : `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@menakimethabait.com&su=${mailSubject}&body=${mailBody}`;
 
   const { loading: isWhatsappToggleLoading, run } = useRequest(updateProtest, {
