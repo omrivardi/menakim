@@ -33,9 +33,6 @@ function Header() {
           customCrossIcon={false}
           disableAutoFocus
         >
-          <Link to="/map" onClick={() => setMenuState(false)} className="bm-item">
-            {t('map')}
-          </Link>
           <Link to="/add-position" onClick={() => setMenuState(false)} className="bm-item">
             {t('open-position')}
           </Link>
