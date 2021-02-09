@@ -57,7 +57,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ displayName, adminId, protestId: id, coordinates }),
+      body: JSON.stringify({ displayName, adminId, protestId: id, coordinates, origin: window.location.href }),
     });
   }
 
