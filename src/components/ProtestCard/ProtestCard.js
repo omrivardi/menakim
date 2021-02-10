@@ -10,7 +10,7 @@ import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '..
 import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
 import { Link } from 'react-router-dom';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
 
 function FormattedDate({ date }) {
@@ -139,16 +139,14 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           {t('navigate')}
         </WazeButton> */}
         <ProtestCardDetail>
-          <ProtestCardBottom>
-            <div>
-              <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
-              {distance ? formatDistance(distance) : 0}
-            </div>
-            <ProtestReportWrapper onClick={() => window.open(contactLink)}>
-              <InfoCircleOutlined style={{ marginLeft: '6px', fontSize: '15px' }} />
-              {t('report')}
-            </ProtestReportWrapper>
-          </ProtestCardBottom>
+          <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
+          {distance ? formatDistance(distance) : 0}
+        </ProtestCardDetail>
+        <ProtestCardDetail>
+          <ProtestReportWrapper onClick={() => window.open(contactLink)}>
+            <ExclamationCircleOutlined style={{ marginLeft: '6px', fontSize: '13px' }} />
+            {t('report')}
+          </ProtestReportWrapper>
         </ProtestCardDetail>
       </ProtestCardInfo>
     </ProtestCardWrapper>
@@ -197,17 +195,6 @@ const ProtestCardDetail = styled.h3`
   margin-bottom: 5px;
 `;
 
-const ProtestCardBottom = styled.h3`
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 18px;
-  font-weight: 100;
-  margin-bottom: 5px;
-  width: 100%;
-`;
-
 const ProtestCardIcon = styled.img`
   width: 17.5px;
   margin-inline-end: 5px;
@@ -215,19 +202,9 @@ const ProtestCardIcon = styled.img`
 `;
 
 const ProtestReportWrapper = styled.div`
-  padding: 5px 10px;
-  background-color: red;
-  color: white;
-  border-radius: 5px;
-  border-style: solid;
-  border-color: red;
+  font-size: 15px;
   transition: 0.3s;
   cursor: pointer;
-
-  &:hover {
-    background-color: white;
-    color: red;
-  }
 `;
 
 const FormItem = styled(Form.Item)`
