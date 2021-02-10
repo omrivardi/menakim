@@ -213,7 +213,7 @@ function ProtestForm({
               store.setCoordinates(mapCenter);
             }}
           >
-            <Button style={{ margin: 'auto' }}>{t('mainPage')}</Button>
+            <Button style={{ margin: 'auto', background: '#39b578' }}>{t('mainPage')}</Button>
           </Link>
         </>
       ) : (
@@ -384,7 +384,7 @@ export const ProtestFormLabel = styled.label`
   width: 100%;
   margin-bottom: 10px;
   font-weight: 600;
-  font-size: 18px;                     
+  font-size: 18px;
 `;
 
 export const ProtestFormInput = styled.input`
