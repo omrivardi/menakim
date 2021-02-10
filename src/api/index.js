@@ -54,7 +54,7 @@ export async function createProtest(params, fromPending = false) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(protestParams),
+    body: JSON.stringify(protestParams, { origin: window.location.href }),
   });
 
   return request;
