@@ -25,6 +25,7 @@ export async function createProtest(params, fromPending = false) {
     ...restParams,
     created_at: firebase.firestore.FieldValue.serverTimestamp(),
     coordinates: new firebase.firestore.GeoPoint(Number(lat), Number(lng)),
+    origin: window.location.href,
   };
 
   // If an authed user created  the protest, add them as a leader.
@@ -54,7 +55,7 @@ export async function createProtest(params, fromPending = false) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(protestParams, { origin: window.location.href }),
+    body: JSON.stringify(protestParams),
   });
 
   return request;
