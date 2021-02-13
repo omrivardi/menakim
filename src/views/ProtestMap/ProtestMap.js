@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { getCurrentPosition } from '../../utils';
 import { useStore } from '../../stores';
@@ -16,6 +16,8 @@ function ProtestMap() {
   const store = useStore();
   const { mapStore, protestStore, userCoordinates } = store;
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const carouselRef = useRef();
 
   const hoveredProtest = useMemo(() => {
     if (!mapStore.hoveredProtestId) {
@@ -51,13 +53,9 @@ function ProtestMap() {
     }
   }, []);
 
-  const handleOk = () => {
+  function handleCloseModal() {
     setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  }
 
   return (
     <>
@@ -74,11 +72,11 @@ function ProtestMap() {
         </ProtestListWrapper> */}
         <StyledModal
           visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
+          footer={null}
+          closable={false}
           afterClose={() => setLocalStorage('seenTutorial', true)}
         >
-          <Carousel>
+          <Carousel ref={carouselRef}>
             <div>
               <p>ברוכים הבאים וברוכות הבאות</p>
               <p>למפת מוקדי הניקיון של "מנקים את הבית"</p>
@@ -102,8 +100,13 @@ function ProtestMap() {
                   משריינים ומשתתפים
                 </ModalCard>
               </CardsWrapper>
+              <ContinueButton onClick={() => carouselRef.current.next()}>אני בפנים</ContinueButton>
             </div>
-            <div>2</div>
+            <div>
+              <p>רוצה לפתוח ולנהל מוקד חדש?</p>
+              <p>ככה עושים את זה:</p>
+              <ContinueButton onClick={handleCloseModal}>! קחו אותי למפה</ContinueButton>
+            </div>
           </Carousel>
         </StyledModal>
         <Map hoveredProtest={hoveredProtest} />
@@ -152,6 +155,14 @@ const StyledModal = styled(Modal)`
   .slick-slide p {
     margin-bottom: 0;
   }
+
+  .ant-carousel .slick-dots-bottom {
+    bottom: -20px;
+  }
+
+  .ant-carousel .slick-dots li button {
+    background-color: cadetblue;
+  }
 `;
 
 const ModalCard = styled.div`
@@ -176,6 +187,18 @@ const CardsWrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
+`;
+
+const ContinueButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 3px solid;
+  width: 150px;
+  height: 40px;
+  margin: 20px auto;
+  cursor: pointer;
 `;
 
 // const ProtestListWrapper = styled.div`
