@@ -50,8 +50,8 @@ export default function TutorialModal(params) {
           <p>רוצה לפתוח ולנהל מוקד חדש?</p>
           <p>ככה עושים את זה:</p>
           <TutorialImages>
-            <img src={'/images/tut1.png'} alt="tut1" />
             <img src={'/images/tut2.png'} alt="tut2" />
+            <img src={'/images/tut1.png'} alt="tut1" />
           </TutorialImages>
           <ContinueButton onClick={handleCloseModal}>קחו אותי למפה !</ContinueButton>
         </div>
@@ -95,6 +95,7 @@ const ModalCard = styled.div`
   height: 110px;
   font-size: 15px;
   padding: 5px;
+  margin-bottom: 15px;
 `;
 
 const CardsWrapper = styled.div`
@@ -125,11 +126,15 @@ const TutorialImages = styled.div`
   display: flex;
   overflow: hidden;
   & img {
-    max-width: 230px;
+    width: 50%;
   }
 
   @media (max-width: 375px) {
     flex-direction: column;
     align-items: center;
+    & img {
+      max-height: 350px;
+      width: 100%;
+    }
   }
 `;
