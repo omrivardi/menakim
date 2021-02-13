@@ -1,17 +1,22 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { getCurrentPosition } from '../../utils';
 import { useStore } from '../../stores';
+import { getLocalStorage, setLocalStorage } from '../../localStorage';
 import {
   Map,
   // ProtestList
 } from '../../components';
 import Helmet from 'react-helmet';
 import styled from 'styled-components/macro';
+import { Modal, Carousel } from 'antd';
+import { WhatsAppOutlined, EnvironmentOutlined, ScheduleOutlined } from '@ant-design/icons';
 
 function ProtestMap() {
   const store = useStore();
   const { mapStore, protestStore, userCoordinates } = store;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const hoveredProtest = useMemo(() => {
     if (!mapStore.hoveredProtestId) {
       return null;
@@ -39,6 +44,21 @@ function ProtestMap() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const hasSeenTutorial = getLocalStorage('seenTutorial');
+    if (!hasSeenTutorial) {
+      setIsModalVisible(true);
+    }
+  }, []);
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <>
       <Helmet>
@@ -52,7 +72,40 @@ function ProtestMap() {
             loading={protestStore.protests?.length === 0 && protestStore.state === 'pending'}
           />
         </ProtestListWrapper> */}
-
+        <StyledModal
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          afterClose={() => setLocalStorage('seenTutorial', true)}
+        >
+          <Carousel>
+            <div>
+              <p>ברוכים הבאים וברוכות הבאות</p>
+              <p>למפת מוקדי הניקיון של "מנקים את הבית"</p>
+              <p>---</p>
+              <p>ב 19/3/2021 אלפי משתתפים ומשתתפות יצאו אל</p>
+              <p>האתרים ומוקדי הטבע המסומנים במפה ויערכו בהם ניקיון יסודי לקראת האביב</p>
+              <p>ברוכים הבאים וברוכות הבאות</p>
+              <p>---</p>
+              <p>איך מצטרפים?</p>
+              <CardsWrapper>
+                <ModalCard>
+                  <EnvironmentOutlined style={{ fontSize: '50px' }} />
+                  בוחרים מוקד להצטרף אליו
+                </ModalCard>
+                <ModalCard>
+                  <WhatsAppOutlined style={{ fontSize: '50px' }} />
+                  מצטרפים לקבוצה
+                </ModalCard>
+                <ModalCard>
+                  <ScheduleOutlined style={{ fontSize: '50px' }} />
+                  משריינים ומשתתפים
+                </ModalCard>
+              </CardsWrapper>
+            </div>
+            <div>2</div>
+          </Carousel>
+        </StyledModal>
         <Map hoveredProtest={hoveredProtest} />
       </HomepageWrapper>
     </>
@@ -83,6 +136,46 @@ const HomepageWrapper = styled.div`
   // @media (min-width: 1700px) {
   //   grid-template-columns: 375px 1fr;
   // }
+`;
+
+const StyledModal = styled(Modal)`
+  .ant-modal-content {
+    border-radius: 100px;
+    border: 3px solid;
+  }
+
+  .slick-slide {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .slick-slide p {
+    margin-bottom: 0;
+  }
+`;
+
+const ModalCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 3px solid;
+  width: 100px;
+  height: 110px;
+  font-size: 15px;
+  padding: 5px;
+`;
+
+const CardsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+
+  @media (max-width: 375px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 // const ProtestListWrapper = styled.div`
