@@ -102,7 +102,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
 
         {whatsappToggleValue ? (
           <div onClick={handleWhatsappClick}>
-            <SocialButton type="whatsapp" link={whatsAppLink}>
+            <SocialButton type="whatsapp" link={whatsAppLink} style={{ marginRight: screen.width > 1080 ? '1.2vw' : '5vw' }}>
               {t('whatsappLink')}
             </SocialButton>
             <TermsInfo>
