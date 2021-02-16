@@ -1,4 +1,4 @@
-import firebase, { firestore } from '../firebase';
+import firebase, { firestore, analytics } from '../firebase';
 import * as geofirestore from 'geofirestore';
 import { calculateDistance } from '../utils';
 
@@ -56,6 +56,13 @@ export async function createProtest(params, fromPending = false) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(protestParams),
+  });
+
+  // log analytics event
+  analytics.logEvent('location_created', {
+    name: protestParams.displayName,
+    area: protestParams.area,
+    placeType: protestParams.placeType,
   });
 
   return request;
