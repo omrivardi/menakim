@@ -93,9 +93,9 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <p style={{ fontWeight: '900', width: '100vw' }}>{t('five')}</p>
       <p style={{ fontWeight: '900', width: '100vw' }}>{t('six')} </p>
       <div id="iconsWrapper">
-        <img className="icons" src="/icons/create-group.png" />
-        <img className="icons" src="/icons/fill-in-form.png" />
-        <img className="icons" src="/icons/share.png" />
+        <img className="icons" src="/icons/create-group.png" alt="create-group" />
+        <img className="icons" src="/icons/fill-in-form.png" alt="fill-in-form" />
+        <img className="icons" src="/icons/share.png" alt="share" />
       </div>
       <br />
       <p style={{ width: '300px' }}>{t('content')} </p>
