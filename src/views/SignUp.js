@@ -76,11 +76,25 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
   const [emailSignIn, setEmailSignIn] = useState(false);
   return (
-    <PageContentWrapper>
+    <PageContentWrapper style={{ maxWidth: '100%' }}>
       <Helmet>
         <title>{t('title')}</title>
       </Helmet>
-      <p>{t('content')} </p>
+      <p>{t('one')} </p>
+      <p>{t('two')} </p>
+      <p>{t('three')} </p>
+      <p>
+        {t('four')} <a href="https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk">{t('link')}</a>{' '}
+      </p>
+      <p>{t('five')}</p>
+      <p>{t('six')} </p>
+      <div id="iconsWrapper">
+        <img className="icons" src="/icons/create-group.png" />
+        <img className="icons" src="/icons/fill-in-form.png" />
+        <img className="icons" src="/icons/share.png" />
+      </div>
+      <br />
+      <p style={{ width: '300px' }}>{t('content')} </p>
 
       <GoogleButton onClick={() => handleSignIn()} style={{ marginBottom: 10, width: 300 }} />
       {emailSignIn ? (
@@ -173,7 +187,7 @@ export default function SignUp(props) {
 
   if (stage === stages.BEFORE_FACEBOOK_AUTH) {
     return (
-      <PageWrapper>
+      <PageWrapper style={{ maxWidth: '80%' }}>
         <SignUpBeforeRedirect updateUserAndRedirect={updateUserAndRedirect} />
       </PageWrapper>
     );
