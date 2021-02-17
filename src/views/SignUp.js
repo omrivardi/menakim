@@ -82,12 +82,16 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       </Helmet>
       <p>{t('one')} </p>
       <p>{t('two')} </p>
-      <p>{t('three')} </p>
       <p>
-        {t('four')} <a href="https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk">{t('link')}</a>{' '}
+        {' '}
+        <span style={{ fontWeight: '900' }}>{t('notice')}</span> {t(window.screen.width > 750 ? 'three' : 'three_mob')}
       </p>
-      <p>{t('five')}</p>
-      <p>{t('six')} </p>
+      <p>
+        {t(window.screen.width > 750 ? 'four' : null)}{' '}
+        <a href="https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk">{t('link')}</a>{' '}
+      </p>
+      <p style={{ fontWeight: '900', width: '100vw' }}>{t('five')}</p>
+      <p style={{ fontWeight: '900', width: '100vw' }}>{t('six')} </p>
       <div id="iconsWrapper">
         <img className="icons" src="/icons/create-group.png" />
         <img className="icons" src="/icons/fill-in-form.png" />
