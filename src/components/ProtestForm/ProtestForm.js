@@ -190,6 +190,18 @@ function ProtestForm({
       {submitSuccess && !editMode ? (
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
+          <StepsList>
+            <StepMessage>{t('messages.step1')}</StepMessage>
+            <StepDescription>
+              <a href="https://chat.whatsapp.com/C9eKwFDfx146SHJV3Vkb48">{t('messages.step1a')}</a>
+            </StepDescription>
+            <StepMessage>{t('messages.step2')}</StepMessage>
+            <StepDescription>{t('messages.step2a')}</StepDescription>
+            <StepMessage>{t('messages.step3')}</StepMessage>
+            <StepDescription>{t('messages.step3a')}</StepDescription>
+            <StepMessage>{t('messages.step4')}</StepMessage>
+            <StepDescription>{t('messages.step4a')}</StepDescription>
+          </StepsList>
           <Link
             to="/"
             onClick={() => {
@@ -419,6 +431,20 @@ const ProtestFormCheckboxWrapper = styled.div`
 
 const SuccessMessage = styled.h2`
   text-align: center;
+`;
+
+const StepsList = styled.ol`
+  text-align: center;
+`;
+
+const StepMessage = styled.li`
+  text-align: right;
+  font-size: 18px;
+`;
+
+const StepDescription = styled.p`
+  text-align: right;
+  list-style-type: none;
 `;
 
 export default ProtestForm;
