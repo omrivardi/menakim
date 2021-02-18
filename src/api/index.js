@@ -1,4 +1,4 @@
-import firebase, { firestore } from '../firebase';
+import firebase, { firestore, analytics } from '../firebase';
 import * as geofirestore from 'geofirestore';
 import { calculateDistance } from '../utils';
 
@@ -25,6 +25,7 @@ export async function createProtest(params, fromPending = false) {
     ...restParams,
     created_at: firebase.firestore.FieldValue.serverTimestamp(),
     coordinates: new firebase.firestore.GeoPoint(Number(lat), Number(lng)),
+    origin: window.location.href,
   };
 
   // If an authed user created  the protest, add them as a leader.
@@ -55,6 +56,13 @@ export async function createProtest(params, fromPending = false) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(protestParams),
+  });
+
+  // log analytics event
+  analytics.logEvent('location_created', {
+    name: protestParams.displayName,
+    area: protestParams.area,
+    placeType: protestParams.placeType,
   });
 
   return request;

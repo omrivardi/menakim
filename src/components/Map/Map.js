@@ -36,7 +36,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   let markerInfo = marker || {
     iconUrl,
     iconRetinaUrl: iconUrl,
-    iconSize: [30, 30],
+    iconSize: [45, 45],
     iconAnchor: [15, 30],
   };
 
@@ -99,7 +99,7 @@ function AppMap({ hoveredProtest }) {
   return (
     <MapWrapper>
       <AddressBar inputRef={addressInputRef} />
-      <MapElement center={coordinates.length > 0 ? coordinates : balfur} zoom={11.5} zoomControl={false}>
+      <MapElement center={coordinates.length > 0 ? coordinates : balfur} zoom={9} zoomControl={false}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

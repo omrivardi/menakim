@@ -22,15 +22,6 @@ function ProtestMap() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapStore.hoveredProtestId]);
 
-  // Fetch protests initially
-  useEffect(() => {
-    if (protestStore.nearbyProtests.length === 0) {
-      protestStore.fetchProtests({ onlyMarkers: false });
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userCoordinates]);
-
   // Ask for user location on map initial load
   useEffect(() => {
     const setCoordinates = async () => {
@@ -40,6 +31,7 @@ function ProtestMap() {
           store.setCoordinates(coordinates);
         }
       } catch (err) {}
+      protestStore.fetchProtests({ onlyMarkers: false });
     };
 
     setCoordinates();

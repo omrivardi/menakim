@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 import Button from '../elements/Button';
 import { validateLatLng, isValidUrl } from '../../utils';
 import { fetchNearbyProtests } from '../../api';
+import { useStore } from '../../stores';
+
 import L from 'leaflet';
 // import DateTimeList from '../DateTimeList';
 
@@ -19,7 +21,7 @@ const protestMarker = new L.Icon({
 });
 
 const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
-const placeTypes = ['river', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
+const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
 
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
@@ -52,7 +54,7 @@ function ProtestForm({
   isAdmin,
 }) {
   const { t } = useTranslation('addCleanup');
-
+  const store = useStore();
   const coordinatesUpdater = useCallback(() => {
     let initialState = [31.7749837, 35.219797];
     if (validateLatLng(initialCoords)) initialState = initialCoords;
@@ -188,8 +190,16 @@ function ProtestForm({
       {submitSuccess && !editMode ? (
         <>
           <SuccessMessage>{submitMessage}</SuccessMessage>
-          <Link to="/">
-            <Button style={{ margin: 'auto' }}>{t('mainPage')}</Button>
+          <Link
+            to="/"
+            onClick={() => {
+              // fetch locations and update coords before redirecting
+              const { protestStore } = store;
+              protestStore.fetchProtests({ onlyMarkers: false });
+              store.setCoordinates(mapCenter);
+            }}
+          >
+            <Button style={{ margin: 'auto', background: '#39b578' }}>{t('mainPage')}</Button>
           </Link>
         </>
       ) : (
@@ -360,13 +370,14 @@ export const ProtestFormLabel = styled.label`
   width: 100%;
   margin-bottom: 10px;
   font-weight: 600;
+  font-size: 18px;
 `;
 
 export const ProtestFormInput = styled.input`
   width: 100%;
   padding: 6px 12px;
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: 18px;
   border: 1px solid #d2d2d2;
   -webkit-appearance: none;
 `;
@@ -376,7 +387,7 @@ const ProtestFormInputDetails = styled.span.attrs((props) => ({
   margin: props.margin || '0',
 }))`
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   margin: ${(props) => props.margin};
   text-align: ${(props) => props.textAlign};
@@ -402,7 +413,7 @@ const ProtestFormCheckboxWrapper = styled.div`
   grid-template-columns: 20px 1fr;
   align-items: start;
   margin: 7.5px 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 100;
 `;
 
