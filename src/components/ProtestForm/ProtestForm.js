@@ -26,33 +26,19 @@ const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settleme
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
   return (
-    <div style={{ fontSize: 18 }}>
-      <p>{t('opening.one')}</p>
-      <p>{t('opening.two')}</p>
-      <p>
-        {t('opening.three')}{' '}
-        <a
-          href="#0"
-          role="button"
-          tabIndex="0"
-          onClick={() => window.open('https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=sharing')}
-        >
-          {t('opening.link')}
-        </a>
-      </p>
-      <p>{t('opening.four')}</p>
-      <p>{t('opening.five')}</p>
+    <div>
+      <h2>{t('opening.one')}</h2>
       <ul>
+        <li>{t('opening.bullets.one')}</li>
+        <li>{t('opening.bullets.two')}</li>
+        <li>{t('opening.bullets.three')}</li>
         <li>
-          {t('opening.bullets.one')} ({t('opening.bullets.one-postfix')}
-          <a href="#0" role="button" tabIndex="0" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
-            {t('opening.bullets.one-postfix-link')}
+          {t('opening.bullets.four')}
+          <a href="#0" role="button" tabIndex="1" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
+            {t('opening.bullets.four-postfix-link')}
           </a>
           )
         </li>
-        <li>{t('opening.bullets.two')}</li>
-        <li>{t('opening.bullets.three')}</li>
-        <li>{t('opening.bullets.four')}</li>
       </ul>
       <p>{t('opening.six')}</p>
     </div>
