@@ -2,7 +2,19 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-'on': pull_request
+on:
+  pull_request:
+env:
+  REACT_APP_FIREBASE_API_KEY: ${{ secrets.DEV_FIREBASE_API_KEY }}
+  REACT_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.DEV_FIREBASE_AUTH_DOMAIN }}
+  REACT_APP_FIREBASE_DATABASE_URL: ${{ secrets.DEV_FIREBASE_DATABASE_URL }}
+  REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.DEV_FIREBASE_PROJECT_ID }}
+  REACT_APP_FIREBASE_APP_ID: ${{ secrets.DEV_FIREBASE_APP_ID }}
+  REACT_APP_FIREBASE_STORAGE: ${{ secrets.DEV_FIREBASE_STORAGE }}
+  REACT_APP_FIREBASE_CUSTOM_STORAGE: ${{ secrets.DEV_FIREBASE_CUSTOM_STORAGE }}
+  REACT_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.DEV_FIREBASE_MEASUREMENT_ID }}
+  REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.DEV_GOOGLE_MAPS_API_KEY }}
+
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
@@ -16,12 +28,3 @@ jobs:
           projectId: menakin-dev
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
-          REACT_APP_FIREBASE_API_KEY: ${{ secrets.DEV_FIREBASE_API_KEY }}
-          REACT_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.DEV_FIREBASE_AUTH_DOMAIN }}
-          REACT_APP_FIREBASE_DATABASE_URL: ${{ secrets.DEV_FIREBASE_DATABASE_URL }}
-          REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.DEV_FIREBASE_PROJECT_ID }}
-          REACT_APP_FIREBASE_APP_ID: ${{ secrets.DEV_FIREBASE_APP_ID }}
-          REACT_APP_FIREBASE_STORAGE: ${{ secrets.DEV_FIREBASE_STORAGE }}
-          REACT_APP_FIREBASE_CUSTOM_STORAGE: ${{ secrets.DEV_FIREBASE_CUSTOM_STORAGE }}
-          REACT_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.DEV_FIREBASE_MEASUREMENT_ID }}
-          REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.DEV_GOOGLE_MAPS_API_KEY }}
