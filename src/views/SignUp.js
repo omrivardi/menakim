@@ -75,23 +75,37 @@ const stages = {
 function SignUpBeforeRedirect({ updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
   const [emailSignIn, setEmailSignIn] = useState(false);
+  const openKit = () => window.open('https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk');
+
   return (
     <PageContentWrapper style={{ maxWidth: '100%' }}>
       <Helmet>
         <title>{t('title')}</title>
       </Helmet>
-      <p>{t('one')} </p>
-      <p>{t('two')} </p>
-      <p>
-        {' '}
-        <span style={{ fontWeight: '900' }}>{t('notice')}</span> {t(window.screen.width > 750 ? 'three' : 'three_mob')}
-      </p>
-      <p>
-        {t(window.screen.width > 750 ? 'four' : null)}{' '}
-        <a href="https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk">{t('link')}</a>{' '}
-      </p>
-      <p style={{ fontWeight: '900', width: '100vw' }}>{t('five')}</p>
-      <p style={{ fontWeight: '900', width: '100vw' }}>{t('six')} </p>
+      <Lines>{t('one')}</Lines>
+      <Lines>{t('two')}</Lines>
+      <MobLines>
+        <Bold>{t('notice')}</Bold> {t('three_mob')}
+      </MobLines>
+      <DeskLines>
+        <Bold>{t('notice')}</Bold> {t('three')}
+      </DeskLines>
+      <MobLines>
+        <br />
+        <a href="#0" onClick={() => openKit()}>
+          {t('link')}
+        </a>
+      </MobLines>
+      <DeskLines>
+        {t('four')}
+        <a href="#0" onClick={() => openKit()}>
+          {t('link')}
+        </a>
+      </DeskLines>
+      <br />
+      <BoldLines>{t('five')}</BoldLines>
+      <BoldLines>{t('six')}</BoldLines>
+      <br />
       <div id="iconsWrapper">
         <img className="icons" src="/icons/create-group.png" alt="create-group" />
         <img className="icons" src="/icons/fill-in-form.png" alt="fill-in-form" />
@@ -242,4 +256,35 @@ const SignUpFormItem = styled(Form.Item)`
 const Buttons = styled.div`
   display: flex;
   align-content: space-between;
+`;
+
+const Lines = styled.p`
+  margin: 0;
+  width: 100vw;
+`;
+
+const BoldLines = styled.p`
+  margin: 0;
+  width: 100vw;
+  font-weight: 900;
+`;
+
+const MobLines = styled.p`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+    margin: 0;
+  }
+`;
+
+const DeskLines = styled.p`
+  display: block;
+  margin: 0;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Bold = styled.span`
+  font-weight: 900;
 `;
