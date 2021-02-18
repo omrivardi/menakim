@@ -24,7 +24,10 @@ const validateFields = (firstName, lastName, phone) =>
   phone.length >= 10 &&
   reg.test(phone);
 
-const validateEmailLogin = (email, pass) => emailReg.test(email) && pass >= 6;
+const validateEmailLogin = (email, pass) => {
+  console.log(email, pass);
+  return emailReg.test(email) && pass.length >= 6;
+};
 
 function EmailSignIn({ cancel, updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
@@ -37,7 +40,7 @@ function EmailSignIn({ cancel, updateUserAndRedirect }) {
       <SignUpFormItem label={t('form.email')} required style={{ flexDirection: 'column' }}>
         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
       </SignUpFormItem>
-      <SignUpFormItem label={t('form.password')} required style={{ flexDirection: 'column' }}>
+      <SignUpFormItem label={t('form.password')} extra={t('form.minimumCharacters')} required style={{ flexDirection: 'column' }}>
         <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
       </SignUpFormItem>
       <SignUpFormItem label={t('form.validatePassword')} required style={{ flexDirection: 'column' }}>
