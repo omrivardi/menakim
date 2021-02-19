@@ -3,6 +3,7 @@ import { useRequest } from 'ahooks';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
 import { updateProtest } from '../../api';
+import { analytics } from '../../firebase';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
@@ -66,6 +67,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       },
       body: JSON.stringify({ displayName, adminId, protestId: id, coordinates, origin: window.location.href }),
     });
+
+    // log analytics event
+    analytics.logEvent('whatsapp_join', { name: displayName });
   }
 
   function toggleWhatsappChange() {
@@ -103,7 +107,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
         {whatsappToggleValue ? (
           <div onClick={handleWhatsappClick}>
             <SocialButton type="whatsapp" link={whatsAppLink}>
-              {t('whatsappLink')}
+              <span style={{ marginRight: window.screen.width > 1080 ? '1.2vw' : '5vw' }}>{t('whatsappLink')}</span>
             </SocialButton>
             <TermsInfo>
               <p>{t('responsibility')}</p>
