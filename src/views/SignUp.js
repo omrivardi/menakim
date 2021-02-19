@@ -25,7 +25,6 @@ const validateFields = (firstName, lastName, phone) =>
   reg.test(phone);
 
 const validateEmailLogin = (email, pass) => {
-  console.log(email, pass);
   return emailReg.test(email) && pass.length >= 6;
 };
 
