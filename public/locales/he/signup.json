@@ -25,8 +25,9 @@
     "submit": "סיום הרשמה",
     "cancel": "ביטול",
     "email": "כתובת אימייל",
-    "password": "סיסמה",
-    "validatePassword": "הקלד סיסמה פעם נוספת"
+    "password": "יצירת סיסמה לאתר",
+    "minimumCharacters": "הסיסמה חייבת להכיל מעל 6 תווים",
+    "validatePassword": "אימות סיסמה"
   },
   "noUser": {
     "message": "על מנת ליצור מוקד ניקיון עלייך להזדהות",
