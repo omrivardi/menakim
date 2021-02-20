@@ -26,7 +26,6 @@ export default function TutorialModal(params) {
         <div>
           <TabWrapper>
             <Logo src={'/images/logo.png'} alt="tut1" />
-            <Title>{t('slide1.title')}</Title>
             <Paragraph>{t('slide1.paragraph1')}</Paragraph>
             <Paragraph>{t('slide1.paragraph2')}</Paragraph>
             <Paragraph>{t('slide1.paragraph3')}</Paragraph>
@@ -73,6 +72,13 @@ export default function TutorialModal(params) {
   );
 }
 
+const Paragraph = styled.p`
+  font-size: 21px;
+  font-weight: ${({ bold }) => (bold ? 'bold' : 500)};
+  color: #333333;
+  margin: 0;
+`;
+
 const StyledModal = styled(Modal)`
   .ant-modal-content {
     background-image: url('/images/menakim-popup-bg.jpg');
@@ -97,6 +103,13 @@ const StyledModal = styled(Modal)`
     background-color: #3aafc9;
     height: 12px;
     border: solid 2px #333333;
+  }
+
+  @media (max-width: 767px) {
+    /* top: 15px; */
+    ${Paragraph} {
+      font-size: 18px;
+    }
   }
 `;
 
@@ -171,27 +184,12 @@ const IconWrapper = styled.div`
   height: 90px;
 `;
 
-const Title = styled.p`
-  color: #03a483;
-  font-size: 27.5px;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 5px;
-`;
-
 const SecondaryTitle = styled.p`
   color: #03a483;
   font-size: 26.5px;
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
-`;
-
-const Paragraph = styled.p`
-  font-size: 21px;
-  font-weight: ${({ bold }) => (bold ? 'bold' : 500)};
-  color: #333333;
-  margin: 0;
 `;
 
 const Logo = styled.img`
