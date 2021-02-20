@@ -106,7 +106,7 @@ const StyledModal = styled(Modal)`
   }
 
   @media (max-width: 767px) {
-    /* top: 15px; */
+    top: 50px;
     ${Paragraph} {
       font-size: 18px;
     }
