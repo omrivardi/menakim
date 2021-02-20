@@ -91,7 +91,6 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
         <Bold>{t('notice')}</Bold> {t('three')}
       </DeskLines>
       <MobLines>
-        <br />
         <a href="#0" onClick={() => openKit()}>
           {t('link')}
         </a>
@@ -260,6 +259,7 @@ const Buttons = styled.div`
 
 const Lines = styled.p`
   margin: 0;
+  font-size: 20px;
   width: 100vw;
 `;
 
@@ -287,4 +287,5 @@ const DeskLines = styled.p`
 
 const Bold = styled.span`
   font-weight: 900;
+  font-size: 16px;
 `;
