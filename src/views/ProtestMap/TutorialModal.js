@@ -2,7 +2,6 @@ import React from 'react';
 import { getLocalStorage, setLocalStorage } from '../../localStorage';
 import styled from 'styled-components/macro';
 import { Modal, Carousel } from 'antd';
-import { WhatsAppOutlined, EnvironmentOutlined, ScheduleOutlined } from '@ant-design/icons';
 
 export default function TutorialModal(params) {
   const carouselRef = React.useRef();
@@ -23,37 +22,49 @@ export default function TutorialModal(params) {
     <StyledModal visible={isModalVisible} footer={null} closable={false} afterClose={() => setLocalStorage('seenTutorial', true)}>
       <Carousel ref={carouselRef}>
         <div>
-          <p>ברוכים הבאים וברוכות הבאות</p>
-          <p>למפת מוקדי הניקיון של "מנקים את הבית"</p>
-          <p>---</p>
-          <p>ב 19/3/2021 אלפי משתתפים ומשתתפות יצאו אל</p>
-          <p>האתרים ומוקדי הטבע המסומנים במפה ויערכו בהם ניקיון יסודי לקראת האביב</p>
-          <p>---</p>
-          <p>איך מצטרפים?</p>
-          <CardsWrapper>
-            <ModalCard>
-              <EnvironmentOutlined style={{ fontSize: '50px' }} />
-              בוחרים מוקד להצטרף אליו
-            </ModalCard>
-            <ModalCard>
-              <WhatsAppOutlined style={{ fontSize: '50px' }} />
-              מצטרפים לקבוצה
-            </ModalCard>
-            <ModalCard>
-              <ScheduleOutlined style={{ fontSize: '50px' }} />
-              משריינים ומשתתפים
-            </ModalCard>
-          </CardsWrapper>
-          <ContinueButton onClick={() => carouselRef.current.next()}>אני בפנים</ContinueButton>
+          <TabWrapper>
+            <Logo src={'/images/logo.png'} alt="tut1" />
+            <Title>ברוכים הבאים וברוכות הבאות</Title>
+            <Paragraph>ב 19/3/2021 אלפי משתתפים ומשתתפות </Paragraph>
+            <Paragraph>יצאו אל האתרים ומוקדי הטבע המסומנים</Paragraph>
+            <Paragraph>במפה ויערכו בהם ניקיון יסודי</Paragraph>
+            <SecondaryTitle>איך בוחרים ומצטרפים למוקד?</SecondaryTitle>
+            <CardsWrapper>
+              <ModalCard>
+                <IconWrapper>
+                  <img src={'/icons/pin.png'} alt="tut1" />
+                </IconWrapper>
+                מוצאים במפה מוקד קרוב/רצוי
+              </ModalCard>
+              <ModalCard>
+                <IconWrapper>
+                  <img src={'/icons/whatsapp.png'} alt="tut1" />
+                </IconWrapper>
+                מצטרפים לקבוצה
+              </ModalCard>
+              <ModalCard>
+                <IconWrapper>
+                  <img src={'/icons/calendar.png'} alt="tut1" />
+                </IconWrapper>
+                משריינים ומשתפים
+              </ModalCard>
+            </CardsWrapper>
+            <ContinueButton onClick={() => carouselRef.current.next()}>
+              <span>יאלה, מתחילים</span>
+            </ContinueButton>
+          </TabWrapper>
         </div>
         <div>
-          <p>רוצה לפתוח ולנהל מוקד חדש?</p>
-          <p>ככה עושים את זה:</p>
-          <TutorialImages>
-            <img src={'/images/tut2.png'} alt="tut2" />
-            <img src={'/images/tut1.png'} alt="tut1" />
-          </TutorialImages>
-          <ContinueButton onClick={handleCloseModal}>קחו אותי למפה !</ContinueButton>
+          <TabWrapper>
+            <Logo src={'/images/logo.png'} alt="tut2" />
+            <Paragraph bold={true}>רוצה לפתוח ולנהל מוקד חדש?</Paragraph>
+            <Paragraph bold={true}>ככה עושים את זה:</Paragraph>
+            <TutorialImages>
+              <img src={'/images/tut2.png'} alt="tut2" />
+              <img src={'/images/tut1.png'} alt="tut1" />
+            </TutorialImages>
+            <ContinueButton onClick={handleCloseModal}>קחו אותי למפה !</ContinueButton>
+          </TabWrapper>
         </div>
       </Carousel>
     </StyledModal>
@@ -62,8 +73,7 @@ export default function TutorialModal(params) {
 
 const StyledModal = styled(Modal)`
   .ant-modal-content {
-    border-radius: 100px;
-    border: 3px solid;
+    background-image: url('/images/menakim-popup-bg.jpg');
   }
 
   .slick-slide {
@@ -72,30 +82,37 @@ const StyledModal = styled(Modal)`
     direction: rtl;
   }
 
-  .slick-slide p {
-    margin-bottom: 0;
+  .ant-carousel .slick-dots-bottom {
+    bottom: -10px;
   }
 
-  .ant-carousel .slick-dots-bottom {
-    bottom: -20px;
+  .ant-carousel .slick-dots li {
+    width: 64px;
+    margin: 0;
   }
 
   .ant-carousel .slick-dots li button {
-    background-color: cadetblue;
+    background-color: #3aafc9;
+    height: 12px;
+    border: solid 2px #333333;
   }
+`;
+
+const TabWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const ModalCard = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow: hidden;
-  border-radius: 20px;
-  border: 3px solid;
-  width: 100px;
-  height: 110px;
-  font-size: 15px;
-  padding: 5px;
-  margin-bottom: 15px;
+  width: 110px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
 `;
 
 const CardsWrapper = styled.div`
@@ -111,20 +128,25 @@ const CardsWrapper = styled.div`
 `;
 
 const ContinueButton = styled.div`
+  background-image: url('/icons/button.png');
+  background-size: cover;
+  color: #ffffff;
   display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  border: 3px solid;
-  width: 150px;
-  height: 40px;
+  justify-content: flex-start;
+  height: 45px;
+  min-width: 200px;
   margin: 20px auto;
+  padding-right: 60px;
+  padding-left: 30px;
   cursor: pointer;
+  font-size: 19.5px;
 `;
 
 const TutorialImages = styled.div`
   display: flex;
   overflow: hidden;
+  margin-top: 10px;
   & img {
     width: 50%;
   }
@@ -137,4 +159,40 @@ const TutorialImages = styled.div`
       width: 100%;
     }
   }
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 90px;
+`;
+
+const Title = styled.p`
+  color: #03a483;
+  font-size: 27.5px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
+
+const SecondaryTitle = styled.p`
+  color: #03a483;
+  font-size: 26.5px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
+
+const Paragraph = styled.p`
+  font-size: 21px;
+  font-weight: ${({ bold }) => (bold ? 'bold' : 500)};
+  color: #333333;
+  margin: 0;
+`;
+
+const Logo = styled.img`
+  object-fit: none;
+  align-self: center;
 `;
