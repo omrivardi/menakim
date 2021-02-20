@@ -6,12 +6,14 @@ import {
   Map,
   // ProtestList
 } from '../../components';
+import TutorialModal from './TutorialModal';
 import Helmet from 'react-helmet';
 import styled from 'styled-components/macro';
 
 function ProtestMap() {
   const store = useStore();
   const { mapStore, protestStore, userCoordinates } = store;
+
   const hoveredProtest = useMemo(() => {
     if (!mapStore.hoveredProtestId) {
       return null;
@@ -52,7 +54,7 @@ function ProtestMap() {
             loading={protestStore.protests?.length === 0 && protestStore.state === 'pending'}
           />
         </ProtestListWrapper> */}
-
+        <TutorialModal />
         <Map hoveredProtest={hoveredProtest} />
       </HomepageWrapper>
     </>
