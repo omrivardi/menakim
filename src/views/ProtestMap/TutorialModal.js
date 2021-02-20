@@ -2,8 +2,10 @@ import React from 'react';
 import { getLocalStorage, setLocalStorage } from '../../localStorage';
 import styled from 'styled-components/macro';
 import { Modal, Carousel } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 export default function TutorialModal(params) {
+  const { t } = useTranslation('tutorialPopup');
   const carouselRef = React.useRef();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
@@ -24,46 +26,46 @@ export default function TutorialModal(params) {
         <div>
           <TabWrapper>
             <Logo src={'/images/logo.png'} alt="tut1" />
-            <Title>ברוכים הבאים וברוכות הבאות</Title>
-            <Paragraph>ב 19/3/2021 אלפי משתתפים ומשתתפות </Paragraph>
-            <Paragraph>יצאו אל האתרים ומוקדי הטבע המסומנים</Paragraph>
-            <Paragraph>במפה ויערכו בהם ניקיון יסודי</Paragraph>
-            <SecondaryTitle>איך בוחרים ומצטרפים למוקד?</SecondaryTitle>
+            <Title>{t('slide1.title')}</Title>
+            <Paragraph>{t('slide1.paragraph1')}</Paragraph>
+            <Paragraph>{t('slide1.paragraph2')}</Paragraph>
+            <Paragraph>{t('slide1.paragraph3')}</Paragraph>
+            <SecondaryTitle>{t('slide1.secondTitle')}</SecondaryTitle>
             <CardsWrapper>
               <ModalCard>
                 <IconWrapper>
                   <img src={'/icons/pin.png'} alt="tut1" />
                 </IconWrapper>
-                מוצאים במפה מוקד קרוב/רצוי
+                {t('slide1.findLocation')}
               </ModalCard>
               <ModalCard>
                 <IconWrapper>
                   <img src={'/icons/whatsapp.png'} alt="tut1" />
                 </IconWrapper>
-                מצטרפים לקבוצה
+                {t('slide1.joinGroup')}
               </ModalCard>
               <ModalCard>
                 <IconWrapper>
                   <img src={'/icons/calendar.png'} alt="tut1" />
                 </IconWrapper>
-                משריינים ומשתפים
+                {t('slide1.schedule')}
               </ModalCard>
             </CardsWrapper>
             <ContinueButton onClick={() => carouselRef.current.next()}>
-              <span>יאלה, מתחילים</span>
+              <span>{t('slide1.nextButton')}</span>
             </ContinueButton>
           </TabWrapper>
         </div>
         <div>
           <TabWrapper>
             <Logo src={'/images/logo.png'} alt="tut2" />
-            <Paragraph bold={true}>רוצה לפתוח ולנהל מוקד חדש?</Paragraph>
-            <Paragraph bold={true}>ככה עושים את זה:</Paragraph>
+            <Paragraph bold={true}>{t('slide2.paragraph1')}</Paragraph>
+            <Paragraph bold={true}>{t('slide2.paragraph2')}</Paragraph>
             <TutorialImages>
               <img src={'/images/tut2.png'} alt="tut2" />
               <img src={'/images/tut1.png'} alt="tut1" />
             </TutorialImages>
-            <ContinueButton onClick={handleCloseModal}>קחו אותי למפה !</ContinueButton>
+            <ContinueButton onClick={handleCloseModal}>{t('slide2.finishButton')}</ContinueButton>
           </TabWrapper>
         </div>
       </Carousel>
