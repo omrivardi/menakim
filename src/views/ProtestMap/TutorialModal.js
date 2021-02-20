@@ -51,7 +51,7 @@ export default function TutorialModal(params) {
                 {t('slide1.schedule')}
               </ModalCard>
             </CardsWrapper>
-            <ContinueButton onClick={() => carouselRef.current.next()}>
+            <ContinueButton onClick={() => carouselRef.current.prev()}>
               <span>{t('slide1.nextButton')}</span>
             </ContinueButton>
           </TabWrapper>
