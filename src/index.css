@@ -356,3 +356,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
     width: 42vw;
   }
 }
+
+
+@media (max-width: 800px) {
+  #iconsWrapper{
+    width: 100vw;
+  }
+  .icons{
+    width: 33%;
+  }
+}
+
