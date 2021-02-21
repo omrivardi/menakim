@@ -84,29 +84,17 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <Helmet>
         <title>{t('title')}</title>
       </Helmet>
-      <Lines>{t('one')}</Lines>
-      <Lines>{t('two')}</Lines>
-      <MobLines>
-        <Bold>{t('notice')}</Bold> {t('three_mob')}
-      </MobLines>
-      <DeskLines>
-        <Bold>{t('notice')}</Bold> {t('three')}
-      </DeskLines>
-      <MobLines>
-        <br />
+      <TopLines>{t('one')}</TopLines>
+      <TopLines>{t('two')}</TopLines>
+      <Lines>
+        {t('three')}
         <a href="#0" onClick={() => openKit()}>
           {t('link')}
         </a>
-      </MobLines>
-      <DeskLines>
-        {t('four')}
-        <a href="#0" onClick={() => openKit()}>
-          {t('link')}
-        </a>
-      </DeskLines>
+      </Lines>
       <br />
-      <BoldLines>{t('five')}</BoldLines>
-      <BoldLines>{t('six')}</BoldLines>
+      <BottomLines>{t('five')}</BottomLines>
+      <BottomLines>{t('six')}</BottomLines>
       <br />
       <div id="iconsWrapper">
         <img className="icons" src="/icons/create-group.png" alt="create-group" />
@@ -260,33 +248,29 @@ const Buttons = styled.div`
   align-content: space-between;
 `;
 
-const Lines = styled.p`
+const TopLines = styled.p`
   margin: 0;
-  width: 100vw;
-`;
-
-const BoldLines = styled.p`
-  margin: 0;
-  width: 100vw;
+  width: 32vw;
+  display: block;
   font-weight: 900;
-`;
-
-const MobLines = styled.p`
-  display: none;
   @media (max-width: 768px) {
-    display: block;
+    width: 90vw;
     margin: 0;
   }
 `;
 
-const DeskLines = styled.p`
-  display: block;
+const Lines = styled.p`
   margin: 0;
+  width: 32vw;
+  display: block;
   @media (max-width: 768px) {
-    display: none;
+    width: 80vw;
+    margin: 0;
   }
 `;
 
-const Bold = styled.span`
+const BottomLines = styled.p`
+  margin: 0;
+  width: 100vw;
   font-weight: 900;
 `;
