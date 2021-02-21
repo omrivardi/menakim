@@ -71,13 +71,13 @@ function Header() {
 
           {isAdmin(store.userStore.user) && (
             <Link to="/admin" onClick={() => setMenuState(false)}>
-              ניהול
+              {t('manage')}
             </Link>
           )}
 
           {store.userStore.user && (
             <Link to="/" onClick={() => store.userStore.logOut()}>
-              התנתקות
+              {t('signout')}
             </Link>
           )}
         </Menu>
