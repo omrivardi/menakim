@@ -85,7 +85,7 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <Lines>{t('one')}</Lines>
       <Lines>{t('two')}</Lines>
       <Lines>
-        {t('three_mob')}
+        {t('three')}
         <a href="#0" onClick={() => openKit()}>
           {t('link')}
         </a>
