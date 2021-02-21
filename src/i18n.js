@@ -61,7 +61,7 @@ i18n
     defaultNS: 'translations',
     fallbackLng: 'he',
     debug: true,
-    whiteList: ['en', 'ar'],
+    whiteList: ['ar', 'ar'],
     detection: options,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
