@@ -252,7 +252,7 @@ const TopLines = styled.p`
   display: block;
   font-weight: 900;
   @media (max-width: 768px) {
-    width: 80vw;
+    width: 90vw;
     margin: 0;
   }
 `;
