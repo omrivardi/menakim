@@ -1,5 +1,6 @@
 import isPointWithinRadius from 'geolib/es/isPointWithinRadius';
 import getDistance from 'geolib/es/getDistance';
+import { useTranslation } from 'react-i18next';
 
 export function getCurrentPosition() {
   return new Promise((resolve, reject) => {
@@ -45,10 +46,11 @@ export function calculateDistance(pointA, pointB) {
 }
 
 export function formatDistance(distance) {
+  const { t } = useTranslation('utils');
   if (distance > 1000) {
-    return `${(distance / 1000).toFixed(1)} ק"מ ממיקומך`;
+    return `${(distance / 1000).toFixed(1)} ${t('km')}`;
   } else {
-    return `${distance} מטר ממיקומך`;
+    return `${distance} ${t('meter')}`;
   }
 }
 
