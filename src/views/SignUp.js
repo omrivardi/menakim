@@ -77,12 +77,32 @@ const stages = {
 function SignUpBeforeRedirect({ updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
   const [emailSignIn, setEmailSignIn] = useState(false);
+  const openKit = () => window.open('https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk');
+
   return (
-    <PageContentWrapper>
+    <PageContentWrapper style={{ maxWidth: '100%' }}>
       <Helmet>
         <title>{t('title')}</title>
       </Helmet>
-      <p>{t('content')} </p>
+      <TopLines>{t('one')}</TopLines>
+      <TopLines>{t('two')}</TopLines>
+      <Lines>
+        {t('three')}
+        <a href="#0" onClick={() => openKit()}>
+          {t('link')}
+        </a>
+      </Lines>
+      <br />
+      <BottomLines>{t('five')}</BottomLines>
+      <BottomLines>{t('six')}</BottomLines>
+      <br />
+      <div id="iconsWrapper">
+        <img className="icons" src="/icons/create-group.png" alt="create-group" />
+        <img className="icons" src="/icons/fill-in-form.png" alt="fill-in-form" />
+        <img className="icons" src="/icons/share.png" alt="share" />
+      </div>
+      <br />
+      <p style={{ width: '300px' }}>{t('content')} </p>
 
       <GoogleButton onClick={() => handleSignIn()} style={{ marginBottom: 10, width: 300 }} />
       {emailSignIn ? (
@@ -175,7 +195,7 @@ export default function SignUp(props) {
 
   if (stage === stages.BEFORE_FACEBOOK_AUTH) {
     return (
-      <PageWrapper>
+      <PageWrapper style={{ maxWidth: '80%' }}>
         <SignUpBeforeRedirect updateUserAndRedirect={updateUserAndRedirect} />
       </PageWrapper>
     );
@@ -226,4 +246,31 @@ const SignUpFormItem = styled(Form.Item)`
 const Buttons = styled.div`
   display: flex;
   align-content: space-between;
+`;
+
+const TopLines = styled.p`
+  margin: 0;
+  width: 32vw;
+  display: block;
+  font-weight: 900;
+  @media (max-width: 768px) {
+    width: 90vw;
+    margin: 0;
+  }
+`;
+
+const Lines = styled.p`
+  margin: 0;
+  width: 32vw;
+  display: block;
+  @media (max-width: 768px) {
+    width: 80vw;
+    margin: 0;
+  }
+`;
+
+const BottomLines = styled.p`
+  margin: 0;
+  width: 100vw;
+  font-weight: 900;
 `;
