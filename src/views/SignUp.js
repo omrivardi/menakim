@@ -82,8 +82,8 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <Helmet>
         <title>{t('title')}</title>
       </Helmet>
-      <Lines>{t('one')}</Lines>
-      <Lines>{t('two')}</Lines>
+      <TopLines>{t('one')}</TopLines>
+      <TopLines>{t('two')}</TopLines>
       <Lines>
         {t('three')}
         <a href="#0" onClick={() => openKit()}>
@@ -91,8 +91,8 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
         </a>
       </Lines>
       <br />
-      <BoldLines>{t('five')}</BoldLines>
-      <BoldLines>{t('six')}</BoldLines>
+      <BottomLines>{t('five')}</BottomLines>
+      <BottomLines>{t('six')}</BottomLines>
       <br />
       <div id="iconsWrapper">
         <img className="icons" src="/icons/create-group.png" alt="create-group" />
@@ -246,6 +246,17 @@ const Buttons = styled.div`
   align-content: space-between;
 `;
 
+const TopLines = styled.p`
+  margin: 0;
+  width: 32vw;
+  display: block;
+  font-weight: 900;
+  @media (max-width: 768px) {
+    width: 80vw;
+    margin: 0;
+  }
+`;
+
 const Lines = styled.p`
   margin: 0;
   width: 32vw;
@@ -256,7 +267,7 @@ const Lines = styled.p`
   }
 `;
 
-const BoldLines = styled.p`
+const BottomLines = styled.p`
   margin: 0;
   width: 100vw;
   font-weight: 900;
