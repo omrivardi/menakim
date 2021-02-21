@@ -26,21 +26,15 @@ const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settleme
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <h2>{t('opening.one')}</h2>
-      <ul>
-        <li>{t('opening.bullets.one')}</li>
-        <li>{t('opening.bullets.two')}</li>
-        <li>{t('opening.bullets.three')}</li>
-        <li>
-          {t('opening.bullets.four')}
-          <a href="#0" role="button" tabIndex="1" onClick={() => window.open('https://www.youtube.com/watch?v=uhaOAPDAXz4')}>
-            {t('opening.bullets.four-postfix-link')}
-          </a>
-          )
-        </li>
-      </ul>
-      <p>{t('opening.six')}</p>
+      <h3>{t('opening.two')}</h3>
+      <div>{t('opening.three')}</div>
+      <a href="https://www.youtube.com/watch?v=uhaOAPDAXz4" role="button" tabIndex="1" target="_blank" rel="noopener noreferrer">
+        {t('opening.link')}
+      </a>
+      <br></br>
+      <br></br>
     </div>
   );
 };
