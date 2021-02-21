@@ -84,23 +84,12 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       </Helmet>
       <Lines>{t('one')}</Lines>
       <Lines>{t('two')}</Lines>
-      <MobLines>
-        <Bold>{t('notice')}</Bold> {t('three_mob')}
-      </MobLines>
-      <DeskLines>
-        <Bold>{t('notice')}</Bold> {t('three')}
-      </DeskLines>
-      <MobLines>
+      <Lines>
+        {t('three_mob')}
         <a href="#0" onClick={() => openKit()}>
           {t('link')}
         </a>
-      </MobLines>
-      <DeskLines>
-        {t('four')}
-        <a href="#0" onClick={() => openKit()}>
-          {t('link')}
-        </a>
-      </DeskLines>
+      </Lines>
       <br />
       <BoldLines>{t('five')}</BoldLines>
       <BoldLines>{t('six')}</BoldLines>
@@ -259,33 +248,16 @@ const Buttons = styled.div`
 
 const Lines = styled.p`
   margin: 0;
-  font-size: 20px;
-  width: 100vw;
+  width: 32vw;
+  display: block;
+  @media (max-width: 768px) {
+    width: 80vw;
+    margin: 0;
+  }
 `;
 
 const BoldLines = styled.p`
   margin: 0;
   width: 100vw;
   font-weight: 900;
-`;
-
-const MobLines = styled.p`
-  display: none;
-  @media (max-width: 768px) {
-    display: block;
-    margin: 0;
-  }
-`;
-
-const DeskLines = styled.p`
-  display: block;
-  margin: 0;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const Bold = styled.span`
-  font-weight: 900;
-  font-size: 16px;
 `;
