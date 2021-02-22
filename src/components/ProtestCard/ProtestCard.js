@@ -33,6 +33,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     adminName,
     whatsAppLink,
     whatsappVisible,
+    notes,
     adminId,
     id,
   } = protestInfo;
@@ -108,6 +109,11 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           </div>
         ) : (
           <ProtestCardDetail>{t('whatsappNotAvailable')}</ProtestCardDetail>
+        )}
+        {notes && (
+          <ProtestCardDetail data-testid="protestCard__notes">
+            <span style={{ marginLeft: '5px' }}>{t('notes')}:</span> {notes}
+          </ProtestCardDetail>
         )}
 
         {streetAddress && (
