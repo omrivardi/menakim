@@ -217,28 +217,6 @@ function ProtestForm({
                 ></ProtestFormInput>
                 <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
-              <ProtestFormLabel>
-                {t('area.title')}
-                <ProtestFormSelect name="area" ref={register}>
-                  {areas.map((area) => (
-                    <option value={area} key={area}>
-                      {t(`area.values.${area}`)}
-                    </option>
-                  ))}
-                </ProtestFormSelect>
-                <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
-              </ProtestFormLabel>
-
-              {/* <ProtestFormLabel>
-                כתובת
-                <PlacesAutocomplete
-                  setManualAddress={setMapCenter}
-                  setStreetAddress={setStreetAddress}
-                  inputRef={register}
-                  defaultValue={streetAddressDefaultValue}
-                />
-                <ProtestFormInputDetails>לאחר בחירת הכתובת, הזיזו את הסמן למיקום המדויק:</ProtestFormInputDetails>
-              </ProtestFormLabel> */}
               <MapWrapper
                 center={mapCenter}
                 zoom={zoomLevel}
