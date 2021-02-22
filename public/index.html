@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <!-- <link rel="icon" type="image/png" sizes="32x32" href="/menakim/public/big-favicon.png" />
+
+<head>
+  <meta charset="utf-8" />
+  <!-- <link rel="icon" type="image/png" sizes="32x32" href="/menakim/public/big-favicon.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/menakim/public/big-favicon.png" /> -->
-    <link rel="shortcut icon" href="./big-favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <link rel="shortcut icon" href="./big-favicon.png" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 
-    <meta name="theme-color" content="#39b578" />
-    <meta name="description" content="מפת מוקדי הניקיון" />
-    <meta property="og:description" content="מפת מוקדי הניקיון" />
-    <meta property="og:image" content="/og-image.png" />
-    <meta property="og:image:type" content="image/png" />
+  <meta name="theme-color" content="#39b578" />
+  <meta name="description" content="מפת מוקדי הניקיון" />
+  <meta property="og:description" content="מפת מוקדי הניקיון" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/og-image.png" />
-    <meta name="twitter:creator" content="@1kmcoil" />
-    <meta name="twitter:site" content="@1kmcoil" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="/og-image.png" />
+  <meta name="twitter:creator" content="@1kmcoil" />
+  <meta name="twitter:site" content="@1kmcoil" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="./big-favicon.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>מנקים את הבית - מפת מוקדים</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-      crossorigin=""
-    />
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <link rel="apple-touch-icon" sizes="180x180" href="./big-favicon.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>מנקים את החוף - מפת מוקדים</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -41,8 +41,10 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_MAPS_API_KEY%&libraries=places&language=iw"></script>
-    <script async defer src="https://sa.1km.co.il/latest.js"></script>
-    <noscript><img src="https://sa.1km.co.il/noscript.gif" alt="" /></noscript>
-  </body>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_MAPS_API_KEY%&libraries=places&language=iw"></script>
+  <script async defer src="https://sa.1km.co.il/latest.js"></script>
+  <noscript><img src="https://sa.1km.co.il/noscript.gif" alt="" /></noscript>
+</body>
+
 </html>
