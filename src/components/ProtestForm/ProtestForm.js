@@ -21,7 +21,6 @@ const protestMarker = new L.Icon({
 });
 
 const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
-const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
 
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
@@ -228,17 +227,6 @@ function ProtestForm({
                   ))}
                 </ProtestFormSelect>
                 <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
-              </ProtestFormLabel>
-              <ProtestFormLabel>
-                {t('placeType.title')}
-                <ProtestFormSelect name="placeType" ref={register}>
-                  {placeTypes.map((placeType) => (
-                    <option value={placeType} key={placeType}>
-                      {t(`placeType.values.${placeType}`)}
-                    </option>
-                  ))}
-                </ProtestFormSelect>
-                <ProtestFormInputDetails>{t('placeType.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
 
               {/* <ProtestFormLabel>
