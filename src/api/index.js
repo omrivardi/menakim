@@ -317,3 +317,27 @@ export async function getPicturesForEvent({ protestId }) {
   const pictureList = eventPictures.docs.map((picture) => ({ ...picture.data(), id: picture.id }));
   return pictureList;
 }
+
+export async function archiveProtest(protestId) {
+  try {
+    await firestore.collection(locationsCollectionName).doc(protestId).update({
+      archived: true,
+    });
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+}
+
+export async function archivePendingProtest(protestId) {
+  try {
+    await firestore.collection('pending_protests').doc(protestId).update({
+      archived: true,
+    });
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+}

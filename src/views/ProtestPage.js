@@ -8,7 +8,7 @@ import {
   getProtestsForLeader,
   makeUserProtestLeader,
   sendProtestLeaderRequest,
-  updateProtest,
+  updateLocation,
   getLatestProtestPictures,
   getFullUserData,
 } from '../api';
@@ -306,7 +306,7 @@ function ProtestPage() {
                 await makeUserProtestLeader(protestId, user.uid);
               }
 
-              const response = await updateProtest({ protestId, params, userId: user.uid });
+              const response = await updateLocation({ locationId: protestId, params, userId: user.uid });
 
               // Refetch the protest once update is complete
               _fetchProtest(protestId, setProtest);
