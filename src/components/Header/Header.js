@@ -22,6 +22,7 @@ function Header() {
       <NavItemLive to="/live">
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
+      <Title>{t('title')}</Title>
       <NavProfileWrapper>
         <Menu
           isOpen={menuOpen}
@@ -112,4 +113,9 @@ const LiveIcon = styled.img`
   border-radius: 50px;
   margin-left: 5px;
   user-select: none;
+`;
+
+const Title = styled.div`
+  font-weight: 600;
+  font-size: 27px;
 `;
