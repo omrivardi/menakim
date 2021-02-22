@@ -40,7 +40,14 @@ function Header() {
             </Link>
           )}
           <hr />
-          <a href="https://api.whatsapp.com/send?phone=&text=www.menakimethabait.com" target="_blank" rel="noreferrer noopener">
+          <Link to="/about" onClick={() => setMenuState(false)} className="bm-item">
+            {t('about')}
+          </Link>
+          <a
+            href="https://api.whatsapp.com/send?phone=&text=https://menakim-et-hahof.web.app/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             {t('share')}
           </a>
           <Link to="/terms-of-use" onClick={() => setMenuState(false)} className="bm-item">

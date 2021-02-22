@@ -19,7 +19,7 @@ export const posts = [
   },
   {
     slug: 'about',
-    title: 'על הפרוייקט - מנקים את הבית',
+    title: 'על הפרוייקט - מנקים את החוף',
     permalink: '/about',
     text: <ProjectSupport />,
   },
