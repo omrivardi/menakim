@@ -14,7 +14,7 @@ const Content = mdx`
 ## על הפרוייקט
 
 המפה נבנתה על ידי מתנדבים ומתנדבות מחבורת <a href="https://www.menakimethabait.com/about" target="_blank" rel="noopener noreferrer">"מנקים את הבית"</a>.  
-אם יש לך כישורי פיתוח ותרצה/י לעזור לפרוייקט, אפשר לשלוח מייל <a href="https://forms.gle/d9YitvNhZNXXiLfF6" target="_blank" rel="noopener noreferrer">מלא טופס כאן</a>.  
+אם יש לך כישורי פיתוח ותרצה/י לעזור לפרוייקט, אפשר לשלוח מייל <a href="https://forms.gle/17sdmJg9fQhxYtQQ6" target="_blank" rel="noopener noreferrer">מלא טופס כאן</a>.  
 כנראה שלא נצליח לענות בשבועות הקרובים. אבל נחזור בהקדם.
 `;
 
