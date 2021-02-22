@@ -20,8 +20,6 @@ const protestMarker = new L.Icon({
   iconAnchor: [25, 48],
 });
 
-const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
-
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
   return (
@@ -217,28 +215,6 @@ function ProtestForm({
                 ></ProtestFormInput>
                 <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
-              <ProtestFormLabel>
-                {t('area.title')}
-                <ProtestFormSelect name="area" ref={register}>
-                  {areas.map((area) => (
-                    <option value={area} key={area}>
-                      {t(`area.values.${area}`)}
-                    </option>
-                  ))}
-                </ProtestFormSelect>
-                <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
-              </ProtestFormLabel>
-
-              {/* <ProtestFormLabel>
-                כתובת
-                <PlacesAutocomplete
-                  setManualAddress={setMapCenter}
-                  setStreetAddress={setStreetAddress}
-                  inputRef={register}
-                  defaultValue={streetAddressDefaultValue}
-                />
-                <ProtestFormInputDetails>לאחר בחירת הכתובת, הזיזו את הסמן למיקום המדויק:</ProtestFormInputDetails>
-              </ProtestFormLabel> */}
               <MapWrapper
                 center={mapCenter}
                 zoom={zoomLevel}
@@ -384,7 +360,7 @@ const ProtestFormInputDetails = styled.span.attrs((props) => ({
 
 const ProtestFormCheckbox = styled.input``;
 
-const ProtestFormSelect = styled.select``;
+// const ProtestFormSelect = styled.select``;
 
 const MapWrapper = styled(Map)`
   width: 100%;
