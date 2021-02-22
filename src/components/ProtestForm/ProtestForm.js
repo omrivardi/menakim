@@ -30,9 +30,6 @@ const OpeningText = () => {
       <h2>{t('opening.one')}</h2>
       <h3>{t('opening.two')}</h3>
       <div>{t('opening.three')}</div>
-      <a href="https://www.youtube.com/watch?v=uhaOAPDAXz4" role="button" tabIndex="1" target="_blank" rel="noopener noreferrer">
-        {t('opening.link')}
-      </a>
       <br></br>
       <br></br>
     </div>
@@ -191,8 +188,6 @@ function ProtestForm({
             </StepDescription>
             <StepMessage>{t('messages.step2')}</StepMessage>
             <StepDescription>{t('messages.step2a')}</StepDescription>
-            <StepMessage>{t('messages.step3')}</StepMessage>
-            <StepDescription>{t('messages.step3a')}</StepDescription>
             <StepMessage>{t('messages.step4')}</StepMessage>
             <StepDescription>{t('messages.step4a')}</StepDescription>
           </StepsList>
