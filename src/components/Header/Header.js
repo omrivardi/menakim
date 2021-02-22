@@ -39,22 +39,6 @@ function Header() {
             </Link>
           )}
           <hr />
-          <a href="https://www.menakimethabait.com/about" target="_blank" rel="noreferrer noopener">
-            {t('about')}
-          </a>
-          <a href="https://www.facebook.com/menakimethabait" target="_blank" rel="noreferrer noopener">
-            {t('facebook')}
-          </a>
-          <a href="https://www.instagram.com/menakim_et_habait/" target="_blank" rel="noreferrer noopener">
-            {t('instagram')}
-          </a>
-          <a
-            href="https://add.eventable.com/events/5fbd2022dc4d5900169aa8bf/5fbd202345b8360065cb430d"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            {t('calendar')}
-          </a>
           <a href="https://api.whatsapp.com/send?phone=&text=www.menakimethabait.com" target="_blank" rel="noreferrer noopener">
             {t('share')}
           </a>
