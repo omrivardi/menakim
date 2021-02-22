@@ -189,9 +189,3 @@ const SecondaryTitle = styled.p`
   margin-top: 5px;
   margin-bottom: 5px;
 `;
-
-const Logo = styled.img`
-  object-fit: none;
-  align-self: center;
-  margin-bottom: 28px;
-`;
