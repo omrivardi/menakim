@@ -3,82 +3,51 @@ import * as geofirestore from 'geofirestore';
 import { calculateDistance } from '../utils';
 
 const GeoFirestore = geofirestore.initializeApp(firestore);
+export const locationsCollectionName = 'locations';
 
 /**
- * Creates a new protest document.
- * - If the visitor is authenticated - add the protest to the public protests & pending protests collection.
- *   The protest will exist in the pending protests only for tracking it's validity.
- * - If the visitor is a guest - add the protest only to the pending protests collection.
- * @param {object} params - The protest object parameters.
- * @param {boolean} fromPending - Is the protest being created from a pending protest.
- * @returns {object} The new protest.
+ * Creates a new location document.
+ * @param {object} params - The location object parameters.
+ * @returns {object} The new location.
  */
-export async function createProtest(params, fromPending = false) {
+export async function createLocation(params) {
   const { coords, user, ...restParams } = params;
   const [lat, lng] = coords;
-  console.log(user);
 
-  const protestsCollection = GeoFirestore.collection('protests');
-  const pendingCollection = GeoFirestore.collection('pending_protests');
+  const locationCollection = GeoFirestore.collection(locationsCollectionName);
 
-  const protestParams = {
+  const locationParams = {
     ...restParams,
     created_at: firebase.firestore.FieldValue.serverTimestamp(),
     coordinates: new firebase.firestore.GeoPoint(Number(lat), Number(lng)),
     origin: window.location.href,
+    roles: { leader: [user.uid] },
+    whatsappVisible: true, //
   };
 
-  // If an authed user created  the protest, add them as a leader.
-  // Protests created from pending should not have a user attached to them initially.
-  if (user?.uid && fromPending === false) {
-    protestParams.roles = { leader: [user.uid] };
-  }
-
-  // Set whatsapp group link visibility (default: true).
-  protestParams.whatsappVisible = true;
-
-  if (user?.uid || fromPending === true) {
-    const protestDoc = await protestsCollection.add(protestParams);
-    protestParams.protestRef = protestDoc.id;
-  }
-
-  // Set archived field for pending protests verifcations.
-  protestParams.archived = false;
-
-  // Add protest to `pending_protests` collection
-  const request = await pendingCollection.add(protestParams);
-  console.log(protestParams);
-
-  // call webhook with admin details.
-  fetch('https://hook.integromat.com/89d1fr91gajw7dyip2k4yjrsr7u3ggfo', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(protestParams),
-  });
+  const locationDoc = await locationCollection.add(locationParams);
 
   // log analytics event
   analytics.logEvent('location_created', {
-    name: protestParams.displayName,
-    area: protestParams.area,
-    placeType: protestParams.placeType,
+    name: locationParams.displayName,
+    area: locationParams.area,
+    placeType: locationParams.placeType,
   });
 
-  return request;
+  return locationDoc;
 }
 
-export async function updateProtest({ protestId, params }) {
+export async function updateLocation({ locationId, params }) {
   const [lat, lng] = params.coords;
   await firestore
-    .collection('protests')
-    .doc(protestId)
+    .collection(locationsCollectionName)
+    .doc(locationId)
     .update({
       ...params,
       coordinates: new firebase.firestore.GeoPoint(Number(lat), Number(lng)),
     });
 
-  const doc = await firestore.collection('protests').doc(protestId).get();
+  const doc = await firestore.collection(locationsCollectionName).doc(locationId).get();
 
   return {
     id: doc.id,
@@ -88,32 +57,8 @@ export async function updateProtest({ protestId, params }) {
   };
 }
 
-export async function archivePendingProtest(protestId) {
-  try {
-    await firestore.collection('pending_protests').doc(protestId).update({
-      archived: true,
-    });
-    return true;
-  } catch (err) {
-    console.error(err);
-    return false;
-  }
-}
-
-export async function archiveProtest(protestId) {
-  try {
-    await firestore.collection('protests').doc(protestId).update({
-      archived: true,
-    });
-    return true;
-  } catch (err) {
-    console.error(err);
-    return false;
-  }
-}
-
 export async function fetchProtest(protestId) {
-  const protest = await firestore.collection('protests').doc(protestId).get();
+  const protest = await firestore.collection(locationsCollectionName).doc(protestId).get();
 
   if (protest.exists) {
     return { id: protest.id, ...protest.data() };
@@ -123,7 +68,7 @@ export async function fetchProtest(protestId) {
 }
 
 export async function fetchNearbyProtests(position) {
-  const geocollection = GeoFirestore.collection('protests');
+  const geocollection = GeoFirestore.collection(locationsCollectionName);
 
   const query = geocollection.near({
     center: new firebase.firestore.GeoPoint(position[0], position[1]),
@@ -163,7 +108,7 @@ export async function getFullUserData(uid) {
 }
 
 export async function getProtestsForLeader(uid) {
-  var protestsRef = firestore.collection('protests');
+  var protestsRef = firestore.collection(locationsCollectionName);
   var query = protestsRef.where('roles.leader', 'array-contains', uid);
 
   const querySnapshot = await query.get();
@@ -208,7 +153,7 @@ export async function setPhoneNumberForUser(uid, phoneNumber) {
 // Check if the protest exist in the database
 export async function isProtestValid(protestId) {
   try {
-    const doc = await firestore.collection('protests').doc(protestId).get();
+    const doc = await firestore.collection(locationsCollectionName).doc(protestId).get();
     if (doc.exists) {
       return true;
     } else {
@@ -353,7 +298,7 @@ export async function updateUserData({ userId, firstName, lastName = '', phone =
 export async function getLatestProtestPictures(protestId) {
   const latestSnapshot = await firestore
     .collection('pictures')
-    .where('protestId', '==', protestId)
+    .where('locationId', '==', protestId)
     .orderBy('createdAt', 'desc')
     .limit(6)
     .get();

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRequest } from 'ahooks';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
-import { updateProtest } from '../../api';
+import { updateLocation } from '../../api';
 import { analytics } from '../../firebase';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +31,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     meeting_time: meetingTime,
     dateTimeList,
     adminName,
-    coordinates,
     whatsAppLink,
     whatsappVisible,
     adminId,
@@ -49,7 +48,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     ? `mailto:info@menakimethabait.com?subject=${mailSubject}&body=${mailBody}`
     : `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@menakimethabait.com&su=${mailSubject}&body=${mailBody}`;
 
-  const { loading: isWhatsappToggleLoading, run } = useRequest(updateProtest, {
+  const { loading: isWhatsappToggleLoading, run } = useRequest(updateLocation, {
     manual: true,
     onSuccess: () => {
       setWhatsappToggleValue((prev) => !prev);
@@ -59,15 +58,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   const upcomingDate = getUpcomingDate(dateTimeList);
 
   function handleWhatsappClick() {
-    // call webhook with event details.
-    fetch('https://hook.integromat.com/leu403u1xmcwoamaojg69m6usbhcnm49', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ displayName, adminId, protestId: id, coordinates, origin: window.location.href }),
-    });
-
     // log analytics event
     analytics.logEvent('whatsapp_join', { name: displayName });
   }
