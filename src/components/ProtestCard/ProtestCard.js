@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import { Form, Switch } from 'antd';
 import { Link } from 'react-router-dom';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
 
 function FormattedDate({ date }) {
@@ -76,11 +75,10 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       onMouseOut={() => store.mapStore.setHoveredProtestId(null)}
       data-testid="protestCard"
     >
-      <Icon src={'/icons/location-click.svg'} alt="loc_icon" />
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
         <ProtestCardDetail data-testid="protestCard__owner">
-          <span style={{ fontWeight: '700', marginLeft: '5px', fontSize: '16px' }}>{t('admin')}:</span> {owner}
+          {t('admin')}:<span style={{ fontWeight: '700', marginLeft: '5px', fontSize: '16px' }}>&nbsp;{owner}</span>
         </ProtestCardDetail>
 
         {store?.userStore?.user?.uid === adminId ? (
@@ -127,10 +125,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           </ProtestCardDetail>
         )}
         <ProtestCardDetail>
-          <ProtestReportWrapper onClick={() => window.open(contactLink)}>
-            <ExclamationCircleOutlined style={{ marginLeft: '6px', fontSize: '13px' }} />
-            {t('report')}
-          </ProtestReportWrapper>
+          <Link to="" className="bm-item" style={{ textDecoration: 'underline' }}>
+            <ProtestReportWrapper onClick={() => window.open(contactLink)}>{t('report')}</ProtestReportWrapper>
+          </Link>
         </ProtestCardDetail>
       </ProtestCardInfo>
     </ProtestCardWrapper>
@@ -145,7 +142,7 @@ const ProtestCardWrapper = styled.div`
   // cursor: pointer;
   border-radius: 12px;
   transition: box-shadow 175ms ease-out;
-
+  font-family: almoni;
   &:last-child {
     margin-bottom: 10px;
   }
@@ -165,9 +162,9 @@ const ProtestCardWrapper = styled.div`
 
 const ProtestCardTitle = styled.h2`
   margin: 0;
-  margin-bottom: 7.5px;
-  font-size: 22px;
-  font-weight: 600;
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 const ProtestCardInfo = styled.div`
@@ -182,7 +179,7 @@ const ProtestCardDetail = styled.h3`
   margin: 0;
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 100;
   margin-bottom: 5px;
 `;
@@ -194,7 +191,7 @@ const ProtestCardIcon = styled.img`
 `;
 
 const ProtestReportWrapper = styled.div`
-  font-size: 15px;
+  font-size: 14px;
   transition: 0.3s;
   cursor: pointer;
 `;
@@ -209,12 +206,7 @@ const TermsInfo = styled.div`
   font-weight: 400;
   font-size: 14px;
   color: #8393a7;
-`;
-
-const Icon = styled.img`
-  object-fit: none;
-  align-self: center;
-  margin-bottom: 1em;
+  margin-bottom: 10px;
 `;
 
 const DistanceWrapper = styled.span`
@@ -231,7 +223,7 @@ const NotesWrapper = styled.span`
 const Button = styled.a`
   width: 100%;
   height: 32px;
-  background: #25d366;
+  background: #26d367;
   display: flex;
   justify-content: center;
   align-items: center;
