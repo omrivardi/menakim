@@ -31,12 +31,6 @@ function Header() {
           customCrossIcon={false}
           disableAutoFocus
         >
-          {!store?.userStore?.user && (
-            <Link to="/sign-up?returnUrl=/" onClick={() => setMenuState(false)} className="bm-item">
-              {t('locationAdminLogin')}
-            </Link>
-          )}
-          <hr />
           <Link to="/about" onClick={() => setMenuState(false)} className="bm-item">
             {t('about')}
           </Link>
