@@ -3,12 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { useStore } from '../stores';
 import { Button, PageWrapper, PageContentWrapper, LoadingSpinner } from '../components';
 import { Modal, Button as AntButton, Form, Input, Typography } from 'antd';
-import { extractUserData, getUserFromRedirect, handleSignIn, emailSignIn, saveUserInFirestore, updateUserData } from '../api';
+import { extractUserData, getUserFromRedirect, emailSignIn, saveUserInFirestore, updateUserData } from '../api';
 import styled from 'styled-components/macro';
 import queryString from 'query-string';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
-import GoogleButton from 'react-google-button';
 
 const { Title } = Typography;
 
@@ -77,7 +76,6 @@ const stages = {
 function SignUpBeforeRedirect({ updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
   const [emailSignIn, setEmailSignIn] = useState(false);
-  const openKit = () => window.open('https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk');
 
   return (
     <PageContentWrapper style={{ maxWidth: '100%' }}>
@@ -248,16 +246,6 @@ const TopLines = styled.p`
   font-weight: 900;
   @media (max-width: 768px) {
     width: 90vw;
-    margin: 0;
-  }
-`;
-
-const Lines = styled.p`
-  margin: 0;
-  width: 32vw;
-  display: block;
-  @media (max-width: 768px) {
-    width: 80vw;
     margin: 0;
   }
 `;
