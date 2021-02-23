@@ -25,6 +25,7 @@ export default function TutorialModal(params) {
       <Carousel ref={carouselRef}>
         <div>
           <TabWrapper>
+            <Logo src={'/icons/globe_in_hand.svg'} alt="tut1" />
             <Paragraph>{t('slide1.paragraph1')}</Paragraph>
             <Paragraph>{t('slide1.paragraph2')}</Paragraph>
             <Paragraph>{t('slide1.paragraph3')}</Paragraph>
@@ -78,10 +79,6 @@ const Paragraph = styled.p`
 `;
 
 const StyledModal = styled(Modal)`
-  .ant-modal-content {
-    background-image: url('/images/menakim-popup-bg.jpg');
-  }
-
   .slick-slide {
     text-align: center;
     font-size: 20px;
@@ -188,4 +185,10 @@ const SecondaryTitle = styled.p`
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
+`;
+
+const Logo = styled.img`
+  object-fit: none;
+  align-self: center;
+  margin-bottom: 28px;
 `;
