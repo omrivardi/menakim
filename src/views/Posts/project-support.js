@@ -13,7 +13,7 @@ const Content = mdx`
 
 ## על המפה
 
-המפה נבנתה על ידי מתנדבים ומתנדבות מחבורת <a href="https://www.menakimethabait.com/about" target="_blank" rel="noopener noreferrer">"מנקים את הבית"</a>.  
+המפה נבנתה על ידי מתנדבים ומתנדבות מחבורת <a href="https://www.menakimethabait.com/about" target="_blank" rel="noopener noreferrer">"מנקים את החוף"</a>.  
 אם יש לך כישורי פיתוח ותרצה/י לעזור לפרוייקט, אפשר  <a href="https://forms.gle/17sdmJg9fQhxYtQQ6" target="_blank" rel="noopener noreferrer">למלא טופס כאן</a>.
 כנראה שלא נצליח לענות בשבועות הקרובים. אבל נחזור בהקדם.
 `;

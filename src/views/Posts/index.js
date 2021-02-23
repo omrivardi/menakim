@@ -8,12 +8,12 @@ import One from './ProjectUpdates/one';
 export const posts = [
   {
     slug: '404',
-    title: 'הדף לא נמצא - מנקים את הבית',
+    title: 'הדף לא נמצא - מנקים את החוף',
     text: <FourOhFour />,
   },
   {
     slug: 'legal-notice',
-    title: 'הבהרה משפטית - מנקים את הבית',
+    title: 'הבהרה משפטית - מנקים את החוף',
     permalink: '/legal-notice',
     text: <LegalNotice />,
   },
@@ -25,18 +25,18 @@ export const posts = [
   },
   /*   {
     slug: 'donate',
-    title: 'תרומה לפרוייקט - מנקים את הבית',
+    title: 'תרומה לפרוייקט - מנקים את החוף',
     permalink: '/donate',
     text: <DonatePage />,
   }, */
   {
     slug: 'terms-of-use',
-    title: 'תנאי השימוש - מנקים את הבית',
+    title: 'תנאי השימוש - מנקים את החוף',
     text: <TermsOfUse />,
   },
   {
     slug: '1',
-    title: 'עדכון #1 - מנקים את הבית',
+    title: 'עדכון #1 - מנקים את החוף',
     text: <One />,
   },
 ];

@@ -44,7 +44,7 @@ function ProtestMap() {
   return (
     <>
       <Helmet>
-        <title>מנקים את הבית</title>
+        <title>מנקים את החוף</title>
       </Helmet>
       <HomepageWrapper>
         {/* <ProtestListWrapper>

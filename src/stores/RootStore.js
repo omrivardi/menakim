@@ -7,7 +7,7 @@ import userStore from './UserStore';
 
 class RootStore {
   userCoordinates = [];
-  currentPageTitle = 'מנקים את הבית';
+  currentPageTitle = 'מנקים את החוף';
 
   constructor() {
     makeAutoObservable(this);
