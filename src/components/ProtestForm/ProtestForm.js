@@ -181,7 +181,9 @@ function ProtestForm({
           <StepsList>
             <StepMessage>{t('messages.step1')}</StepMessage>
             <StepDescription>
-              <a href="https://chat.whatsapp.com/C9eKwFDfx146SHJV3Vkb48">{t('messages.step1a')}</a>
+              <a href="https://chat.whatsapp.com/FyazfLSeSuSHojdbfvAOc9" target="_blank" rel="noreferrer noopener">
+                {t('messages.step1a')}
+              </a>
             </StepDescription>
             <StepMessage>{t('messages.step2')}</StepMessage>
             <StepDescription>{t('messages.step2a')}</StepDescription>
@@ -214,6 +216,11 @@ function ProtestForm({
                   placeholder={t('place.placeholder')}
                 ></ProtestFormInput>
                 <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
+              </ProtestFormLabel>
+              <ProtestFormLabel>
+                {t('owner.title')}
+                <ProtestFormInput placeholder={t('owner.title')} name="owner" ref={register}></ProtestFormInput>
+                <ProtestFormInputDetails>{t('owner.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
               <MapWrapper
                 center={mapCenter}
