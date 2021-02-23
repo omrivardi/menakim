@@ -28,7 +28,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     distance,
     meeting_time: meetingTime,
     dateTimeList,
-    adminName,
+    owner,
     whatsAppLink,
     whatsappVisible,
     notes,
@@ -79,11 +79,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       <Icon src={'/icons/location-click.svg'} alt="loc_icon" />
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
-        {adminName && (
-          <ProtestCardDetail data-testid="protestCard__adminName">
-            <span style={{ fontWeight: '700', marginLeft: '5px', fontSize: '16px' }}>{t('admin')}:</span> {adminName}
-          </ProtestCardDetail>
-        )}
+        <ProtestCardDetail data-testid="protestCard__owner">
+          <span style={{ fontWeight: '700', marginLeft: '5px', fontSize: '16px' }}>{t('admin')}:</span> {owner}
+        </ProtestCardDetail>
 
         {store?.userStore?.user?.uid === adminId ? (
           <FormItem label={t('showWhatsappButton')}>

@@ -215,6 +215,11 @@ function ProtestForm({
                 ></ProtestFormInput>
                 <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
               </ProtestFormLabel>
+              <ProtestFormLabel>
+                {t('owner.title')}
+                <ProtestFormInput placeholder={t('owner.title')} name="owner" ref={register}></ProtestFormInput>
+                <ProtestFormInputDetails>{t('owner.details')}</ProtestFormInputDetails>
+              </ProtestFormLabel>
               <MapWrapper
                 center={mapCenter}
                 zoom={zoomLevel}
