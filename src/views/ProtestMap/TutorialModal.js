@@ -69,7 +69,7 @@ export default function TutorialModal(params) {
           <TabWrapper>
             <Logo src={'/icons/safety_instructions.svg'} alt="tut1" />
             <Title>{t('slide2.title')}</Title>
-            <Title>{t('slide2.subTitle')}</Title>
+            <Title size="small">{t('slide2.subTitle')}</Title>
             <List style={{ textAlign: 'right' }}>
               <li>
                 <Paragraph size="medium" bold={true}>
@@ -171,7 +171,7 @@ const StyledModal = styled(Modal)`
   }
 
   @media (max-width: 767px) {
-    top: 50px;
+    top: 10px;
     ${Paragraph} {
       font-size: 18px;
     }
@@ -266,10 +266,13 @@ const Logo = styled.img`
 
 const Title = styled.p`
   color: #03a483;
-  font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
   line-height: 11px;
+  font-size: ${({ size }) => (size === 'small' ? '23px' : '24px')};
+  @media (max-width: 381px) {
+    line-height: 24px;
+  }
 `;
 
 const List = styled.ol`
