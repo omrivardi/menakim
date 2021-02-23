@@ -86,12 +86,6 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       </Helmet>
       <TopLines>{t('one')}</TopLines>
       <TopLines>{t('two')}</TopLines>
-      <Lines>
-        {t('three')}
-        <a href="#0" onClick={() => openKit()}>
-          {t('link')}
-        </a>
-      </Lines>
       <br />
       <BottomLines>{t('five')}</BottomLines>
       <BottomLines>{t('six')}</BottomLines>
@@ -104,7 +98,6 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <br />
       <p style={{ width: '300px' }}>{t('content')} </p>
 
-      <GoogleButton onClick={() => handleSignIn()} style={{ marginBottom: 10, width: 300 }} />
       {emailSignIn ? (
         <EmailSignIn cancel={() => setEmailSignIn(false)} updateUserAndRedirect={updateUserAndRedirect} />
       ) : (
