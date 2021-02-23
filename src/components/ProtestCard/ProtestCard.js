@@ -7,8 +7,6 @@ import { analytics } from '../../firebase';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
-// import { WazeButton } from '../';
-import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
 import { Link } from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -76,16 +74,14 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       style={style}
       onMouseOver={() => store.mapStore.setHoveredProtestId(protestInfo.id)}
       onMouseOut={() => store.mapStore.setHoveredProtestId(null)}
-      // onClick={() => {
-      //   history.push(`/protest/${id}`);
-      // }}
       data-testid="protestCard"
     >
+      <Icon src={'/icons/location-click.svg'} alt="loc_icon" />
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
         {adminName && (
           <ProtestCardDetail data-testid="protestCard__adminName">
-            <span style={{ fontWeight: 'bold', marginLeft: '5px' }}>{t('admin')}:</span> {adminName}
+            <span style={{ fontWeight: '700', marginLeft: '5px', fontSize: '16px' }}>{t('admin')}:</span> {adminName}
           </ProtestCardDetail>
         )}
 
@@ -95,25 +91,22 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           </FormItem>
         ) : null}
 
+        <NotesWrapper>{notes}</NotesWrapper>
+        <DistanceWrapper>{distance ? formatDistance(distance) : formatDistance(0)}</DistanceWrapper>
         {whatsappToggleValue ? (
-          <div onClick={handleWhatsappClick}>
-            <SocialButton type="whatsapp" link={whatsAppLink}>
-              <span style={{ marginRight: window.screen.width > 1080 ? '1.2vw' : '5vw' }}>{t('whatsappLink')}</span>
-            </SocialButton>
+          <>
+            <Button href={whatsAppLink} onClick={handleWhatsappClick} target="_blank" rel="noreferrer noopener">
+              {t('whatsappLink')}
+            </Button>
             <TermsInfo>
               <p>{t('responsibility')}</p>
               <Link to="/terms-of-use" className="bm-item" style={{ textDecoration: 'underline' }}>
                 {t('terms')}
               </Link>
             </TermsInfo>
-          </div>
+          </>
         ) : (
           <ProtestCardDetail>{t('whatsappNotAvailable')}</ProtestCardDetail>
-        )}
-        {notes && (
-          <ProtestCardDetail data-testid="protestCard__notes">
-            <span style={{ marginLeft: '5px' }}>{t('notes')}:</span> {notes}
-          </ProtestCardDetail>
         )}
 
         {streetAddress && (
@@ -135,13 +128,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             {meetingTime}
           </ProtestCardDetail>
         )}
-        {/* <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
-          {t('navigate')}
-        </WazeButton> */}
-        <ProtestCardDetail>
-          <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
-          {distance ? formatDistance(distance) : 0}
-        </ProtestCardDetail>
         <ProtestCardDetail>
           <ProtestReportWrapper onClick={() => window.open(contactLink)}>
             <ExclamationCircleOutlined style={{ marginLeft: '6px', fontSize: '13px' }} />
@@ -159,7 +145,7 @@ const ProtestCardWrapper = styled.div`
   background-color: #fff;
   box-shadow: 0 1px 4px 0px #00000026;
   // cursor: pointer;
-  border-radius: 4px;
+  border-radius: 12px;
   transition: box-shadow 175ms ease-out;
 
   &:last-child {
@@ -173,6 +159,10 @@ const ProtestCardWrapper = styled.div`
     box-sizing: border-box;
     box-shadow: 0 0 0 1px #6e7dff, 0px 4px 6px -1px #00000026;
   }
+
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
 `;
 
 const ProtestCardTitle = styled.h2`
@@ -184,6 +174,10 @@ const ProtestCardTitle = styled.h2`
 
 const ProtestCardInfo = styled.div`
   margin-bottom: 7.5px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 `;
 
 const ProtestCardDetail = styled.h3`
@@ -211,9 +205,42 @@ const FormItem = styled(Form.Item)`
   margin-bottom: 10px;
 `;
 
-const TermsInfo = styled(Form.Item)`
+const TermsInfo = styled.div`
   text-align: center;
   line-height: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: #8393a7;
 `;
 
+const Icon = styled.img`
+  object-fit: none;
+  align-self: center;
+  margin-bottom: 1em;
+`;
+
+const DistanceWrapper = styled.span`
+  color: #8393a7;
+  font-weight: 400;
+  font-size: 16px;
+`;
+
+const NotesWrapper = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+`;
+
+const Button = styled.a`
+  width: 100%;
+  height: 32px;
+  background: #25d366;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+  color: white !important; 
+  font-size: 18px;
+  text-align: center
+  font-weight: 700;
+`;
 export default ProtestCard;
