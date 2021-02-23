@@ -30,13 +30,13 @@ const positionPoint = new L.Icon({
 const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   const [adminName, setAdminName] = useState('');
 
-  const iconUrl = '/icons/markers/oilspill_marker.png';
+  const iconUrl = '/icons/markers/cleaning-marker.png';
 
   // Use a speical marker from the protest object / the default fist.
   let markerInfo = marker || {
     iconUrl,
     iconRetinaUrl: iconUrl,
-    iconSize: [45, 30],
+    iconSize: [45, 45],
     iconAnchor: [15, 30],
   };
 
