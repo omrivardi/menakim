@@ -63,7 +63,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
 
   function toggleWhatsappChange() {
     run({
-      protestId: id,
+      locationId: id,
       params: { coords: protestInfo?.latlng, whatsappVisible: !whatsappToggleValue },
     });
   }
