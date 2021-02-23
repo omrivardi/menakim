@@ -6,16 +6,12 @@ import Menu from 'react-burger-menu/lib/menus/slide';
 import styled, { keyframes } from 'styled-components/macro';
 import { useStore } from '../../stores';
 import { isAdmin } from '../../utils';
-import { isMobile } from 'react-device-detect';
 
 function Header() {
   const store = useStore();
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation('header');
-  const contactLink = isMobile
-    ? 'mailto:info@menakimethabait.com'
-    : 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@menakimethabait.com';
 
   return (
     <HeaderWrapper path={pathname}>
@@ -45,7 +41,7 @@ function Header() {
             {t('terms')}
           </Link>
 
-          <a href={contactLink} target="_blank" rel="noreferrer noopener">
+          <a href="https://forms.gle/NwHepXio9kNzpLXB6" target="_blank" rel="noreferrer noopener">
             {t('contact')}
           </a>
 
