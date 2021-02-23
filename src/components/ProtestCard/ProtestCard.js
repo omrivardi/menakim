@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { useRequest } from 'ahooks';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
-import { updateLocation } from '../../api';
+import { updateLocation, deleteLocation } from '../../api';
 import { analytics } from '../../firebase';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import { Form, Switch } from 'antd';
 import { Link } from 'react-router-dom';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons';
+
 import { isMobile } from 'react-device-detect';
 
 function FormattedDate({ date }) {
@@ -76,6 +77,14 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       onMouseOut={() => store.mapStore.setHoveredProtestId(null)}
       data-testid="protestCard"
     >
+      {store?.userStore?.user?.uid === adminId ? (
+        <DeleteButton
+          onClick={async () => {
+            await deleteLocation(id);
+            window.location.reload();
+          }}
+        />
+      ) : null}
       <Icon src={'/icons/location-click.svg'} alt="loc_icon" />
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
@@ -240,5 +249,11 @@ const Button = styled.a`
   font-size: 18px;
   text-align: center
   font-weight: 700;
+`;
+
+const DeleteButton = styled(DeleteOutlined)`
+  align-self: flex-end;
+  font-size: 18px;
+  color: #b41f25;
 `;
 export default ProtestCard;

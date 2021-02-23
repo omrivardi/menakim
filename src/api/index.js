@@ -56,6 +56,10 @@ export async function updateLocation({ locationId, params }) {
   };
 }
 
+export function deleteLocation(locationId) {
+  return firestore.collection(locationsCollectionName).doc(locationId).delete();
+}
+
 export async function fetchProtest(protestId) {
   const protest = await firestore.collection(locationsCollectionName).doc(protestId).get();
 
