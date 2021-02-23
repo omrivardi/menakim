@@ -22,32 +22,42 @@ export default function TutorialModal(params) {
 
   return (
     <StyledModal visible={isModalVisible} footer={null} closable={false} afterClose={() => setLocalStorage('seenTutorial', true)}>
-      <Carousel ref={carouselRef}>
+      <Carousel ref={carouselRef} dots={false}>
         <div>
           <TabWrapper>
             <Logo src={'/icons/globe_in_hand.svg'} alt="tut1" />
-            <Paragraph>{t('slide1.paragraph1')}</Paragraph>
-            <Paragraph>{t('slide1.paragraph2')}</Paragraph>
-            <Paragraph>{t('slide1.paragraph3')}</Paragraph>
+            <Title>{t('slide1.title')}</Title>
+            <Paragraph size="large" bold>
+              {t('slide1.paragraph1')}
+            </Paragraph>
+            <Paragraph size="large" bold>
+              {t('slide1.paragraph2')}
+            </Paragraph>
+            <Paragraph size="medium" bold={true}>
+              {t('slide1.paragraph3')}
+            </Paragraph>
+            <Paragraph size="medium" bold={true}>
+              {t('slide1.paragraph4')}
+            </Paragraph>
             <SecondaryTitle>{t('slide1.secondTitle')}</SecondaryTitle>
             <CardsWrapper>
               <ModalCard>
                 <IconWrapper>
-                  <img src={'/icons/pin.png'} alt="tut1" />
+                  <img src={'/icons/safety_instructions.png'} alt="tut1" />
+                </IconWrapper>
+                {t('slide1.readSafety')}
+              </ModalCard>
+              <ModalCard>
+                <IconWrapper>
+                  <img src={'/icons/location_pin.png'} alt="tut1" />
                 </IconWrapper>
                 {t('slide1.findLocation')}
               </ModalCard>
               <ModalCard>
                 <IconWrapper>
-                  <img src={'/icons/whatsapp.png'} alt="tut1" />
+                  <img src={'/icons/join_location.png'} alt="tut1" />
                 </IconWrapper>
-                {t('slide1.joinGroup')}
-              </ModalCard>
-              <ModalCard>
-                <IconWrapper>
-                  <img src={'/icons/calendar.png'} alt="tut1" />
-                </IconWrapper>
-                {t('slide1.schedule')}
+                {t('slide1.joinLocation')}
               </ModalCard>
             </CardsWrapper>
             <ContinueButton onClick={() => carouselRef.current.prev()}>
@@ -57,12 +67,57 @@ export default function TutorialModal(params) {
         </div>
         <div>
           <TabWrapper>
-            <SecondaryTitle bold={true}>{t('slide2.paragraph1')}</SecondaryTitle>
-            <SecondaryTitle bold={true}>{t('slide2.paragraph2')}</SecondaryTitle>
-            <TutorialImages>
-              <img src={'/images/tut2.png'} alt="tut2" />
-              <img src={'/images/tut1.png'} alt="tut1" />
-            </TutorialImages>
+            <Logo src={'/icons/safety_instructions.svg'} alt="tut1" />
+            <Title>{t('slide2.title')}</Title>
+            <Title>{t('slide2.subTitle')}</Title>
+            <List style={{ textAlign: 'right' }}>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li1Title')}
+                </Paragraph>
+                <Paragraph size="small">{t('slide2.li1Text')}</Paragraph>
+              </li>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li2Title')}
+                </Paragraph>
+                <Paragraph size="small">{t('slide2.li2Text')}</Paragraph>
+              </li>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li3Title')}
+                </Paragraph>
+                <Paragraph size="small">{t('slide2.li3Text')}</Paragraph>
+              </li>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li4Title')}
+                </Paragraph>
+                <Paragraph size="small">{t('slide2.li4Text')}</Paragraph>
+              </li>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li5Title')}
+                </Paragraph>
+                <Paragraph size="small">{t('slide2.li5Text')}</Paragraph>
+              </li>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li6Title')}
+                </Paragraph>
+                <Paragraph size="small">{t('slide2.li6Text')}</Paragraph>
+              </li>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li7Title')}
+                </Paragraph>
+              </li>
+              <li>
+                <Paragraph size="medium" bold={true}>
+                  {t('slide2.li8Title')}
+                </Paragraph>
+              </li>
+            </List>
             <ContinueButton onClick={handleCloseModal}>{t('slide2.finishButton')}</ContinueButton>
           </TabWrapper>
         </div>
@@ -72,13 +127,28 @@ export default function TutorialModal(params) {
 }
 
 const Paragraph = styled.p`
-  font-size: 21px;
+  /* font-size: 21px; */
+  font-size: ${({ size }) => {
+    switch (size) {
+      case 'small':
+        return '16px';
+      case 'medium':
+        return '18px';
+      case 'large':
+        return '22px';
+      default:
+        return '16px';
+    }
+  }};
   font-weight: ${({ bold }) => (bold ? 'bold' : 500)};
   color: #333333;
   margin: 0;
 `;
 
 const StyledModal = styled(Modal)`
+  .ant-modal-body {
+    font-family: 'almoni';
+  }
   .slick-slide {
     text-align: center;
     font-size: 20px;
@@ -112,6 +182,7 @@ const TabWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 606px;
 `;
 
 const ModalCard = styled.div`
@@ -120,9 +191,9 @@ const ModalCard = styled.div`
   align-items: center;
   overflow: hidden;
   width: 110px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #333333;
+  color: #4f4f4f;
 `;
 
 const CardsWrapper = styled.div`
@@ -153,23 +224,23 @@ const ContinueButton = styled.div`
   font-size: 19.5px;
 `;
 
-const TutorialImages = styled.div`
-  display: flex;
-  overflow: hidden;
-  margin-top: 10px;
-  & img {
-    width: 50%;
-  }
+// const TutorialImages = styled.div`
+//   display: flex;
+//   overflow: hidden;
+//   margin-top: 10px;
+//   & img {
+//     width: 50%;
+//   }
 
-  @media (max-width: 375px) {
-    flex-direction: column;
-    align-items: center;
-    & img {
-      max-height: 350px;
-      width: 100%;
-    }
-  }
-`;
+//   @media (max-width: 375px) {
+//     flex-direction: column;
+//     align-items: center;
+//     & img {
+//       max-height: 350px;
+//       width: 100%;
+//     }
+//   }
+// `;
 
 const IconWrapper = styled.div`
   display: flex;
@@ -180,8 +251,8 @@ const IconWrapper = styled.div`
 `;
 
 const SecondaryTitle = styled.p`
-  color: #03a483;
-  font-size: 26.5px;
+  color: #35a6bf;
+  font-size: 28px;
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -190,5 +261,19 @@ const SecondaryTitle = styled.p`
 const Logo = styled.img`
   object-fit: none;
   align-self: center;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
+`;
+
+const Title = styled.p`
+  color: #03a483;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  line-height: 11px;
+`;
+
+const List = styled.ol`
+  & li {
+    line-height: 21px;
+  }
 `;
