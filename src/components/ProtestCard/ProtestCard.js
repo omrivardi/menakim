@@ -200,7 +200,7 @@ const ProtestCardIcon = styled.img`
 `;
 
 const ProtestReportWrapper = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   transition: 0.3s;
   cursor: pointer;
 `;
@@ -213,7 +213,7 @@ const TermsInfo = styled.div`
   text-align: center;
   line-height: 0;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   color: #8393a7;
   margin-bottom: 10px;
 `;
@@ -226,7 +226,7 @@ const DistanceWrapper = styled.span`
 
 const NotesWrapper = styled.span`
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const Button = styled.a`
