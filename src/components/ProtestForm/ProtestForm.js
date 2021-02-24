@@ -123,10 +123,10 @@ function ProtestForm({
     //   return;
     // }
 
-    if (!params.whatsAppLink || !isValidUrl(params.whatsAppLink)) {
-      alert(t('validations.link'));
-      return;
-    }
+    // if (!params.whatsAppLink || !isValidUrl(params.whatsAppLink)) {
+    //   alert(t('validations.link'));
+    //   return;
+    // }
 
     if (!params.userApproved) {
       alert(t('validations.approved'));
