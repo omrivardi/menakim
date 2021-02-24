@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { useTranslation } from 'react-i18next';
 import Button from '../elements/Button';
-import { validateLatLng, isValidUrl } from '../../utils';
+import { validateLatLng } from '../../utils';
 import { fetchNearbyProtests } from '../../api';
 import { useStore } from '../../stores';
 
