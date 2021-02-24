@@ -116,9 +116,27 @@ function AppMap({ hoveredProtest }) {
         )}
         <MarkersList markers={mapStore.markers} hoveredProtest={hoveredProtest} />
       </MapElement>
+      <MadeBy>
+        Created by{' '}
+        <a href="http://map.menakimethabait.com/" target="_blank" rel="noreferrer">
+          MenakinEtHabait
+        </a>
+      </MadeBy>
     </MapWrapper>
   );
 }
+
+const MadeBy = styled.p`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-left: 0.5em;
+  margin-bottom: 0;
+  z-index: 500;
+  background: white;
+  opacity: 0.8;
+  padding: 0 5px;
+`;
 
 const MapWrapper = styled.div`
   width: 100%;
