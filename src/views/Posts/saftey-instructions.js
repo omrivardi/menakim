@@ -68,6 +68,7 @@ const TabWrapper = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 606px;
+  margin-top: 20px;
 `;
 
 const Paragraph = styled.p`
