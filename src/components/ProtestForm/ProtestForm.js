@@ -315,7 +315,7 @@ function ProtestForm({
                 </>
               ) : (
                 <Button type="submit" color="#1ED96E">
-                  {editMode === 'pending' ? 'יצירת הפגנה' : 'עריכת הפגנה'}
+                  {editMode === 'pending' ? 'יצירת מוקד' : 'עדכון המוקד'}
                 </Button>
               )}
             </>

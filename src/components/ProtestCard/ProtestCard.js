@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import { useRequest } from 'ahooks';
+import React from 'react';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
-import { updateLocation, deleteLocation } from '../../api';
+import { deleteLocation } from '../../api';
 import { analytics } from '../../firebase';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
-import { Form, Switch } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
@@ -30,14 +28,12 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     dateTimeList,
     owner,
     whatsAppLink,
-    whatsappVisible,
     notes,
     adminId,
     id,
   } = protestInfo;
   const history = useHistory();
   const store = useStore();
-  const [whatsappToggleValue, setWhatsappToggleValue] = useState(whatsappVisible === undefined || whatsappVisible);
 
   // const history = useHistory();
   const { t } = useTranslation('card');
@@ -47,25 +43,11 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     ? `mailto:info@menakimethabait.com?subject=${mailSubject}&body=${mailBody}`
     : `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@menakimethabait.com&su=${mailSubject}&body=${mailBody}`;
 
-  const { loading: isWhatsappToggleLoading, run } = useRequest(updateLocation, {
-    manual: true,
-    onSuccess: () => {
-      setWhatsappToggleValue((prev) => !prev);
-    },
-  });
-
   const upcomingDate = getUpcomingDate(dateTimeList);
 
   function handleWhatsappClick() {
     // log analytics event
     analytics.logEvent('whatsapp_join', { name: displayName });
-  }
-
-  function toggleWhatsappChange() {
-    run({
-      locationId: id,
-      params: { coords: protestInfo?.latlng, whatsappVisible: !whatsappToggleValue },
-    });
   }
 
   return (
@@ -93,15 +75,9 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           {t('admin')}:<span style={{ fontWeight: '700', marginLeft: '5px', fontSize: '16px' }}>&nbsp;{owner}</span>
         </ProtestCardDetail>
 
-        {store?.userStore?.user?.uid === adminId ? (
-          <FormItem label={t('showWhatsappButton')}>
-            <Switch loading={isWhatsappToggleLoading} checked={whatsappToggleValue} onChange={toggleWhatsappChange} />
-          </FormItem>
-        ) : null}
-
         <NotesWrapper>{notes}</NotesWrapper>
         <DistanceWrapper>{distance ? formatDistance(distance) : formatDistance(0)}</DistanceWrapper>
-        {whatsappToggleValue && whatsAppLink ? (
+        {whatsAppLink ? (
           <>
             <Button href={whatsAppLink} onClick={handleWhatsappClick} target="_blank" rel="noreferrer noopener">
               {t('whatsappLink')}
@@ -113,9 +89,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
               </Link>
             </TermsInfo>
           </>
-        ) : (
-          <ProtestCardDetail>{t('whatsappNotAvailable')}</ProtestCardDetail>
-        )}
+        ) : null}
 
         {streetAddress && (
           <ProtestCardDetail data-testid="protestCard__streetAddress">
@@ -206,10 +180,6 @@ const ProtestReportWrapper = styled.div`
   font-size: 14px;
   transition: 0.3s;
   cursor: pointer;
-`;
-
-const FormItem = styled(Form.Item)`
-  margin-bottom: 10px;
 `;
 
 const TermsInfo = styled.div`
