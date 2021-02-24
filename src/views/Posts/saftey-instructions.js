@@ -8,7 +8,6 @@ const Instructions = () => {
   return (
     <TabWrapper>
       <Logo src={'/icons/safety_instructions.svg'} alt="tut1" />
-      <Title>{t('slide2.title')}</Title>
       <Title size="small">{t('slide2.subTitle')}</Title>
       <List style={{ textAlign: 'right' }}>
         <li>
@@ -101,6 +100,7 @@ const Title = styled.p`
   font-weight: bold;
   margin-bottom: 14px;
   line-height: 11px;
+  text-align: center;
   font-size: ${({ size }) => (size === 'small' ? '23px' : '24px')};
   @media (max-width: 600px) {
     line-height: 24px;
