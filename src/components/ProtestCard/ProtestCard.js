@@ -98,7 +98,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
 
         <NotesWrapper>{notes}</NotesWrapper>
         <DistanceWrapper>{distance ? formatDistance(distance) : formatDistance(0)}</DistanceWrapper>
-        {whatsappToggleValue ? (
+        {whatsappToggleValue && whatsAppLink ? (
           <>
             <Button href={whatsAppLink} onClick={handleWhatsappClick} target="_blank" rel="noreferrer noopener">
               {t('whatsappLink')}
