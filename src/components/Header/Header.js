@@ -18,7 +18,9 @@ function Header() {
       <NavItemLive to="/live">
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
-      <Title>{t('title')}</Title>
+      <Link to="/" style={{ fontFamily: 'almoni', fontSize: '2rem', height: '100%' }}>
+        <Logo src="/icons/LOGO_HOF.png" alt="logo" />
+      </Link>
       <NavProfileWrapper>
         <Menu
           isOpen={menuOpen}
@@ -109,7 +111,6 @@ const LiveIcon = styled.img`
   user-select: none;
 `;
 
-const Title = styled.div`
-  font-weight: 600;
-  font-size: 27px;
+const Logo = styled.img`
+  width: 155px;
 `;
