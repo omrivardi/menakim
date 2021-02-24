@@ -30,7 +30,6 @@ export async function createLocation(params) {
   // log analytics event
   analytics.logEvent('location_created', {
     name: locationParams.displayName,
-    area: locationParams.area,
   });
 
   return locationDoc;
