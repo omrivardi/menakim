@@ -101,7 +101,7 @@ const Title = styled.p`
   margin-bottom: 14px;
   line-height: 11px;
   font-size: ${({ size }) => (size === 'small' ? '23px' : '24px')};
-  @media (max-width: 381px) {
+  @media (max-width: 600px) {
     line-height: 24px;
   }
 `;
