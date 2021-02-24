@@ -2,6 +2,7 @@ import React from 'react';
 import FourOhFour from './four-oh-four.js';
 import TermsOfUse from './terms-of-use.js';
 import LegalNotice from './legal-notice.js';
+import Instructions from './saftey-instructions';
 import ProjectSupport from './project-support';
 import One from './ProjectUpdates/one';
 
@@ -33,6 +34,11 @@ export const posts = [
     slug: 'terms-of-use',
     title: 'תנאי השימוש - מנקים את החוף',
     text: <TermsOfUse />,
+  },
+  {
+    slug: 'saftey-instructions',
+    title: 'הוראות בטיחות - מנקים את החוף',
+    text: <Instructions />,
   },
   {
     slug: '1',

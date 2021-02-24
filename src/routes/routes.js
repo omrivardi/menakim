@@ -44,7 +44,7 @@ const routes = [
     key: 'UPLOAD_FORM',
   },
   {
-    path: ['/about', '/donate', '/project-updates/:slug', '/legal-notice', '/terms-of-use'],
+    path: ['/about', '/donate', '/project-updates/:slug', '/legal-notice', '/terms-of-use', '/saftey-instructions'],
     component: PostView,
     key: 'POST_VIEW',
   },

@@ -29,6 +29,9 @@ function Header() {
           customCrossIcon={false}
           disableAutoFocus
         >
+          <Link to="/" onClick={() => setMenuState(false)} className="bm-item">
+            {t('map')}
+          </Link>
           <Link to="/about" onClick={() => setMenuState(false)} className="bm-item">
             {t('about')}
           </Link>
@@ -41,6 +44,9 @@ function Header() {
           </a>
           <Link to="/terms-of-use" onClick={() => setMenuState(false)} className="bm-item">
             {t('terms')}
+          </Link>
+          <Link to="/saftey-instructions" onClick={() => setMenuState(false)} className="bm-item">
+            {t('saftey')}
           </Link>
 
           <a href="https://forms.gle/NwHepXio9kNzpLXB6" target="_blank" rel="noreferrer noopener">
