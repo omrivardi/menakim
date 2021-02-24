@@ -8,8 +8,8 @@ import { analytics } from '../../firebase';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import { Form, Switch } from 'antd';
-import { Link } from 'react-router-dom';
-import { DeleteOutlined } from '@ant-design/icons';
+import { Link, useHistory } from 'react-router-dom';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
 
 function FormattedDate({ date }) {
@@ -35,7 +35,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     adminId,
     id,
   } = protestInfo;
-
+  const history = useHistory();
   const store = useStore();
   const [whatsappToggleValue, setWhatsappToggleValue] = useState(whatsappVisible === undefined || whatsappVisible);
 
@@ -77,12 +77,15 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       data-testid="protestCard"
     >
       {store?.userStore?.user?.uid === adminId ? (
-        <DeleteButton
-          onClick={async () => {
-            await deleteLocation(id);
-            window.location.reload();
-          }}
-        />
+        <ButtonsWrapper>
+          <DeleteButton
+            onClick={async () => {
+              await deleteLocation(id);
+              window.location.reload();
+            }}
+          />
+          <EditButton onClick={() => history.push(`/protest/${id}/edit`)} />
+        </ButtonsWrapper>
       ) : null}
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
@@ -247,5 +250,17 @@ const DeleteButton = styled(DeleteOutlined)`
   align-self: flex-end;
   font-size: 18px;
   color: #b41f25;
+`;
+
+const EditButton = styled(EditOutlined)`
+  align-self: flex-end;
+  font-size: 18px;
+  color: #b41f25;
+  margin-right: 10px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 export default ProtestCard;

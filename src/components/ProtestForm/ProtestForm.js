@@ -109,7 +109,7 @@ function ProtestForm({
     //   alert('אנא הזינו את כתובת ההפגנה');
     //   return;
     // } else {
-    if (!params.displayName) {
+    if (!params.displayName && !editMode) {
       alert(t('validations.name'));
       return;
     }
@@ -128,7 +128,7 @@ function ProtestForm({
     //   return;
     // }
 
-    if (!params.userApproved) {
+    if (!params.userApproved && !editMode) {
       alert(t('validations.approved'));
       return;
     }
@@ -146,6 +146,7 @@ function ProtestForm({
       if (editMode) {
         setSubmitSuccess(true);
         setSubmitMessage(t('messages.ok'));
+
         afterSubmitCallback();
         return;
       }

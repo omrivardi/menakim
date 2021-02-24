@@ -313,7 +313,10 @@ function ProtestPage() {
 
               return response;
             }}
-            afterSubmitCallback={() => history.push(`/protest/${protestId}`)}
+            afterSubmitCallback={async () => {
+              history.push('/');
+              window.location.reload();
+            }}
             defaultValues={protest}
             editMode={true}
             isAdmin={isAdmin(user)}
