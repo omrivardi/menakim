@@ -8,11 +8,12 @@
   "location": "מיקום המוקד",
   "time": "שעת מפגש",
   "distance": "מרחק",
-  "whatsappLink": "הצטרפות למוקד",
+  "whatsappLink": "הרשמה להתנדבות",
   "navigate": "נווט בעזרת Waze",
   "showWhatsappButton": "הצגת קישור",
   "whatsappNotAvailable": "ההרשמה למוקד הגיעה למגבלת המשתתפים והמשתתפות ונסגרה על ידי אחראי.ת המוקד",
   "report": "דיווח על בעיה במוקד",
+  "lastUpdated": "זמן עדכון אחרון",
   "reportMail": {
     "subject": "דיווח על בעיה במוקד - מספר מוקד: ",
     "body": "מספר מוקד: "

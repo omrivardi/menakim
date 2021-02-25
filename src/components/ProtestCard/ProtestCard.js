@@ -30,6 +30,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     whatsAppLink,
     notes,
     adminId,
+    updatedAt,
     id,
   } = protestInfo;
   const history = useHistory();
@@ -115,6 +116,11 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             <ProtestReportWrapper onClick={() => window.open(contactLink)}>{t('report')}</ProtestReportWrapper>
           </Link>
         </ProtestCardDetail>
+        {updatedAt ? (
+          <LastUpdated>
+            {t('lastUpdated')}:<span style={{ marginLeft: '5px' }}>&nbsp;{updatedAt.toDate().toLocaleString()}</span>
+          </LastUpdated>
+        ) : null}
       </ProtestCardInfo>
     </ProtestCardWrapper>
   );
@@ -189,6 +195,14 @@ const TermsInfo = styled.div`
   font-size: 14px;
   color: #8393a7;
   margin-bottom: 10px;
+`;
+
+const LastUpdated = styled.div`
+  align-items: flex-end;
+  line-height: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: #8393a7;
 `;
 
 const DistanceWrapper = styled.span`
