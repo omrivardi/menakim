@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 // import PlacesAutocomplete from '../PlacesAutocomplete';
+import ReactMarkdown from 'react-markdown';
 import { useForm } from 'react-hook-form';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +10,6 @@ import Button from '../elements/Button';
 import { validateLatLng } from '../../utils';
 import { fetchNearbyProtests } from '../../api';
 import { useStore } from '../../stores';
-
 import L from 'leaflet';
 // import DateTimeList from '../DateTimeList';
 
@@ -50,9 +50,11 @@ function ProtestForm({
   }, [initialCoords]);
 
   // eslint-disable-next-line no-unused-vars
-  const { register, handleSubmit, setValue, reset } = useForm({
+  const { register, handleSubmit, watch, setValue, reset } = useForm({
     defaultValues,
   });
+
+  const watchShowAge = watch('notes');
 
   // const [streetAddressDefaultValue, setStreetAddressDefaultValue] = useState(defaultValues.streetAddress);
 
@@ -281,6 +283,10 @@ function ProtestForm({
             {t('remarks.title')}
             <ProtestFormInput placeholder={t('remarks.title')} name="notes" ref={register}></ProtestFormInput>
             <ProtestFormInputDetails>{t('remarks.details')}</ProtestFormInputDetails>
+            <div>{t('remarks.preview')}</div>
+            <PreviewNotes>
+              <ReactMarkdown>{watchShowAge}</ReactMarkdown>
+            </PreviewNotes>
           </ProtestFormLabel>
           {!editMode ? (
             <>
@@ -346,7 +352,7 @@ export const ProtestFormLabel = styled.label`
   font-size: 18px;
 `;
 
-export const ProtestFormInput = styled.input`
+export const ProtestFormInput = styled.textarea`
   width: 100%;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -406,6 +412,14 @@ const StepMessage = styled.li`
 const StepDescription = styled.p`
   text-align: right;
   list-style-type: none;
+`;
+
+const PreviewNotes = styled.div`
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
 `;
 
 export default ProtestForm;
