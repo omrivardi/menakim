@@ -9,6 +9,7 @@ import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '..
 import { Link, useHistory } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
+import ReactMarkdown from 'react-markdown';
 
 function FormattedDate({ date }) {
   const { t } = useTranslation('card');
@@ -76,7 +77,11 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           {t('admin')}:<span style={{ fontWeight: '700', marginLeft: '5px', fontSize: '16px' }}>&nbsp;{owner}</span>
         </ProtestCardDetail>
 
-        <NotesWrapper>{notes}</NotesWrapper>
+        <NotesWrapper>
+          <ReactMarkdown unwrapDisallowed={true} disallowedTypes={['paragraph']}>
+            {notes}
+          </ReactMarkdown>
+        </NotesWrapper>
         <DistanceWrapper>{distance ? formatDistance(distance) : formatDistance(0)}</DistanceWrapper>
         {whatsAppLink ? (
           <>
