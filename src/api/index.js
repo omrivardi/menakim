@@ -19,6 +19,7 @@ export async function createLocation(params) {
   const locationParams = {
     ...restParams,
     created_at: firebase.firestore.FieldValue.serverTimestamp(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     coordinates: new firebase.firestore.GeoPoint(Number(lat), Number(lng)),
     origin: window.location.href,
     roles: { leader: [user.uid] },
@@ -43,6 +44,7 @@ export async function updateLocation({ locationId, params }) {
     .update({
       ...params,
       coordinates: new firebase.firestore.GeoPoint(Number(lat), Number(lng)),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
   const doc = await firestore.collection(locationsCollectionName).doc(locationId).get();
