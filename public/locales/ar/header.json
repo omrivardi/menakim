@@ -8,5 +8,7 @@
   "cleaning": "ننظف البيت",
   "terms": "تعليمات الاستخدام",
   "contact": "اتصل",
-  "locationAdminLogin": "دخول الشخص المسؤول عن مركز التنظيف"
+  "locationAdminLogin": "دخول الشخص المسؤول عن مركز التنظيف",
+  "manage": "إدارة",
+  "signout": "قطع الاتصال"
 }
