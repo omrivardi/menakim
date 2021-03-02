@@ -13,7 +13,9 @@ function Header() {
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation('header');
-  const contactLink = 'https://forms.gle/xDpcZQMBruBry9Kr7';
+  const contactLink = isMobile
+    ? 'mailto:info@menakimethabait.com'
+    : 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@menakimethabait.com';
 
   useEffect(() => {
     localStorage.setItem('i18nextLng', language);
