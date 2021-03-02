@@ -19,7 +19,7 @@ function Header() {
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
       <Link to="/" style={{ fontFamily: 'almoni', fontSize: '2rem', height: '100%' }}>
-        <img src="/icons/logo.png" id="logo" alt="logo" />
+        <img src={`${t('logo')}`} id="logo" alt="logo" />
       </Link>
       <NavProfileWrapper>
         <Menu

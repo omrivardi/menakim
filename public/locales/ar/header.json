@@ -10,5 +10,6 @@
   "contact": "اتصل",
   "locationAdminLogin": "دخول الشخص المسؤول عن مركز التنظيف",
   "manage": "إدارة",
-  "signout": "قطع الاتصال"
+  "signout": "قطع الاتصال",
+  "logo": "/images/logo2.png"
 }

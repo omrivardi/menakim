@@ -10,5 +10,6 @@
   "contact": "יצירת קשר",
   "locationAdminLogin": "כניסה לאחראי.ת מוקד",
   "manage": "ניהול",
-  "signout": "התנתקות"
+  "signout": "התנתקות",
+  "logo": "/images/logo.png"
 }
