@@ -259,7 +259,7 @@ function ProtestForm({
                 <ProtestFormInputDetails>לאחר בחירת הכתובת, הזיזו את הסמן למיקום המדויק:</ProtestFormInputDetails>
               </ProtestFormLabel> */}
 
-              <ProtestFormLabel>{t('map.title')}</ProtestFormLabel>
+              <ProtestFormMapLabel>{t('map.title')}</ProtestFormMapLabel>
               <ProtestFormSectionTitle>{t('map.subtitle')}</ProtestFormSectionTitle>
               <MapWrapper
                 center={mapCenter}
@@ -298,15 +298,11 @@ function ProtestForm({
                   ></Marker>
                 ))}
               </MapWrapper>
-
-              <hr />
             </>
           )}
           {/* <ProtestFormSectionTitle>תאריך ושעה</ProtestFormSectionTitle>
           <DateTimeList dateTimeList={dateTimeList} setDateTimeList={setDateTimeList} /> */}
 
-          <hr />
-          <ProtestFormSectionTitle>{t('contact')}</ProtestFormSectionTitle>
           <ProtestFormLabel>
             {t('whatsapp.title')}
             <ProtestFormInput placeholder={t('whatsapp.placeholder')} name="whatsAppLink" ref={register}></ProtestFormInput>
@@ -384,6 +380,14 @@ export const ProtestFormLabel = styled.label`
   font-size: 18px;
 `;
 
+export const ProtestFormMapLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-weight: 600;
+  font-size: 18px;
+`;
+
 export const ProtestFormInput = styled.input`
   width: 100%;
   padding: 6px 12px;
@@ -416,7 +420,7 @@ const MapWrapper = styled(Map)`
 `;
 
 const ProtestFormSectionTitle = styled.h3`
-  margin: 3px 0;
+  margin: 0px 0;
 `;
 
 const ProtestFormCheckboxWrapper = styled.div`
