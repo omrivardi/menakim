@@ -7,12 +7,12 @@ import { analytics } from '../../firebase';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
-// import { WazeButton } from '../';
 import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
 import { Link } from 'react-router-dom';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, EditOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
+import { useHistory } from 'react-router-dom';
 
 function FormattedDate({ date }) {
   const { t } = useTranslation('card');
@@ -35,13 +35,15 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     whatsAppLink,
     whatsappVisible,
     adminId,
+    notes,
     id,
   } = protestInfo;
 
   const store = useStore();
   const [whatsappToggleValue, setWhatsappToggleValue] = useState(whatsappVisible === undefined || whatsappVisible);
 
-  // const history = useHistory();
+  const history = useHistory();
+
   const { t } = useTranslation('card');
   const mailSubject = `${t('reportMail.subject')}${id}`;
   const mailBody = `${t('reportMail.body')}${id}`;
@@ -90,6 +92,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       // }}
       data-testid="protestCard"
     >
+      {store?.userStore?.user?.uid === adminId ? <EditButton onClick={() => history.push(`/protest/${id}/edit`)} /> : null}
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
         {adminName && (
@@ -120,6 +123,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           <ProtestCardDetail>{t('whatsappNotAvailable')}</ProtestCardDetail>
         )}
 
+        <NotesWrapper>{notes}</NotesWrapper>
         {streetAddress && (
           <ProtestCardDetail data-testid="protestCard__streetAddress">
             <ProtestCardIcon src="/icons/location.svg" alt="" aria-hidden="true" title={t('location')} />
@@ -218,6 +222,18 @@ const FormItem = styled(Form.Item)`
 const TermsInfo = styled(Form.Item)`
   text-align: center;
   line-height: 0;
+`;
+
+const NotesWrapper = styled.span`
+  font-weight: 400;
+  font-size: 18px;
+`;
+
+const EditButton = styled(EditOutlined)`
+  align-self: flex-end;
+  font-size: 18px;
+  color: #b41f25;
+  margin-right: 10px;
 `;
 
 export default ProtestCard;
