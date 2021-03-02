@@ -258,6 +258,9 @@ function ProtestForm({
                 />
                 <ProtestFormInputDetails>לאחר בחירת הכתובת, הזיזו את הסמן למיקום המדויק:</ProtestFormInputDetails>
               </ProtestFormLabel> */}
+
+              <ProtestFormLabel>{t('map.title')}</ProtestFormLabel>
+              <ProtestFormSectionTitle>{t('map.subtitle')}</ProtestFormSectionTitle>
               <MapWrapper
                 center={mapCenter}
                 zoom={zoomLevel}
