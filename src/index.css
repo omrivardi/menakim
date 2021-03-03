@@ -357,13 +357,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
   }
 }
 
-
+#iconsWrapper{
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  Justify-content: center;
+}
+.icons{
+  width: 33%;
+}
 @media (max-width: 800px) {
   #iconsWrapper{
-    width: 100vw;
-  }
-  .icons{
-    width: 33%;
+    width: 80vw;
   }
 }
 

@@ -142,10 +142,10 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
         {/* <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
           {t('navigate')}
         </WazeButton> */}
-        <ProtestCardDetail>
+        {/*         <ProtestCardDetail>
           <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
           {distance ? formatDistance(distance) : 0}
-        </ProtestCardDetail>
+        </ProtestCardDetail> */}
         <ProtestCardDetail>
           <ProtestReportWrapper onClick={() => window.open(contactLink)}>
             <ExclamationCircleOutlined style={{ marginLeft: '6px', fontSize: '13px' }} />
