@@ -6,7 +6,7 @@ import { updateProtest } from '../../api';
 import { analytics } from '../../firebase';
 // import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
+import { dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 // import { WazeButton } from '../';
 import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
@@ -27,7 +27,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   const {
     displayName,
     streetAddress,
-    distance,
     meeting_time: meetingTime,
     dateTimeList,
     adminName,
