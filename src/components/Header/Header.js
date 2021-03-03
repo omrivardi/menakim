@@ -13,11 +13,12 @@ function Header() {
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation('header');
-  const contactLink = 'https://forms.gle/xDpcZQMBruBry9Kr7';
 
   useEffect(() => {
     localStorage.setItem('i18nextLng', language);
   }, [language]);
+
+  const contactLink = 'https://forms.gle/xDpcZQMBruBry9Kr7';
 
   return (
     <HeaderWrapper path={pathname}>
