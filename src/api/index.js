@@ -130,7 +130,7 @@ export async function fetchNearbyProtests(position) {
     radius: 1000,
   });
 
-  const snapshot = await query.limit(35).get();
+  const snapshot = await query.limit(1000).get();
 
   const protests = snapshot.docs.map((doc) => {
     const { latitude, longitude } = doc.data().g.geopoint;
