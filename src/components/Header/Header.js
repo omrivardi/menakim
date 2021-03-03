@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -9,17 +9,24 @@ import { isAdmin } from '../../utils';
 
 function Header() {
   const store = useStore();
+  const [language, setLanguage] = useState('');
   const [menuOpen, setMenuState] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation('header');
+
+  useEffect(() => {
+    localStorage.setItem('i18nextLng', language);
+  }, [language]);
+
   const contactLink = 'https://forms.gle/xDpcZQMBruBry9Kr7';
+
   return (
     <HeaderWrapper path={pathname}>
       <NavItemLive to="/live">
         <LiveIcon src="/icons/live.svg" alt="" style={{ marginRight: 10 }} />
       </NavItemLive>
       <Link to="/" style={{ fontFamily: 'almoni', fontSize: '2rem', height: '100%' }}>
-        <img src="/icons/logo.png" id="logo" alt="logo" />
+        <img src={`${t('logo')}`} id="logo" alt="logo" />
       </Link>
       <NavProfileWrapper>
         <Menu
@@ -38,7 +45,7 @@ function Header() {
             </Link>
           )}
           <hr />
-          <a href="https://www.menakimethabait.com/about" target="_blank" rel="noreferrer noopener">
+          <a href={t('about-link')} target="_blank" rel="noreferrer noopener">
             {t('about')}
           </a>
           <a href="https://www.facebook.com/menakimethabait" target="_blank" rel="noreferrer noopener">
@@ -65,15 +72,27 @@ function Header() {
             {t('contact')}
           </a>
 
+          <LangSelect
+            value={language}
+            onChange={(e) => {
+              setLanguage(e.target.value);
+              window.location.reload();
+            }}
+          >
+            <LangOption value="">בחר שפה</LangOption>
+            <LangOption value="he">עברית</LangOption>
+            <LangOption value="ar">ערבית</LangOption>
+          </LangSelect>
+
           {isAdmin(store.userStore.user) && (
             <Link to="/admin" onClick={() => setMenuState(false)}>
-              ניהול
+              {t('manage')}
             </Link>
           )}
 
           {store.userStore.user && (
             <Link to="/" onClick={() => store.userStore.logOut()}>
-              התנתקות
+              {t('signout')}
             </Link>
           )}
         </Menu>
@@ -127,4 +146,13 @@ const LiveIcon = styled.img`
   border-radius: 50px;
   margin-left: 5px;
   user-select: none;
+`;
+
+const LangSelect = styled.select`
+  color: white;
+  background-color: #39b578;
+`;
+
+const LangOption = styled.option`
+  color: white;
 `;

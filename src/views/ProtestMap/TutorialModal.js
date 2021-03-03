@@ -25,7 +25,7 @@ export default function TutorialModal(params) {
       <Carousel ref={carouselRef}>
         <div>
           <TabWrapper>
-            <Logo src={'/images/logo.png'} alt="tut1" />
+            <Logo src={t('logo')} alt="tut1" />
             <Paragraph>{t('slide1.paragraph1')}</Paragraph>
             <Paragraph>{t('slide1.paragraph2')}</Paragraph>
             <Paragraph>{t('slide1.paragraph3')}</Paragraph>
@@ -57,9 +57,9 @@ export default function TutorialModal(params) {
         </div>
         <div>
           <TabWrapper>
-            <Logo src={'/images/logo.png'} alt="tut2" />
-            <SecondaryTitle bold={true}>{t('slide2.paragraph1')}</SecondaryTitle>
-            <SecondaryTitle bold={true}>{t('slide2.paragraph2')}</SecondaryTitle>
+            <Logo src={t('logo')} alt="tut2" />
+            <Paragraph bold={true}>{t('slide2.paragraph1')}</Paragraph>
+            <Paragraph bold={true}>{t('slide2.paragraph2')}</Paragraph>
             <TutorialImages>
               <img src={'/images/tut2.png'} alt="tut2" />
               <img src={'/images/tut1.png'} alt="tut1" />
@@ -193,7 +193,8 @@ const SecondaryTitle = styled.p`
 `;
 
 const Logo = styled.img`
-  object-fit: none;
+  object-fit: contain;
   align-self: center;
   margin-bottom: 28px;
+  width: 20vw;
 `;
