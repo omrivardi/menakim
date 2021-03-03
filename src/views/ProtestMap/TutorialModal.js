@@ -57,7 +57,7 @@ export default function TutorialModal(params) {
         </div>
         <div>
           <TabWrapper>
-            <Logo src={'/images/logo.png'} alt="tut2" />
+            <Logo src={t('logo')} alt="tut2" />
             <Paragraph bold={true}>{t('slide2.paragraph1')}</Paragraph>
             <Paragraph bold={true}>{t('slide2.paragraph2')}</Paragraph>
             <TutorialImages>
