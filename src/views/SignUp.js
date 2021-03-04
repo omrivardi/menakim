@@ -97,9 +97,18 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <BottomLines>{t('six')}</BottomLines>
       <br />
       <div id="iconsWrapper">
-        <img className="icons" src="/icons/create-group.png" alt="create-group" />
-        <img className="icons" src="/icons/fill-in-form.png" alt="fill-in-form" />
-        <img className="icons" src="/icons/share.png" alt="share" />
+        <figure className="icons">
+          <img src="/icons/create-group.png" alt="create-group" />
+          <figcaption>{t('pre.one')}</figcaption>
+        </figure>
+        <figure className="icons">
+          <img src="/icons/fill-in-form.png" alt="fill-in-form" />
+          <figcaption>{t('pre.two')}</figcaption>
+        </figure>
+        <figure className="icons">
+          <img src="/icons/share.png" alt="share" />
+          <figcaption>{t('pre.three')}</figcaption>
+        </figure>
       </div>
       <br />
       <p style={{ width: '300px' }}>{t('content')} </p>

@@ -28,13 +28,11 @@ const OpeningText = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <h2>{t('opening.one')}</h2>
-      <h3>{t('opening.two')}</h3>
-      <div>{t('opening.three')}</div>
+      <p>{t('opening.two')}</p>
+      <p style={{ margin: 0 }}>{t('opening.three')}</p>
       <a href="https://www.youtube.com/watch?v=uhaOAPDAXz4" role="button" tabIndex="1" target="_blank" rel="noopener noreferrer">
         {t('opening.link')}
       </a>
-      <br></br>
-      <br></br>
     </div>
   );
 };
