@@ -88,6 +88,10 @@ export async function updateProtest({ protestId, params }) {
   };
 }
 
+export function deleteLocation(locationId) {
+  return firestore.collection('protests').doc(locationId).delete();
+}
+
 export async function archivePendingProtest(protestId) {
   try {
     await firestore.collection('pending_protests').doc(protestId).update({

@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import { useRequest } from 'ahooks';
 import styled from 'styled-components/macro';
 import { useStore } from '../../stores';
-import { updateProtest } from '../../api';
+import { updateProtest, deleteLocation } from '../../api';
 import { analytics } from '../../firebase';
-// import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
-import { Link } from 'react-router-dom';
-import { ExclamationCircleOutlined, EditOutlined } from '@ant-design/icons';
+import { Link, useHistory } from 'react-router-dom';
+import { ExclamationCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
-import { useHistory } from 'react-router-dom';
 
 function FormattedDate({ date }) {
   const { t } = useTranslation('card');
@@ -87,12 +85,26 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
       style={style}
       onMouseOver={() => store.mapStore.setHoveredProtestId(protestInfo.id)}
       onMouseOut={() => store.mapStore.setHoveredProtestId(null)}
-      // onClick={() => {
-      //   history.push(`/protest/${id}`);
-      // }}
       data-testid="protestCard"
     >
-      {store?.userStore?.user?.uid === adminId ? <EditButton onClick={() => history.push(`/protest/${id}/edit`)} /> : null}
+      {store?.userStore?.user?.uid === adminId ? (
+        <ButtonsWrapper>
+          <DeleteButton
+            onClick={async () => {
+              await deleteLocation(id);
+              fetch('https://hook.integromat.com/jbsyt79m6iwpy339iwccmmelyl9tila2', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ displayName, adminId, protestId: id, coordinates, origin: window.location.href }),
+              });
+              window.location.reload();
+            }}
+          />
+          <EditButton onClick={() => history.push(`/protest/${id}/edit`)} />
+        </ButtonsWrapper>
+      ) : null}
       <ProtestCardTitle>{displayName}</ProtestCardTitle>
       <ProtestCardInfo>
         {adminName && (
@@ -229,11 +241,22 @@ const NotesWrapper = styled.span`
   font-size: 18px;
 `;
 
+const DeleteButton = styled(DeleteOutlined)`
+  align-self: flex-end;
+  font-size: 18px;
+  color: #b41f25;
+`;
+
 const EditButton = styled(EditOutlined)`
   align-self: flex-end;
   font-size: 18px;
   color: #b41f25;
   margin-right: 10px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export default ProtestCard;

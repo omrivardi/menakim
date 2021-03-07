@@ -212,43 +212,41 @@ function ProtestForm({
         </>
       ) : (
         <>
-          {(!editMode || isAdmin) && (
-            <>
-              <OpeningText />
-              <ProtestFormLabel>
-                {t('place.title')}
-                <ProtestFormInput
-                  type="text"
-                  name="displayName"
-                  ref={register}
-                  placeholder={t('place.placeholder')}
-                ></ProtestFormInput>
-                <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
-              </ProtestFormLabel>
-              <ProtestFormLabel>
-                {t('area.title')}
-                <ProtestFormSelect name="area" ref={register}>
-                  {areas.map((area) => (
-                    <option value={area} key={area}>
-                      {t(`area.values.${area}`)}
-                    </option>
-                  ))}
-                </ProtestFormSelect>
-                <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
-              </ProtestFormLabel>
-              <ProtestFormLabel>
-                {t('placeType.title')}
-                <ProtestFormSelect name="placeType" ref={register}>
-                  {placeTypes.map((placeType) => (
-                    <option value={placeType} key={placeType}>
-                      {t(`placeType.values.${placeType}`)}
-                    </option>
-                  ))}
-                </ProtestFormSelect>
-                <ProtestFormInputDetails>{t('placeType.details')}</ProtestFormInputDetails>
-              </ProtestFormLabel>
+          {(!editMode || isAdmin) && <OpeningText />}
+          <ProtestFormLabel>
+            {t('place.title')}
+            <ProtestFormInput
+              type="text"
+              name="displayName"
+              ref={register}
+              placeholder={t('place.placeholder')}
+            ></ProtestFormInput>
+            <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
+          </ProtestFormLabel>
+          <ProtestFormLabel>
+            {t('area.title')}
+            <ProtestFormSelect name="area" ref={register}>
+              {areas.map((area) => (
+                <option value={area} key={area}>
+                  {t(`area.values.${area}`)}
+                </option>
+              ))}
+            </ProtestFormSelect>
+            <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
+          </ProtestFormLabel>
+          <ProtestFormLabel>
+            {t('placeType.title')}
+            <ProtestFormSelect name="placeType" ref={register}>
+              {placeTypes.map((placeType) => (
+                <option value={placeType} key={placeType}>
+                  {t(`placeType.values.${placeType}`)}
+                </option>
+              ))}
+            </ProtestFormSelect>
+            <ProtestFormInputDetails>{t('placeType.details')}</ProtestFormInputDetails>
+          </ProtestFormLabel>
 
-              {/* <ProtestFormLabel>
+          {/* <ProtestFormLabel>
                 כתובת
                 <PlacesAutocomplete
                   setManualAddress={setMapCenter}
@@ -258,47 +256,46 @@ function ProtestForm({
                 />
                 <ProtestFormInputDetails>לאחר בחירת הכתובת, הזיזו את הסמן למיקום המדויק:</ProtestFormInputDetails>
               </ProtestFormLabel> */}
-              <MapWrapper
-                center={mapCenter}
-                zoom={zoomLevel}
-                scrollWheelZoom={'center'}
-                onMove={(t) => {
-                  setMarkerPosition([t.target.getCenter().lat, t.target.getCenter().lng]);
-                  setZoomLevel(t.target._zoom);
-                }}
-                onMoveEnd={async (t) => {
-                  const newPosition = [t.target.getCenter().lat, t.target.getCenter().lng];
-                  setMapCenter(newPosition);
-                  setMarkerPosition(newPosition);
-                  setZoomLevel(t.target._zoom);
+          <MapWrapper
+            center={mapCenter}
+            zoom={zoomLevel}
+            scrollWheelZoom={'center'}
+            onMove={(t) => {
+              setMarkerPosition([t.target.getCenter().lat, t.target.getCenter().lng]);
+              setZoomLevel(t.target._zoom);
+            }}
+            onMoveEnd={async (t) => {
+              const newPosition = [t.target.getCenter().lat, t.target.getCenter().lng];
+              setMapCenter(newPosition);
+              setMarkerPosition(newPosition);
+              setZoomLevel(t.target._zoom);
 
-                  // Fetch protests on move end
-                  if (mapCenter) {
-                    const protests = await fetchNearbyProtests(mapCenter);
-                    setNearbyProtests(protests);
-                  }
-                }}
-                onZoom={(event) => {
-                  setZoomLevel(event.target._zoom);
-                }}
-              >
-                <TileLayer
-                  attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={markerPostion}></Marker>
-                {nearbyProtests.map((protest) => (
-                  <Marker
-                    position={[protest.coordinates.latitude, protest.coordinates.longitude]}
-                    icon={protestMarker}
-                    key={protest.id}
-                  ></Marker>
-                ))}
-              </MapWrapper>
+              // Fetch protests on move end
+              if (mapCenter) {
+                const protests = await fetchNearbyProtests(mapCenter);
+                setNearbyProtests(protests);
+              }
+            }}
+            onZoom={(event) => {
+              setZoomLevel(event.target._zoom);
+            }}
+          >
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={markerPostion}></Marker>
+            {nearbyProtests.map((protest) => (
+              <Marker
+                position={[protest.coordinates.latitude, protest.coordinates.longitude]}
+                icon={protestMarker}
+                key={protest.id}
+              ></Marker>
+            ))}
+          </MapWrapper>
 
-              <hr />
-            </>
-          )}
+          <hr />
+
           {/* <ProtestFormSectionTitle>תאריך ושעה</ProtestFormSectionTitle>
           <DateTimeList dateTimeList={dateTimeList} setDateTimeList={setDateTimeList} /> */}
 
