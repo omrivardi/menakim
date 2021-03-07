@@ -89,7 +89,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     manual: true,
     onSuccess: () => {
       setWhatsappToggleValue((prev) => !prev);
-      handleCardAction(actionTypes.EDIT_LOCATION);
     },
   });
 
