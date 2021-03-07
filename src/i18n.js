@@ -19,11 +19,26 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    ns: ['translations', 'signup', 'addCleanup', 'header', 'card', 'tutorialPopup'],
+    ns: [
+      'translations',
+      'signup',
+      'addCleanup',
+      'header',
+      'card',
+      'tutorialPopup',
+      'donate',
+      'protestList',
+      'tutorialPopup',
+      'utils',
+    ],
     defaultNS: 'translations',
     fallbackLng: 'he',
     debug: true,
-
+    whiteList: ['he', 'ar'],
+    detection: {
+      order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+      cache: ['cookie'],
+    },
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },

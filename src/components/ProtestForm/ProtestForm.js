@@ -28,13 +28,11 @@ const OpeningText = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <h2>{t('opening.one')}</h2>
-      <h3>{t('opening.two')}</h3>
-      <div>{t('opening.three')}</div>
+      <p>{t('opening.two')}</p>
+      <p style={{ margin: 0 }}>{t('opening.three')}</p>
       <a href="https://www.youtube.com/watch?v=uhaOAPDAXz4" role="button" tabIndex="1" target="_blank" rel="noopener noreferrer">
         {t('opening.link')}
       </a>
-      <br></br>
-      <br></br>
     </div>
   );
 };
@@ -256,6 +254,9 @@ function ProtestForm({
                 />
                 <ProtestFormInputDetails>לאחר בחירת הכתובת, הזיזו את הסמן למיקום המדויק:</ProtestFormInputDetails>
               </ProtestFormLabel> */}
+
+          <ProtestFormMapLabel>{t('map.title')}</ProtestFormMapLabel>
+          <ProtestFormSectionTitle>{t('map.subtitle')}</ProtestFormSectionTitle>
           <MapWrapper
             center={mapCenter}
             zoom={zoomLevel}
@@ -293,64 +294,59 @@ function ProtestForm({
               ></Marker>
             ))}
           </MapWrapper>
-
-          <hr />
-
-          {/* <ProtestFormSectionTitle>תאריך ושעה</ProtestFormSectionTitle>
+        </>
+      )}
+      {/* <ProtestFormSectionTitle>תאריך ושעה</ProtestFormSectionTitle>
           <DateTimeList dateTimeList={dateTimeList} setDateTimeList={setDateTimeList} /> */}
 
-          <hr />
-          <ProtestFormSectionTitle>{t('contact')}</ProtestFormSectionTitle>
-          <ProtestFormLabel>
-            {t('whatsapp.title')}
-            <ProtestFormInput placeholder={t('whatsapp.placeholder')} name="whatsAppLink" ref={register}></ProtestFormInput>
-          </ProtestFormLabel>
-          {/* <ProtestFormLabel>
+      <ProtestFormLabel>
+        {t('whatsapp.title')}
+        <ProtestFormInput placeholder={t('whatsapp.placeholder')} name="whatsAppLink" ref={register}></ProtestFormInput>
+      </ProtestFormLabel>
+      {/* <ProtestFormLabel>
             קבוצת טלגרם
             <ProtestFormInput placeholder="לינק לקבוצה" name="telegramLink" ref={register}></ProtestFormInput>
           </ProtestFormLabel> */}
-          <ProtestFormLabel>
-            {t('remarks.title')}
-            <ProtestFormInput placeholder={t('remarks.title')} name="notes" ref={register}></ProtestFormInput>
-            <ProtestFormInputDetails>{t('remarks.details')}</ProtestFormInputDetails>
-          </ProtestFormLabel>
-          {!editMode ? (
-            <>
-              <ProtestFormInputDetails margin="10px 0">
-                {t('legal.one')}
-                <br />
-                {t('legal.two')}
-                <br />
-                {t('legal.three')}
-                <br />
-                {t('legal.four')}
-                <br />
-                {t('legal.five')}
-              </ProtestFormInputDetails>
-              <ProtestFormCheckboxWrapper>
-                <ProtestFormCheckbox type="checkbox" id="contact-approve" name="userApproved" ref={register} />
-                <label htmlFor="contact-approve">{t('legal.agree')}</label>
-              </ProtestFormCheckboxWrapper>
+      <ProtestFormLabel>
+        {t('remarks.title')}
+        <ProtestFormInput placeholder={t('remarks.title')} name="notes" ref={register}></ProtestFormInput>
+        <ProtestFormInputDetails>{t('remarks.details')}</ProtestFormInputDetails>
+      </ProtestFormLabel>
+      {!editMode ? (
+        <>
+          <ProtestFormInputDetails margin="10px 0">
+            {t('legal.one')}
+            <br />
+            {t('legal.two')}
+            <br />
+            {t('legal.three')}
+            <br />
+            {t('legal.four')}
+            <br />
+            {t('legal.five')}
+          </ProtestFormInputDetails>
+          <ProtestFormCheckboxWrapper>
+            <ProtestFormCheckbox type="checkbox" id="contact-approve" name="userApproved" ref={register} />
+            <label htmlFor="contact-approve">{t('legal.agree')}</label>
+          </ProtestFormCheckboxWrapper>
 
+          <Button type="submit" color="#1ED96E">
+            {t('add')}
+          </Button>
+        </>
+      ) : (
+        <>
+          {defaultValues.protestRef ? (
+            <>
+              <p style={{ textAlign: 'center' }}>.ההפגנה כבר נוצרה, רק צריך לאשר שהיא תקינה</p>
               <Button type="submit" color="#1ED96E">
-                {t('add')}
+                אישור הפגנה
               </Button>
             </>
           ) : (
-            <>
-              {defaultValues.protestRef ? (
-                <>
-                  <p style={{ textAlign: 'center' }}>.ההפגנה כבר נוצרה, רק צריך לאשר שהיא תקינה</p>
-                  <Button type="submit" color="#1ED96E">
-                    אישור הפגנה
-                  </Button>
-                </>
-              ) : (
-                <Button type="submit" color="#1ED96E">
-                  {editMode === 'pending' ? 'יצירת הפגנה' : 'עריכת הפגנה'}
-                </Button>
-              )}
-            </>
+            <Button type="submit" color="#1ED96E">
+              {editMode === 'pending' ? 'יצירת הפגנה' : 'עריכת הפגנה'}
+            </Button>
           )}
         </>
       )}
@@ -374,6 +370,14 @@ export const ProtestFormLabel = styled.label`
   flex-direction: column;
   width: 100%;
   margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+`;
+
+export const ProtestFormMapLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   font-weight: 600;
   font-size: 18px;
 `;
@@ -410,7 +414,7 @@ const MapWrapper = styled(Map)`
 `;
 
 const ProtestFormSectionTitle = styled.h3`
-  margin: 3px 0;
+  margin: 0px 0;
 `;
 
 const ProtestFormCheckboxWrapper = styled.div`

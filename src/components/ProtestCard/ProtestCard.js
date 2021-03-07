@@ -5,7 +5,7 @@ import { useStore } from '../../stores';
 import { updateProtest, deleteLocation } from '../../api';
 import { analytics } from '../../firebase';
 import { useTranslation } from 'react-i18next';
-import { formatDistance, dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
+import { dateToDayOfWeek, formatDate, getUpcomingDate } from '../../utils';
 import SocialButton from '../elements/Button/SocialButton';
 import { Form, Switch } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
@@ -25,7 +25,6 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   const {
     displayName,
     streetAddress,
-    distance,
     meeting_time: meetingTime,
     dateTimeList,
     adminName,
@@ -158,10 +157,10 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
         {/* <WazeButton link={`https://www.waze.com/ul?ll=${coordinates?.latitude}%2C${coordinates?.longitude}&navigate=yes&zoom=17`}>
           {t('navigate')}
         </WazeButton> */}
-        <ProtestCardDetail>
+        {/*         <ProtestCardDetail>
           <ProtestCardIcon src="/icons/ruler.svg" alt="" aria-hidden="true" title={t('distance')} />
           {distance ? formatDistance(distance) : 0}
-        </ProtestCardDetail>
+        </ProtestCardDetail> */}
         <ProtestCardDetail>
           <ProtestReportWrapper onClick={() => window.open(contactLink)}>
             <ExclamationCircleOutlined style={{ marginLeft: '6px', fontSize: '13px' }} />
