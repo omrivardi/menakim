@@ -194,5 +194,8 @@ const Logo = styled.img`
   object-fit: contain;
   align-self: center;
   margin-bottom: 28px;
-  width: 45vw;
+  width: 20vw;
+  @media (max-width: 767px) {
+    width: 45vw;
+  }
 `;
