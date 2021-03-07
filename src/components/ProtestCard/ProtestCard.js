@@ -116,6 +116,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
             onClick={async () => {
               await deleteLocation(id);
               handleCardAction(actionTypes.DELETE_LOCATION);
+              window.location.reload();
             }}
           />
           <EditButton onClick={() => history.push(`/protest/${id}/edit`)} />
