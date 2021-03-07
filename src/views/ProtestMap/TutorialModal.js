@@ -106,7 +106,7 @@ const StyledModal = styled(Modal)`
   }
 
   @media (max-width: 767px) {
-    top: 50px;
+    top: 20px;
     ${Paragraph} {
       font-size: 18px;
     }
@@ -137,7 +137,6 @@ const CardsWrapper = styled.div`
   margin: 15px 0;
 
   @media (max-width: 375px) {
-    flex-direction: column;
     align-items: center;
   }
 `;
@@ -167,11 +166,10 @@ const TutorialImages = styled.div`
   }
 
   @media (max-width: 375px) {
-    flex-direction: column;
     align-items: center;
     & img {
       max-height: 350px;
-      width: 100%;
+      width: 50%;
     }
   }
 `;
@@ -196,5 +194,5 @@ const Logo = styled.img`
   object-fit: contain;
   align-self: center;
   margin-bottom: 28px;
-  width: 20vw;
+  width: 45vw;
 `;
