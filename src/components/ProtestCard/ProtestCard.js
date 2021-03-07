@@ -52,6 +52,17 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     manual: true,
     onSuccess: () => {
       setWhatsappToggleValue((prev) => !prev);
+      fetch('https://hook.integromat.com/hljlb9rf0d7wknpgo82if97pqa2qoqj6', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          toggleStatus: whatsappToggleValue ? 'hidden' : 'visible',
+          locationID: id,
+          locationName: displayName,
+        }),
+      });
     },
   });
 
