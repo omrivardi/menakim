@@ -46,7 +46,7 @@ const Divider = styled.div`
 const Text = styled.span`
   font-size: 16px;
   line-height: 19px;
-
+  margin-left: 20px;
   color: #ffffff;
 `;
 
