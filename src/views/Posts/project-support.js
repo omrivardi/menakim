@@ -13,7 +13,7 @@ const Content = mdx`
 
 ## על המפה
 
-המפה נבנתה על בסיס הקוד הפתוח של מפת <a href="https://github.com/guytepper/1km.co.il" target="_blank" rel="noopener noreferrer">1km</a> על ידי ידי מתנדבים ומתנדבות מצוות <a href="https://www.menakimethabait.com/about" target="_blank" rel="noopener noreferrer">"מנקים את הבית"</a>.  
+המפה נבנתה על בסיס הקוד הפתוח של מפת <a href="https://github.com/guytepper/1km.co.il" target="_blank" rel="noopener noreferrer">1km</a> על ידי מתנדבים ומתנדבות מצוות <a href="https://www.menakimethabait.com/about" target="_blank" rel="noopener noreferrer">"מנקים את הבית"</a>.  
 אם יש לך כישורי פיתוח ותרצה/י לעזור לפרוייקט, אפשר  <a href="https://forms.gle/17sdmJg9fQhxYtQQ6" target="_blank" rel="noopener noreferrer">למלא טופס כאן</a>.
 יתכן ויקח זמן עד שנגיע לכל הפניות, אבל אנחנו מבטיחים לענות בהקדם האפשרי.
 
