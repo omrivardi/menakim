@@ -194,7 +194,6 @@ export default function SignUp(props) {
   }, [history.pathname]);
 
   if (stage === stages.UNKNOWN) {
-    setStage(stages.AFTER_FACEBOOK_AUTH);
     return (
       <PageWrapper>
         <p style={{ marginTop: 25 }}>{t('waiting')}</p>
