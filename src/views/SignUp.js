@@ -88,7 +88,7 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <TopLines>{t('two')}</TopLines>
       <Lines>
         {t('three')}
-        <a href="#0" onClick={() => openKit()}>
+        <a href={t('href-link')} target="_blank" rel="noreferrer noopener">
           {t('link')}
         </a>
       </Lines>
@@ -194,6 +194,7 @@ export default function SignUp(props) {
   }, [history.pathname]);
 
   if (stage === stages.UNKNOWN) {
+    setStage(stages.AFTER_FACEBOOK_AUTH);
     return (
       <PageWrapper>
         <p style={{ marginTop: 25 }}>{t('waiting')}</p>
