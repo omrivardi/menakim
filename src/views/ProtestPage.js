@@ -12,6 +12,7 @@ import {
   getLatestProtestPictures,
   getFullUserData,
 } from '../api';
+import { analytics } from '../firebase';
 import { Map, Marker, Polyline, TileLayer } from 'react-leaflet';
 import { ProtectedRoute, ProtestForm, PictureGallery, WazeButton } from '../components';
 import {
@@ -308,12 +309,30 @@ function ProtestPage() {
 
               const response = await updateProtest({ protestId, params, userId: user.uid });
 
+              // call webhook with event details.
+              fetch('https://hook.integromat.com/nq3eh09k9mkgd94aocclyaxb0y0r9bow', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  oldData: params,
+                  newData: response,
+                  origin: window.location.href,
+                }),
+              });
+
+              // log analytics event
+              analytics.logEvent('edit_location', { name: response.displayName });
               // Refetch the protest once update is complete
               _fetchProtest(protestId, setProtest);
 
               return response;
             }}
-            afterSubmitCallback={() => history.push(`/protest/${protestId}`)}
+            afterSubmitCallback={async () => {
+              history.push('/');
+              window.location.reload();
+            }}
             defaultValues={protest}
             editMode={true}
             isAdmin={isAdmin(user)}
