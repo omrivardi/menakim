@@ -54,7 +54,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
       icon={protestPoint(markerInfo)}
       onclick={() => analytics.logEvent('marker_click', { name: props.displayName })}
     >
-      <StylePopup closeButton={false}>
+      <StylePopup closeButton={false} autoPanPadding={L.point(5, 100)}>
         <ProtestCard protestInfo={{ ...props, coordinates, adminName, adminId: roles?.leader[0] }} style={{ margin: 0 }} />
       </StylePopup>
     </Marker>
