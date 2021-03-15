@@ -79,9 +79,9 @@ function Header() {
               window.location.reload();
             }}
           >
-            <LangOption value="">בחר שפה</LangOption>
+            <LangOption value="">{t('pick-lang')}</LangOption>
             <LangOption value="he">עברית</LangOption>
-            <LangOption value="ar">ערבית</LangOption>
+            <LangOption value="ar">عربي</LangOption>
           </LangSelect>
 
           {isAdmin(store.userStore.user) && (
