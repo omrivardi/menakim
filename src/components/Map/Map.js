@@ -8,6 +8,7 @@ import L from 'leaflet';
 import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
 import { getFullUserData } from '../../api';
+import { analytics } from '../../firebase';
 import location from '../../assets/icons/location.png';
 
 const protestPoint = ({ iconUrl, iconRetinaUrl, iconSize, iconAnchor }) =>
@@ -48,8 +49,12 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   }, [roles]);
 
   return (
-    <Marker position={[coordinates.latitude, coordinates.longitude]} icon={protestPoint(markerInfo)}>
-      <StylePopup closeButton={false}>
+    <Marker
+      position={[coordinates.latitude, coordinates.longitude]}
+      icon={protestPoint(markerInfo)}
+      onclick={() => analytics.logEvent('marker_click', { name: props.displayName })}
+    >
+      <StylePopup closeButton={false} autoPanPadding={L.point(5, 100)}>
         <ProtestCard protestInfo={{ ...props, coordinates, adminName, adminId: roles?.leader[0] }} style={{ margin: 0 }} />
       </StylePopup>
     </Marker>
