@@ -62,13 +62,13 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   const history = useHistory();
 
   const { t } = useTranslation('card');
-  function handleCardAction(cardAction) {
+  async function handleCardAction(cardAction) {
     if (!actionMap[cardAction]) {
       console.error('unkown action in card', cardAction);
       return;
     }
     // call webhook with event details.
-    fetch(`https://hook.integromat.com/${actionMap[cardAction].integtomatHook}`, {
+    await fetch(`https://hook.integromat.com/${actionMap[cardAction].integtomatHook}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
           <DeleteButton
             onClick={async () => {
               await deleteLocation(id);
-              handleCardAction(actionTypes.DELETE_LOCATION);
+              await handleCardAction(actionTypes.DELETE_LOCATION);
               window.location.reload();
             }}
           />

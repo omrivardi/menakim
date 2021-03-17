@@ -310,7 +310,7 @@ function ProtestPage() {
               const response = await updateProtest({ protestId, params, userId: user.uid });
 
               // call webhook with event details.
-              fetch('https://hook.integromat.com/nq3eh09k9mkgd94aocclyaxb0y0r9bow', {
+              await fetch('https://hook.integromat.com/nq3eh09k9mkgd94aocclyaxb0y0r9bow', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

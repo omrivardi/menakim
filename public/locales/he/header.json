@@ -12,5 +12,6 @@
   "locationAdminLogin": "כניסה לאחראי.ת מוקד",
   "manage": "ניהול",
   "signout": "התנתקות",
-  "logo": "/images/logo.png"
+  "logo": "/images/logo.png",
+  "pick-lang":"اختار لغة"
 }

@@ -77,7 +77,6 @@ const stages = {
 function SignUpBeforeRedirect({ updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
   const [emailSignIn, setEmailSignIn] = useState(false);
-  const openKit = () => window.open('https://drive.google.com/file/d/1arCs67WnAwWU02KvSrw0Mo7EV_IO9ofz/view?usp=drivesdk');
 
   return (
     <PageContentWrapper style={{ maxWidth: '100%' }}>
@@ -88,7 +87,7 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
       <TopLines>{t('two')}</TopLines>
       <Lines>
         {t('three')}
-        <a href="#0" onClick={() => openKit()}>
+        <a href={t('href-link')} target="_blank" rel="noreferrer noopener">
           {t('link')}
         </a>
       </Lines>
