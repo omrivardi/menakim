@@ -8,6 +8,7 @@ import userStore from './UserStore';
 class RootStore {
   userCoordinates = [];
   currentPageTitle = 'מנקים את הבית';
+  eventDate = '08/04/2022';
 
   constructor() {
     makeAutoObservable(this);

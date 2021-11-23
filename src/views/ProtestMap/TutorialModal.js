@@ -3,9 +3,11 @@ import { getLocalStorage, setLocalStorage } from '../../localStorage';
 import styled from 'styled-components/macro';
 import { Modal, Carousel } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useStore } from '../../stores';
 
 export default function TutorialModal(params) {
   const { t } = useTranslation('tutorialPopup');
+  const store = useStore();
   const carouselRef = React.useRef();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
@@ -26,7 +28,7 @@ export default function TutorialModal(params) {
         <div>
           <TabWrapper>
             <Logo src={t('logo')} alt="tut1" />
-            <Paragraph>{t('slide1.paragraph1')}</Paragraph>
+            <Paragraph>{t('slide1.paragraph1', { eventDate: store.eventDate })}</Paragraph>
             <Paragraph>{t('slide1.paragraph2')}</Paragraph>
             <Paragraph>{t('slide1.paragraph3')}</Paragraph>
             <SecondaryTitle>{t('slide1.secondTitle')}</SecondaryTitle>
