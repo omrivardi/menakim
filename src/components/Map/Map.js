@@ -5,7 +5,6 @@ import { useStore } from '../../stores';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
 import L from 'leaflet';
-import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
 import { getFullUserData } from '../../api';
 import { analytics } from '../../firebase';
@@ -103,7 +102,6 @@ function AppMap({ hoveredProtest }) {
 
   return (
     <MapWrapper>
-      <AddressBar inputRef={addressInputRef} />
       <MapElement center={coordinates.length > 0 ? coordinates : balfur} zoom={9} zoomControl={false}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

@@ -30,9 +30,18 @@ const OpeningText = () => {
       <h2>{t('opening.one')}</h2>
       <p>{t('opening.two')}</p>
       <p style={{ margin: 0 }}>{t('opening.three')}</p>
-      <a href="https://www.youtube.com/watch?v=uhaOAPDAXz4" role="button" tabIndex="1" target="_blank" rel="noopener noreferrer">
-        {t('opening.link')}
-      </a>
+      <ProtestFormInputDetails>
+        {t('opening.four')}
+        <a
+          href="https://www.youtube.com/watch?v=uhaOAPDAXz4"
+          role="button"
+          tabIndex="1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t('opening.link')}
+        </a>
+      </ProtestFormInputDetails>
     </div>
   );
 };
@@ -343,7 +352,7 @@ function ProtestForm({
                 </>
               ) : (
                 <Button type="submit" color="#1ED96E">
-                  {editMode === 'pending' ? 'יצירת הפגנה' : 'עריכת הפגנה'}
+                  {editMode === 'pending' ? 'יצירת הפגנה' : 'אישור'}
                 </Button>
               )}
             </>
