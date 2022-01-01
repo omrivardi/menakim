@@ -77,7 +77,7 @@ const balfur = [31.7749837, 35.219797];
 function AppMap({ hoveredProtest }) {
   const store = useStore();
   const { mapStore, userCoordinates: coordinates } = store;
-  const addressInputRef = useRef(); // Search Bar ref, used by the combobox
+  // const addressInputRef = useRef(); // Search Bar ref, used by the combobox
 
   /*
   const updateMap = (currentMapPosition) => {
