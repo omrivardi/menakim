@@ -9,6 +9,7 @@ class RootStore {
   userCoordinates = [];
   currentPageTitle = 'מנקים את הבית';
   eventDate = '08/04/2022';
+  dateImage = '/icons/share.png';
 
   constructor() {
     makeAutoObservable(this);

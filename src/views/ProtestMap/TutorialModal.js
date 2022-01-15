@@ -47,7 +47,7 @@ export default function TutorialModal(params) {
               </ModalCard>
               <ModalCard>
                 <IconWrapper>
-                  <img src={'/icons/calendar.png'} alt="tut1" />
+                  <img src={store.dateImage} alt="tut1" />
                 </IconWrapper>
                 {t('slide1.schedule')}
               </ModalCard>
