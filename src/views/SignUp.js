@@ -78,6 +78,8 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
   const { t } = useTranslation('signup');
   const [emailSignIn, setEmailSignIn] = useState(false);
 
+  const store = useStore();
+
   return (
     <PageContentWrapper style={{ maxWidth: '100%' }}>
       <Helmet>
@@ -105,7 +107,7 @@ function SignUpBeforeRedirect({ updateUserAndRedirect }) {
           <figcaption>{t('pre.two')}</figcaption>
         </figure>
         <figure className="icons">
-          <img src="/icons/share.png" alt="share" />
+          <img src={store.dateImage} alt="share" />
           <figcaption>{t('pre.three')}</figcaption>
         </figure>
       </div>
