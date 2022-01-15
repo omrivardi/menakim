@@ -301,6 +301,20 @@ function ProtestForm({
           <ProtestFormLabel>
             {t('whatsapp.title')}
             <ProtestFormInput placeholder={t('whatsapp.placeholder')} name="whatsAppLink" ref={register}></ProtestFormInput>
+            <ProtestFormInputDetails>
+              <p style={{ margin: 0 }}>
+                {t('opening.four')}
+                <a
+                  href="https://www.youtube.com/watch?v=uhaOAPDAXz4"
+                  role="button"
+                  tabIndex="1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('opening.link')}
+                </a>
+              </p>
+            </ProtestFormInputDetails>
           </ProtestFormLabel>
           {/* <ProtestFormLabel>
             קבוצת טלגרם
@@ -344,7 +358,7 @@ function ProtestForm({
                 </>
               ) : (
                 <Button type="submit" color="#1ED96E">
-                  {editMode === 'pending' ? 'יצירת הפגנה' : 'עריכת הפגנה'}
+                  {editMode === 'pending' ? 'יצירת הפגנה' : 'אישור'}
                 </Button>
               )}
             </>
