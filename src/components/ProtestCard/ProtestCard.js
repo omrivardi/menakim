@@ -48,6 +48,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     meeting_time: meetingTime,
     dateTimeList,
     adminName,
+    setIconUrl,
     coordinates,
     whatsAppLink,
     whatsappVisible,
@@ -88,7 +89,14 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
   const { loading: isWhatsappToggleLoading, run } = useRequest(updateProtest, {
     manual: true,
     onSuccess: () => {
-      setWhatsappToggleValue((prev) => !prev);
+      setWhatsappToggleValue((prev) => {
+        if (prev) {
+          setIconUrl('/icons/markers/bird-marker-grey.svg');
+        } else {
+          setIconUrl('/icons/markers/bird-marker.svg');
+        }
+        return !prev;
+      });
       fetch('https://hook.integromat.com/hljlb9rf0d7wknpgo82if97pqa2qoqj6', {
         method: 'POST',
         headers: {

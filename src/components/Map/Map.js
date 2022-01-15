@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
 // import { pointWithinRadius } from '../../utils';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
 import L from 'leaflet';
-import AddressBar from './AddressBar';
 import ProtestCard from '../ProtestCard';
 import { getFullUserData } from '../../api';
 import { analytics } from '../../firebase';
@@ -30,8 +29,7 @@ const positionPoint = new L.Icon({
 
 const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   const [adminName, setAdminName] = useState('');
-
-  const iconUrl = '/icons/markers/bird-marker.svg';
+  const [iconUrl, setIconUrl] = useState('/icons/markers/bird-marker.svg');
 
   // Use a speical marker from the protest object / the default fist.
   let markerInfo = marker || {
@@ -55,7 +53,10 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
       onclick={() => analytics.logEvent('marker_click', { name: props.displayName })}
     >
       <StylePopup closeButton={false} autoPanPadding={L.point(5, 100)}>
-        <ProtestCard protestInfo={{ ...props, coordinates, adminName, adminId: roles?.leader[0] }} style={{ margin: 0 }} />
+        <ProtestCard
+          protestInfo={{ ...props, setIconUrl, coordinates, adminName, adminId: roles?.leader[0] }}
+          style={{ margin: 0 }}
+        />
       </StylePopup>
     </Marker>
   );
@@ -78,7 +79,6 @@ const balfur = [31.7749837, 35.219797];
 function AppMap({ hoveredProtest }) {
   const store = useStore();
   const { mapStore, userCoordinates: coordinates } = store;
-  const addressInputRef = useRef(); // Search Bar ref, used by the combobox
 
   /*
   const updateMap = (currentMapPosition) => {
@@ -103,7 +103,6 @@ function AppMap({ hoveredProtest }) {
 
   return (
     <MapWrapper>
-      <AddressBar inputRef={addressInputRef} />
       <MapElement center={coordinates.length > 0 ? coordinates : balfur} zoom={9} zoomControl={false}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
