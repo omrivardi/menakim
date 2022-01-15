@@ -29,8 +29,7 @@ const positionPoint = new L.Icon({
 
 const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
   const [adminName, setAdminName] = useState('');
-
-  const iconUrl = '/icons/markers/bird-marker.svg';
+  const [iconUrl, setIconUrl] = useState('/icons/markers/bird-marker.svg');
 
   // Use a speical marker from the protest object / the default fist.
   let markerInfo = marker || {
@@ -54,7 +53,10 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
       onclick={() => analytics.logEvent('marker_click', { name: props.displayName })}
     >
       <StylePopup closeButton={false} autoPanPadding={L.point(5, 100)}>
-        <ProtestCard protestInfo={{ ...props, coordinates, adminName, adminId: roles?.leader[0] }} style={{ margin: 0 }} />
+        <ProtestCard
+          protestInfo={{ ...props, setIconUrl, coordinates, adminName, adminId: roles?.leader[0] }}
+          style={{ margin: 0 }}
+        />
       </StylePopup>
     </Marker>
   );
