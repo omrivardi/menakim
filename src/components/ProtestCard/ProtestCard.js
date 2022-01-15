@@ -91,7 +91,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
     onSuccess: () => {
       setWhatsappToggleValue((prev) => {
         if (prev) {
-          setIconUrl('/icons/markers/bird-marker-grey.jpeg'); // todo(raz.rimon) need to change it to the proper svg greyscale icon
+          setIconUrl('/icons/markers/bird-marker-grey.svg');
         } else {
           setIconUrl('/icons/markers/bird-marker.svg');
         }
