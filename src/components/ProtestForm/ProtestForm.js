@@ -134,6 +134,16 @@ function ProtestForm({
       return;
     }
 
+    if (!params.leadSource || params.leadSource === '') {
+      alert(t('validations.leadSource'));
+      return;
+    }
+
+    if (!params.userApproved && !editMode) {
+      alert(t('validations.approved'));
+      return;
+    }
+
     if (!params.userApproved && !editMode) {
       alert(t('validations.approved'));
       return;
@@ -226,6 +236,7 @@ function ProtestForm({
           <ProtestFormLabel>
             {t('placeType.title')}
             <ProtestFormSelect name="placeType" ref={register}>
+              <option value="" key={t('placeTypes.placeholder')} disabled selected></option>
               {placeTypes.map((placeType) => (
                 <option value={placeType} key={placeType}>
                   {t(`placeType.values.${placeType}`)}
@@ -318,6 +329,7 @@ function ProtestForm({
           <ProtestFormLabel>
             {t('leadSource.title')}
             <ProtestFormSelect name="leadSource" ref={register}>
+              <option value="" key={t('leadSource.placeholder')} disabled selected></option>
               {sources.map((source) => (
                 <option value={source} key={source}>
                   {t(`leadSource.values.${source}`)}
