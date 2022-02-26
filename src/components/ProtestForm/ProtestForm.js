@@ -20,8 +20,9 @@ const protestMarker = new L.Icon({
   iconAnchor: [25, 48],
 });
 
-const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
+// const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
 const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
+const sources = ['friend', 'facebook', 'instagram', 'youtube', 'whatsapp', 'tiktok', 'television', 'newspaper', 'other'];
 
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
@@ -223,17 +224,6 @@ function ProtestForm({
             <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
           </ProtestFormLabel>
           <ProtestFormLabel>
-            {t('area.title')}
-            <ProtestFormSelect name="area" ref={register}>
-              {areas.map((area) => (
-                <option value={area} key={area}>
-                  {t(`area.values.${area}`)}
-                </option>
-              ))}
-            </ProtestFormSelect>
-            <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
-          </ProtestFormLabel>
-          <ProtestFormLabel>
             {t('placeType.title')}
             <ProtestFormSelect name="placeType" ref={register}>
               {placeTypes.map((placeType) => (
@@ -324,6 +314,16 @@ function ProtestForm({
             {t('remarks.title')}
             <ProtestFormInput placeholder={t('remarks.title')} name="notes" ref={register}></ProtestFormInput>
             <ProtestFormInputDetails>{t('remarks.details')}</ProtestFormInputDetails>
+          </ProtestFormLabel>
+          <ProtestFormLabel>
+            {t('leadSource.title')}
+            <ProtestFormSelect name="leadSource" ref={register}>
+              {sources.map((source) => (
+                <option value={source} key={source}>
+                  {t(`leadSource.values.${source}`)}
+                </option>
+              ))}
+            </ProtestFormSelect>
           </ProtestFormLabel>
           {!editMode ? (
             <>

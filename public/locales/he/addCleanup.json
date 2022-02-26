@@ -25,6 +25,21 @@
       "other": "אחר"
     }
   },
+  "leadSource": {
+    "title": "איך שמעת על \"מנקים את הבית\"?",
+    "placeholder": "חבר.ה",
+    "values": {
+      "friend": "חבר.ה",
+      "facebook": "פייסבוק",
+      "instagram": "אינסטגרם",
+      "youtube": "יוטיוב",
+      "whatsapp": "וואצאפ",
+      "tiktok": "טיקטוק",
+      "television": "טלוויזיה",
+      "newspaper": "עיתון",
+      "other": "אחר"
+    }
+  },
   "placeType": {
     "title": "סוג מיקום",
     "details": "סוג מיקום מוקד הניקיון",
