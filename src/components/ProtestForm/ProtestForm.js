@@ -20,8 +20,9 @@ const protestMarker = new L.Icon({
   iconAnchor: [25, 48],
 });
 
-const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
+// const areas = ['north', 'south', 'center', 'golan', 'arava', 'yehuda', 'other'];
 const placeTypes = ['river', 'forest', 'park', 'viewpoint', 'parking', 'settlement', 'underwater', 'beach', 'other'];
+const sources = ['friend', 'facebook', 'instagram', 'youtube', 'whatsapp', 'tiktok', 'television', 'newspaper', 'other'];
 
 const OpeningText = () => {
   const { t } = useTranslation('addCleanup');
@@ -133,6 +134,16 @@ function ProtestForm({
       return;
     }
 
+    if (!params.leadSource || params.leadSource === '') {
+      alert(t('validations.leadSource'));
+      return;
+    }
+
+    if (!params.userApproved && !editMode) {
+      alert(t('validations.approved'));
+      return;
+    }
+
     if (!params.userApproved && !editMode) {
       alert(t('validations.approved'));
       return;
@@ -223,19 +234,9 @@ function ProtestForm({
             <ProtestFormInputDetails>{t('place.details')}</ProtestFormInputDetails>
           </ProtestFormLabel>
           <ProtestFormLabel>
-            {t('area.title')}
-            <ProtestFormSelect name="area" ref={register}>
-              {areas.map((area) => (
-                <option value={area} key={area}>
-                  {t(`area.values.${area}`)}
-                </option>
-              ))}
-            </ProtestFormSelect>
-            <ProtestFormInputDetails>{t('area.details')}</ProtestFormInputDetails>
-          </ProtestFormLabel>
-          <ProtestFormLabel>
             {t('placeType.title')}
             <ProtestFormSelect name="placeType" ref={register}>
+              <option value="" key={t('placeTypes.placeholder')} disabled selected></option>
               {placeTypes.map((placeType) => (
                 <option value={placeType} key={placeType}>
                   {t(`placeType.values.${placeType}`)}
@@ -324,6 +325,17 @@ function ProtestForm({
             {t('remarks.title')}
             <ProtestFormInput placeholder={t('remarks.title')} name="notes" ref={register}></ProtestFormInput>
             <ProtestFormInputDetails>{t('remarks.details')}</ProtestFormInputDetails>
+          </ProtestFormLabel>
+          <ProtestFormLabel>
+            {t('leadSource.title')}
+            <ProtestFormSelect name="leadSource" ref={register}>
+              <option value="" key={t('leadSource.placeholder')} disabled selected></option>
+              {sources.map((source) => (
+                <option value={source} key={source}>
+                  {t(`leadSource.values.${source}`)}
+                </option>
+              ))}
+            </ProtestFormSelect>
           </ProtestFormLabel>
           {!editMode ? (
             <>
