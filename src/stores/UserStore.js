@@ -1,12 +1,13 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { auth } from '../firebase';
 import { setLocalStorage, getLocalStorage } from '../localStorage';
-import { getFullUserData, fetchProtest } from '../api';
+import { getFullUserData, fetchProtest, getProtestsForLeader } from '../api';
 
 class UserStore {
   rootStore = null;
   user = null;
   userCurrentProtest = null;
+  userProtests = null;
 
   constructor(rootStore) {
     makeAutoObservable(this, { rootStore: false });
@@ -21,8 +22,10 @@ class UserStore {
           userData = { uid: user.uid, email: user.email };
         }
         this.user = userData;
+        this.userProtests = await getProtestsForLeader(user.uid);
       } else {
         this.user = null;
+        this.userProtests = null;
       }
     });
 
