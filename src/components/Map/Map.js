@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
 // import { pointWithinRadius } from '../../utils';
@@ -27,14 +27,18 @@ const positionPoint = new L.Icon({
   iconSize: [35, 40],
 });
 
-const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
+const PopupMarker = ({ coordinates, marker, hovered, roles, id, ...props }) => {
+  const store = useStore();
+  const { userStore } = store;
+  const markerRef = useRef(null);
   const [adminName, setAdminName] = useState('');
+  const isCreatedByUser = userStore?.userProtests?.find((protest) => protest.id === id);
   const [iconUrl, setIconUrl] = useState('/icons/markers/bird-marker.svg');
 
   // Use a speical marker from the protest object / the default fist.
   let markerInfo = marker || {
-    iconUrl,
-    iconRetinaUrl: iconUrl,
+    iconUrl: isCreatedByUser ? '/icons/markers/bird-marker-red.svg' : iconUrl,
+    iconRetinaUrl: isCreatedByUser ? '/icons/markers/bird-marker-red.svg' : iconUrl,
     iconSize: [38, 49],
     iconAnchor: [19, 25],
   };
@@ -46,8 +50,17 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, ...props }) => {
     })();
   }, [roles]);
 
+  useEffect(() => {
+    if (userStore?.userProtests?.length > 0) {
+      if (userStore?.userProtests[0].id === id) {
+        markerRef.current.leafletElement.openPopup();
+      }
+    }
+  }, [userStore?.userProtests, marker, id]);
+
   return (
     <Marker
+      ref={markerRef}
       position={[coordinates.latitude, coordinates.longitude]}
       icon={protestPoint(markerInfo)}
       onclick={() => analytics.logEvent('marker_click', { name: props.displayName })}

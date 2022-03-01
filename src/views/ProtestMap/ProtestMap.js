@@ -12,7 +12,7 @@ import styled from 'styled-components/macro';
 
 function ProtestMap() {
   const store = useStore();
-  const { mapStore, protestStore, userCoordinates } = store;
+  const { mapStore, protestStore, userCoordinates, userStore, setCoordinates } = store;
 
   const hoveredProtest = useMemo(() => {
     if (!mapStore.hoveredProtestId) {
@@ -40,6 +40,15 @@ function ProtestMap() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (userStore?.userProtests?.length > 0) {
+      const { latitude, longitude } = userStore.userProtests[0].coordinates;
+      if (latitude && longitude) {
+        setCoordinates([latitude, longitude]);
+      }
+    }
+  }, [setCoordinates, userStore?.userProtests]);
 
   return (
     <>
