@@ -67,7 +67,7 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, id, ...props }) => {
     >
       <StylePopup closeButton={false} autoPanPadding={L.point(5, 100)}>
         <ProtestCard
-          protestInfo={{ ...props, setIconUrl, coordinates, adminName, adminId: roles?.leader[0] }}
+          protestInfo={{ ...props, id, setIconUrl, coordinates, adminName, adminId: roles?.leader[0] }}
           style={{ margin: 0 }}
         />
       </StylePopup>
