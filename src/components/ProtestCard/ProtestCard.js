@@ -150,7 +150,7 @@ function ProtestCard({ protestInfo, showAction = false, style }) {
 
         {store?.userStore?.user?.uid === adminId ? (
           <FormItem label={t('showWhatsappButton')}>
-            <Switch loading={isWhatsappToggleLoading} checked={whatsappToggleValue} onChange={toggleWhatsappChange} />
+            <Switch loading={isWhatsappToggleLoading} checked={!whatsappToggleValue} onChange={toggleWhatsappChange} />
           </FormItem>
         ) : null}
 
