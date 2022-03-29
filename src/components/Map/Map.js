@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores';
+import { useParams } from 'react-router-dom';
 // import { pointWithinRadius } from '../../utils';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components/macro';
@@ -30,6 +31,7 @@ const positionPoint = new L.Icon({
 const PopupMarker = ({ coordinates, marker, hovered, roles, id, ...props }) => {
   const store = useStore();
   const { userStore } = store;
+  const { focusId } = useParams();
   const markerRef = useRef(null);
   const [adminName, setAdminName] = useState('');
   const isCreatedByUser = userStore?.userProtests?.find((protest) => protest.id === id);
@@ -51,12 +53,16 @@ const PopupMarker = ({ coordinates, marker, hovered, roles, id, ...props }) => {
   }, [roles]);
 
   useEffect(() => {
-    if (userStore?.userProtests?.length > 0) {
+    if (id === focusId) {
+      markerRef.current.leafletElement.openPopup();
+    }
+
+    if (!focusId && userStore?.userProtests?.length > 0) {
       if (userStore?.userProtests[0].id === id) {
         markerRef.current.leafletElement.openPopup();
       }
     }
-  }, [userStore?.userProtests, marker, id]);
+  }, [userStore?.userProtests, marker, id, focusId]);
 
   return (
     <Marker
