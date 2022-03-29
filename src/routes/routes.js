@@ -3,7 +3,7 @@ import { UploadForm } from '../components';
 
 const routes = [
   {
-    path: ['/', '/map'],
+    path: ['/', '/map', '/map/:focusId'],
     component: ProtestMap,
     key: 'PROTEST_MAP',
     exact: true,
