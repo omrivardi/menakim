@@ -33,7 +33,7 @@ i18n
     ],
     defaultNS: 'translations',
     fallbackLng: 'he',
-    debug: true,
+    debug: false,
     whiteList: ['he', 'ar'],
     detection: {
       order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
