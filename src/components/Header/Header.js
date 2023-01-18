@@ -36,7 +36,7 @@ function Header() {
           customCrossIcon={false}
           disableAutoFocus
         >
-          <Link to="/add-position" onClick={() => setMenuState(false)} className="bm-item">
+          <Link to="https://menakim-et-habait.firebaseapp.com/add-position" onClick={() => setMenuState(false)} className="bm-item">
             {t('open-position')}
           </Link>
           {!store?.userStore?.user && (
