@@ -24,7 +24,7 @@ const routes = [
     key: 'PROTEST_PAGE',
   },
   {
-    path: '/add-position',
+    path: 'https://menakim-et-habait.firebaseapp.com/add-position',
     component: AddProtest,
     key: 'ADD_PROTEST',
   },
