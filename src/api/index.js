@@ -293,7 +293,7 @@ export function extractUserData(result) {
 export function handleSignIn() {
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope('email');
-  firebase.auth().signInWithRedirect(provider);
+  firebase.auth().signInWithPopup(provider);
 }
 
 export function emailSignIn(email, password) {
