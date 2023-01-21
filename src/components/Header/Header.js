@@ -36,13 +36,13 @@ function Header() {
           customCrossIcon={false}
           disableAutoFocus
         >
-          <a href="https://menakim-et-habait.firebaseapp.com/add-position" className="bm-item">
+          <a href="https://menakim-et-habait.firebaseapp.com/add-position" onClick={() => setMenuState(false)} className="bm-item">
             {t('open-position')}
           </a>
           {!store?.userStore?.user && (
-            <Link to="https://menakim-et-habait.firebaseapp.com/sign-up?returnUrl=/" onClick={() => setMenuState(false)} className="bm-item">
+            <a href="https://menakim-et-habait.firebaseapp.com/sign-up?returnUrl=/" onClick={() => setMenuState(false)} className="bm-item">
               {t('locationAdminLogin')}
-            </Link>
+            </a>
           )}
           <hr />
           <a href={t('about-link')} target="_blank" rel="noreferrer noopener">
