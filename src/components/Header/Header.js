@@ -40,7 +40,7 @@ function Header() {
             {t('open-position')}
           </a>
           {!store?.userStore?.user && (
-            <Link to="/sign-up?returnUrl=/" onClick={() => setMenuState(false)} className="bm-item">
+            <Link to="https://menakim-et-habait.firebaseapp.com/sign-up?returnUrl=/" onClick={() => setMenuState(false)} className="bm-item">
               {t('locationAdminLogin')}
             </Link>
           )}
