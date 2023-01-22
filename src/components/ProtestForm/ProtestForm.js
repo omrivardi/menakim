@@ -197,7 +197,7 @@ function ProtestForm({
           <StepsList>
             <StepMessage>{t('messages.step1')}</StepMessage>
             <StepDescription>
-              <a href="https://chat.whatsapp.com/C9eKwFDfx146SHJV3Vkb48" target="_blank" rel="noreferrer">
+              <a href="https://swiy.co/wa_leaders_group" target="_blank" rel="noreferrer">
                 {t('messages.step1a')}
               </a>
             </StepDescription>
