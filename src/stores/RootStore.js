@@ -8,7 +8,7 @@ import userStore from './UserStore';
 class RootStore {
   userCoordinates = [];
   currentPageTitle = 'מנקים את הבית';
-  eventDate = '31/03/2023';
+  eventDate = '24/03/2023';
   dateImage = '/icons/share.png';
 
   constructor() {
